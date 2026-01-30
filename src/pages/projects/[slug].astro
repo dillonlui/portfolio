@@ -1,0 +1,430 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ImageCarousel from '../../components/ImageCarousel';
+import Lightbox from '../../components/Lightbox';
+import FigmaEmbed from '../../components/FigmaEmbed.astro';
+
+// Define the project data type
+interface ProjectData {
+  title: string;
+  description: string;
+  role: string;
+  timeline: string;
+  team: string;
+  heroImage: string;
+  overview: string;
+  challenge: string;
+  process: string[];
+  solution: string;
+  results: string[];
+  images: { src: string; alt: string; caption?: string }[];
+  figmaUrl?: string;
+}
+
+
+export function getStaticPaths() {
+  const projectData: Record<string, ProjectData> = {
+    'project-1': {
+      title: 'Mobile Banking Redesign',
+      description: 'A comprehensive redesign of a mobile banking application focusing on accessibility and user experience.',
+      role: 'Lead Designer',
+      timeline: '6 months',
+      team: '2 designers, 4 engineers',
+      heroImage: '/images/placeholder.svg',
+      overview: 'This project involved completely reimagining the mobile banking experience for over 2 million users. The existing app had usability issues and wasn\'t meeting accessibility standards.',
+      challenge: 'The main challenges were improving task completion rates, reducing customer support calls, and ensuring WCAG 2.1 AA compliance while maintaining brand consistency.',
+      process: [
+        'Conducted user research with 50+ participants including users with disabilities',
+        'Mapped current user journeys and identified pain points',
+        'Created personas and defined key user scenarios',
+        'Iterated through multiple design concepts with stakeholder input',
+        'Prototyped and tested solutions with real users',
+      ],
+      solution: 'We developed a streamlined interface with improved information architecture, clearer visual hierarchy, and full accessibility support including screen reader optimization and high contrast modes.',
+      results: [
+        '40% improvement in task completion rates',
+        '35% reduction in customer support calls',
+        'WCAG 2.1 AA compliance achieved',
+        '4.7 star rating on app stores (up from 3.2)',
+      ],
+      images: [
+        { src: '/images/placeholder.svg', alt: 'Home screen design', caption: 'New home screen with quick actions' },
+        { src: '/images/placeholder.svg', alt: 'Transaction flow', caption: 'Streamlined transfer flow' },
+        { src: '/images/placeholder.svg', alt: 'Accessibility features', caption: 'High contrast mode' },
+      ],
+      // figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/example',
+    },
+    'project-2': {
+      title: 'SaaS Design System',
+      description: 'Building a design system from the ground up for a growing SaaS platform.',
+      role: 'Design Systems Lead',
+      timeline: '8 months',
+      team: '3 designers, 6 engineers',
+      heroImage: '/images/placeholder.svg',
+      overview: 'Created a comprehensive design system to unify the product experience across multiple applications and reduce design and development time.',
+      challenge: 'The product had grown organically resulting in inconsistent UI patterns, duplicated components, and slow feature development due to lack of reusable elements.',
+      process: [
+        'Audited existing components and patterns across all products',
+        'Established design principles and guidelines',
+        'Built component library with full documentation',
+        'Created contribution guidelines and governance model',
+        'Implemented training program for design and engineering teams',
+      ],
+      solution: 'A modular design system with 80+ components, comprehensive documentation, and a Figma library synced with the code implementation.',
+      results: [
+        '60% faster design-to-development handoff',
+        '45% reduction in design inconsistencies',
+        '100% adoption across product teams',
+        'Reduced onboarding time for new designers by 50%',
+      ],
+      images: [
+        { src: '/images/placeholder.svg', alt: 'Component library', caption: 'Core component library' },
+        { src: '/images/placeholder.svg', alt: 'Documentation', caption: 'Component documentation' },
+        { src: '/images/placeholder.svg', alt: 'Token system', caption: 'Design token structure' },
+      ],
+    },
+    'project-3': {
+      title: 'E-commerce Optimization',
+      description: 'E-commerce experience redesign that increased conversion rates by 40%.',
+      role: 'Senior Product Designer',
+      timeline: '4 months',
+      team: '2 designers, 3 engineers',
+      heroImage: '/images/placeholder.svg',
+      overview: 'Optimized the checkout and product discovery experience for a major e-commerce platform to increase conversion rates and reduce cart abandonment.',
+      challenge: 'High cart abandonment rate (78%) and low conversion from product pages to purchase. Users were frustrated with a complex checkout process.',
+      process: [
+        'Analyzed funnel data to identify drop-off points',
+        'Conducted competitive analysis of leading e-commerce sites',
+        'Ran A/B tests on key checkout flow variations',
+        'Simplified the checkout to a single-page experience',
+        'Improved product recommendations and search',
+      ],
+      solution: 'A streamlined single-page checkout, improved product filtering, and personalized recommendations based on browsing history.',
+      results: [
+        '40% increase in conversion rate',
+        '25% reduction in cart abandonment',
+        '18% increase in average order value',
+        '$2.3M additional annual revenue',
+      ],
+      images: [
+        { src: '/images/placeholder.svg', alt: 'New checkout flow', caption: 'Single-page checkout' },
+        { src: '/images/placeholder.svg', alt: 'Product page', caption: 'Improved product page' },
+        { src: '/images/placeholder.svg', alt: 'Mobile experience', caption: 'Mobile-optimized experience' },
+      ],
+    },
+  };
+
+  return Object.keys(projectData).map((slug) => ({
+    params: { slug },
+    props: { project: projectData[slug] },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout title={`${project.title} | Portfolio`} description={project.description}>
+  <article class="case-study">
+    <!-- Hero Section -->
+    <header class="hero section">
+      <div class="container">
+        <a href="/" class="back-link fade-in">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+          Back to Projects
+        </a>
+        <h1 class="hero-title fade-in">{project.title}</h1>
+        <p class="hero-description fade-in">{project.description}</p>
+
+        <div class="project-meta fade-in">
+          <div class="meta-item">
+            <span class="meta-label">Role</span>
+            <span class="meta-value">{project.role}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Timeline</span>
+            <span class="meta-value">{project.timeline}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Team</span>
+            <span class="meta-value">{project.team}</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Image -->
+    <div class="hero-image-wrapper fade-in">
+      <img src={project.heroImage} alt={project.title} class="hero-image" />
+    </div>
+
+    <!-- Overview Section -->
+    <section class="section">
+      <div class="container content-width">
+        <h2 class="section-title fade-in">Overview</h2>
+        <p class="body-text fade-in">{project.overview}</p>
+      </div>
+    </section>
+
+    <!-- Challenge Section -->
+    <section class="section bg-surface">
+      <div class="container content-width">
+        <h2 class="section-title fade-in">The Challenge</h2>
+        <p class="body-text fade-in">{project.challenge}</p>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section">
+      <div class="container content-width">
+        <h2 class="section-title fade-in">Process</h2>
+        <ol class="process-list">
+          {project.process.map((step) => (
+            <li class="process-item fade-in">{step}</li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title fade-in">Design Exploration</h2>
+        <div class="fade-in">
+          <ImageCarousel images={project.images} client:visible />
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="section bg-surface">
+      <div class="container content-width">
+        <h2 class="section-title fade-in">Solution</h2>
+        <p class="body-text fade-in">{project.solution}</p>
+      </div>
+    </section>
+
+    <!-- Figma Embed (if available) -->
+    {project.figmaUrl && (
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title fade-in">Interactive Prototype</h2>
+          <div class="fade-in">
+            <FigmaEmbed url={project.figmaUrl} title={`${project.title} Prototype`} />
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Results Section -->
+    <section class="section">
+      <div class="container content-width">
+        <h2 class="section-title fade-in">Results</h2>
+        <ul class="results-list">
+          {project.results.map((result) => (
+            <li class="result-item fade-in">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              {result}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Image Lightbox Gallery -->
+    <section class="section bg-surface">
+      <div class="container">
+        <h2 class="section-title fade-in">Gallery</h2>
+        <div class="fade-in">
+          <Lightbox images={project.images} client:visible />
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Project -->
+    <section class="section next-project">
+      <div class="container">
+        <p class="next-label fade-in">Next Project</p>
+        <a href="/" class="next-link fade-in">View All Projects →</a>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study {
+    padding-bottom: 0;
+  }
+
+  .hero {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-3xl);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-xl);
+    transition: color var(--transition-fast);
+  }
+
+  .back-link:hover {
+    color: var(--color-text);
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-description {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xl);
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .meta-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+  }
+
+  .meta-value {
+    font-weight: 500;
+  }
+
+  .hero-image-wrapper {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto var(--space-3xl);
+    padding: 0 var(--space-lg);
+  }
+
+  .hero-image {
+    width: 100%;
+    border-radius: 8px;
+    background-color: var(--color-surface);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .body-text {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+
+  .process-list {
+    padding-left: var(--space-lg);
+  }
+
+  .process-item {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-sm);
+  }
+
+  .process-item::marker {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .results-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .result-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    font-size: 1.125rem;
+    margin-bottom: var(--space-lg);
+    color: var(--color-text);
+  }
+
+  .result-item svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .next-project {
+    text-align: center;
+    padding: var(--space-4xl) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .next-label {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .next-link {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .next-link:hover {
+    color: var(--color-accent);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animate elements on scroll
+  gsap.utils.toArray('.fade-in').forEach((el) => {
+    gsap.from(el as Element, {
+      scrollTrigger: {
+        trigger: el as Element,
+        start: 'top 90%',
+        toggleActions: 'play none none none',
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.6,
+      ease: 'power3.out',
+    });
+  });
+</script>

@@ -1,0 +1,46 @@
+---
+interface Props {
+  url: string;
+  title?: string;
+  height?: string;
+}
+
+const { url, title = 'Figma Prototype', height = '600px' } = Astro.props;
+
+// Convert Figma URL to embed URL if needed
+function getEmbedUrl(figmaUrl: string): string {
+  if (figmaUrl.includes('embed')) {
+    return figmaUrl;
+  }
+  // Convert regular Figma URL to embed URL
+  const embedUrl = figmaUrl.replace('figma.com/', 'figma.com/embed?embed_host=share&url=');
+  return embedUrl;
+}
+
+const embedUrl = getEmbedUrl(url);
+---
+
+<div class="figma-embed-wrapper">
+  <iframe
+    src={embedUrl}
+    title={title}
+    allowfullscreen
+    loading="lazy"
+    style={`height: ${height};`}
+  ></iframe>
+</div>
+
+<style>
+  .figma-embed-wrapper {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-surface);
+    margin: var(--space-xl) 0;
+  }
+
+  iframe {
+    width: 100%;
+    border: none;
+  }
+</style>

@@ -1,0 +1,200 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/', label: 'Work' },
+  { href: '/about', label: 'About' },
+];
+
+function isActive(href: string): boolean {
+  if (href === '/') {
+    return currentPath === '/' || currentPath === '/portfolio/' || currentPath === '/portfolio';
+  }
+  return currentPath.startsWith(href) || currentPath.startsWith(`/portfolio${href}`);
+}
+---
+
+<header class="header">
+  <nav class="nav container">
+    <a href="/" class="logo">
+      Portfolio
+    </a>
+
+    <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+
+    <ul class="nav-links">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={['nav-link', { active: isActive(link.href) }]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    height: var(--header-height);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .logo:hover {
+    color: var(--color-accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-xl);
+    list-style: none;
+  }
+
+  .nav-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: var(--space-sm) 0;
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-text);
+  }
+
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-text);
+    position: relative;
+    transition: background-color var(--transition-fast);
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-text);
+    left: 0;
+    transition: transform var(--transition-fast);
+  }
+
+  .hamburger::before {
+    top: -8px;
+  }
+
+  .hamburger::after {
+    top: 8px;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 767px) {
+    .mobile-menu-btn {
+      display: block;
+      z-index: 101;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 300px;
+      flex-direction: column;
+      background-color: var(--color-background);
+      padding: calc(var(--header-height) + var(--space-xl)) var(--space-xl);
+      gap: var(--space-lg);
+      transform: translateX(100%);
+      transition: transform var(--transition-base);
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.is-open {
+      transform: translateX(0);
+    }
+
+    .nav-link {
+      font-size: 1.25rem;
+    }
+
+    /* Hamburger animation when open */
+    .mobile-menu-btn[aria-expanded="true"] .hamburger {
+      background-color: transparent;
+    }
+
+    .mobile-menu-btn[aria-expanded="true"] .hamburger::before {
+      transform: rotate(45deg) translate(5px, 6px);
+    }
+
+    .mobile-menu-btn[aria-expanded="true"] .hamburger::after {
+      transform: rotate(-45deg) translate(5px, -6px);
+    }
+  }
+</style>
+
+<script>
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', (!isOpen).toString());
+    navLinks?.classList.toggle('is-open');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('.nav') && navLinks?.classList.contains('is-open')) {
+      menuBtn?.setAttribute('aria-expanded', 'false');
+      navLinks.classList.remove('is-open');
+    }
+  });
+</script>
