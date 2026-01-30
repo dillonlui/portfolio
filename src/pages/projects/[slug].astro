@@ -4,6 +4,8 @@ import ImageCarousel from '../../components/ImageCarousel';
 import Lightbox from '../../components/Lightbox';
 import FigmaEmbed from '../../components/FigmaEmbed.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // Define the project data type
 interface ProjectData {
   title: string;
@@ -30,7 +32,7 @@ export function getStaticPaths() {
       role: 'Lead Designer',
       timeline: '6 months',
       team: '2 designers, 4 engineers',
-      heroImage: '/images/placeholder.svg',
+      heroImage: 'images/placeholder.svg',
       overview: 'This project involved completely reimagining the mobile banking experience for over 2 million users. The existing app had usability issues and wasn\'t meeting accessibility standards.',
       challenge: 'The main challenges were improving task completion rates, reducing customer support calls, and ensuring WCAG 2.1 AA compliance while maintaining brand consistency.',
       process: [
@@ -48,9 +50,9 @@ export function getStaticPaths() {
         '4.7 star rating on app stores (up from 3.2)',
       ],
       images: [
-        { src: '/images/placeholder.svg', alt: 'Home screen design', caption: 'New home screen with quick actions' },
-        { src: '/images/placeholder.svg', alt: 'Transaction flow', caption: 'Streamlined transfer flow' },
-        { src: '/images/placeholder.svg', alt: 'Accessibility features', caption: 'High contrast mode' },
+        { src: 'images/placeholder.svg', alt: 'Home screen design', caption: 'New home screen with quick actions' },
+        { src: 'images/placeholder.svg', alt: 'Transaction flow', caption: 'Streamlined transfer flow' },
+        { src: 'images/placeholder.svg', alt: 'Accessibility features', caption: 'High contrast mode' },
       ],
       // figmaUrl: 'https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/example',
     },
@@ -60,7 +62,7 @@ export function getStaticPaths() {
       role: 'Design Systems Lead',
       timeline: '8 months',
       team: '3 designers, 6 engineers',
-      heroImage: '/images/placeholder.svg',
+      heroImage: 'images/placeholder.svg',
       overview: 'Created a comprehensive design system to unify the product experience across multiple applications and reduce design and development time.',
       challenge: 'The product had grown organically resulting in inconsistent UI patterns, duplicated components, and slow feature development due to lack of reusable elements.',
       process: [
@@ -78,9 +80,9 @@ export function getStaticPaths() {
         'Reduced onboarding time for new designers by 50%',
       ],
       images: [
-        { src: '/images/placeholder.svg', alt: 'Component library', caption: 'Core component library' },
-        { src: '/images/placeholder.svg', alt: 'Documentation', caption: 'Component documentation' },
-        { src: '/images/placeholder.svg', alt: 'Token system', caption: 'Design token structure' },
+        { src: 'images/placeholder.svg', alt: 'Component library', caption: 'Core component library' },
+        { src: 'images/placeholder.svg', alt: 'Documentation', caption: 'Component documentation' },
+        { src: 'images/placeholder.svg', alt: 'Token system', caption: 'Design token structure' },
       ],
     },
     'project-3': {
@@ -89,7 +91,7 @@ export function getStaticPaths() {
       role: 'Senior Product Designer',
       timeline: '4 months',
       team: '2 designers, 3 engineers',
-      heroImage: '/images/placeholder.svg',
+      heroImage: 'images/placeholder.svg',
       overview: 'Optimized the checkout and product discovery experience for a major e-commerce platform to increase conversion rates and reduce cart abandonment.',
       challenge: 'High cart abandonment rate (78%) and low conversion from product pages to purchase. Users were frustrated with a complex checkout process.',
       process: [
@@ -107,9 +109,9 @@ export function getStaticPaths() {
         '$2.3M additional annual revenue',
       ],
       images: [
-        { src: '/images/placeholder.svg', alt: 'New checkout flow', caption: 'Single-page checkout' },
-        { src: '/images/placeholder.svg', alt: 'Product page', caption: 'Improved product page' },
-        { src: '/images/placeholder.svg', alt: 'Mobile experience', caption: 'Mobile-optimized experience' },
+        { src: 'images/placeholder.svg', alt: 'New checkout flow', caption: 'Single-page checkout' },
+        { src: 'images/placeholder.svg', alt: 'Product page', caption: 'Improved product page' },
+        { src: 'images/placeholder.svg', alt: 'Mobile experience', caption: 'Mobile-optimized experience' },
       ],
     },
   };
@@ -121,6 +123,12 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+
+// Prepend base URL to image paths for React components
+const imagesWithBase = project.images.map(img => ({
+  ...img,
+  src: `${base}${img.src}`
+}));
 ---
 
 <BaseLayout title={`${project.title} | Portfolio`} description={project.description}>
@@ -128,7 +136,7 @@ const { project } = Astro.props;
     <!-- Hero Section -->
     <header class="hero section">
       <div class="container">
-        <a href="/" class="back-link fade-in">
+        <a href={base} class="back-link fade-in">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
             <polyline points="15 18 9 12 15 6" />
           </svg>
@@ -156,7 +164,7 @@ const { project } = Astro.props;
 
     <!-- Hero Image -->
     <div class="hero-image-wrapper fade-in">
-      <img src={project.heroImage} alt={project.title} class="hero-image" />
+      <img src={`${base}${project.heroImage}`} alt={project.title} class="hero-image" />
     </div>
 
     <!-- Overview Section -->
@@ -192,7 +200,7 @@ const { project } = Astro.props;
       <div class="container">
         <h2 class="section-title fade-in">Design Exploration</h2>
         <div class="fade-in">
-          <ImageCarousel images={project.images} client:visible />
+          <ImageCarousel images={imagesWithBase} client:visible />
         </div>
       </div>
     </section>
@@ -239,7 +247,7 @@ const { project } = Astro.props;
       <div class="container">
         <h2 class="section-title fade-in">Gallery</h2>
         <div class="fade-in">
-          <Lightbox images={project.images} client:visible />
+          <Lightbox images={imagesWithBase} client:visible />
         </div>
       </div>
     </section>
@@ -248,7 +256,7 @@ const { project } = Astro.props;
     <section class="section next-project">
       <div class="container">
         <p class="next-label fade-in">Next Project</p>
-        <a href="/" class="next-link fade-in">View All Projects →</a>
+        <a href={base} class="next-link fade-in">View All Projects →</a>
       </div>
     </section>
   </article>

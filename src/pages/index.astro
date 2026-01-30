@@ -2,27 +2,29 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // Sample project data - replace with content collection later
 // Use placeholder.svg until real images are added
 const projects = [
   {
     title: 'Mobile Banking Redesign',
     description: 'A comprehensive redesign of a mobile banking application focusing on accessibility and user experience.',
-    thumbnail: '/images/placeholder.svg',
+    thumbnail: `${base}images/placeholder.svg`,
     slug: 'project-1',
     tags: ['UX Design', 'Mobile', 'Fintech'],
   },
   {
     title: 'SaaS Design System',
     description: 'Building a design system from the ground up for a growing SaaS platform.',
-    thumbnail: '/images/placeholder.svg',
+    thumbnail: `${base}images/placeholder.svg`,
     slug: 'project-2',
     tags: ['Design Systems', 'Web', 'B2B'],
   },
   {
     title: 'E-commerce Optimization',
     description: 'E-commerce experience redesign that increased conversion rates by 40%.',
-    thumbnail: '/images/placeholder.svg',
+    thumbnail: `${base}images/placeholder.svg`,
     slug: 'project-3',
     tags: ['E-commerce', 'UX Research', 'Web'],
   },

@@ -8,10 +8,11 @@ interface Props {
 }
 
 const { title, description, thumbnail, slug, tags = [] } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <article class="project-card fade-in">
-  <a href={`/projects/${slug}`} class="card-link">
+  <a href={`${base}projects/${slug}`} class="card-link">
     <div class="thumbnail-wrapper">
       <img src={thumbnail} alt={title} class="thumbnail" loading="lazy" />
     </div>
