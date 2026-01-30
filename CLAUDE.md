@@ -4,9 +4,17 @@
 Migrate portfolio from Squarespace to GitHub Pages, then eventually redesign using Figma.
 
 ## Current Status
+**Live at:** https://dillonlui.github.io/portfolio/
+
+**Completed:**
 - Astro project with React integration
-- GitHub Actions workflow configured for deployment
-- Deploying to: dillonlui.github.io/portfolio (eventually dillonlui.com)
+- SSH configured for personal GitHub (github.com-personal alias)
+- GitHub Actions workflow deploying successfully
+- Base path configured for /portfolio subdirectory
+
+**Next:**
+- Phase 5: Recreate Squarespace design from screenshots
+- Phase 6: Switch to custom domain (dillonlui.com)
 
 ## Tech Stack
 - Astro 5.x (static output)
