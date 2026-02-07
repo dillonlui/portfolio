@@ -5,6 +5,7 @@ slug: vybe
 tags:
   - iOS | Android
   - Social Media
+thumbnailPosition: "center 20%"
 accentColor: "#1a1a1a"
 order: 4
 featured: false

@@ -44,7 +44,7 @@ const { beforeImage, afterImage, beforeLabel = 'Before', afterLabel = 'After' } 
   }
 
   .ba-label {
-    font-size: 0.875rem;
+    font-size: var(--text-caption);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -52,7 +52,7 @@ const { beforeImage, afterImage, beforeLabel = 'Before', afterLabel = 'After' } 
   }
 
   .ba-image-wrapper {
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     background-color: var(--color-surface);
   }

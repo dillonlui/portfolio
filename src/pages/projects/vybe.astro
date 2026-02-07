@@ -55,21 +55,6 @@ const img = `${base}/images/projects/vybe`;
 </style>
 
 <script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.utils.toArray('.feature-showcase').forEach((el) => {
-    gsap.from(el as Element, {
-      scrollTrigger: {
-        trigger: el as Element,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      opacity: 0,
-      y: 40,
-      duration: 0.6,
-      ease: 'power3.out',
-    });
-  });
+  import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
+  initCaseStudyAnimations('.feature-showcase');
 </script>

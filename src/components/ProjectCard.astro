@@ -5,16 +5,17 @@ interface Props {
   thumbnail: string;
   slug: string;
   tags?: string[];
+  thumbnailPosition?: string;
 }
 
-const { title, description, thumbnail, slug, tags = [] } = Astro.props;
+const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'center center' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
 <article class="project-card">
   <a href={`${base}/projects/${slug}`} class="card-link">
     <div class="thumbnail-wrapper">
-      <img src={thumbnail} alt={title} class="thumbnail" loading="lazy" />
+      <img src={thumbnail} alt={title} class="thumbnail" loading="lazy" style={`object-position: ${thumbnailPosition};`} />
     </div>
     <div class="card-content">
       {tags.length > 0 && (
@@ -33,14 +34,14 @@ const base = import.meta.env.BASE_URL;
 <style>
   .project-card {
     background-color: var(--color-background);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
 
   .project-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
   }
 
   .card-link {
@@ -53,12 +54,14 @@ const base = import.meta.env.BASE_URL;
     aspect-ratio: 16 / 10;
     overflow: hidden;
     background-color: var(--color-surface);
+    border-radius: var(--radius-md);
   }
 
   .thumbnail {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
     transition: transform var(--transition-slow);
   }
 
@@ -78,23 +81,24 @@ const base = import.meta.env.BASE_URL;
   }
 
   .tag {
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     font-weight: 500;
     padding: var(--space-xs) var(--space-sm);
     background-color: var(--color-surface);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     color: var(--color-text-secondary);
   }
 
   .card-title {
-    font-size: 1.25rem;
+    font-size: var(--text-h3);
     margin-bottom: var(--space-sm);
     color: var(--color-text);
   }
 
   .card-description {
-    font-size: 0.9375rem;
+    font-size: var(--text-body-sm);
     color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
     margin-bottom: 0;
     display: -webkit-box;
     -webkit-line-clamp: 3;

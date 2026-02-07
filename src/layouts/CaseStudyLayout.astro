@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import CaseStudyHero from '../components/CaseStudyHero.astro';
 import ProjectNav from '../components/ProjectNav.astro';
 import CTAFooter from '../components/CTAFooter.astro';
+import CaseStudyLightbox from '../components/CaseStudyLightbox.astro';
 
 interface Props {
   title: string;
@@ -36,11 +37,12 @@ const {
     logoImage={logoImage}
   />
   <slot />
-  <CTAFooter />
+  <CaseStudyLightbox />
   <ProjectNav
     previousProject={previousProject}
     nextProject={nextProject}
   />
+  <CTAFooter />
 </BaseLayout>
 
 <style define:vars={{ accentColor }}>

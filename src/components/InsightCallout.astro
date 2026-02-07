@@ -16,19 +16,19 @@ const { title, description } = Astro.props;
   .insight-callout {
     padding: var(--space-xl);
     background-color: var(--color-surface);
-    border-radius: 8px;
-    border-left: 3px solid var(--color-text);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--color-accent);
   }
 
   .insight-title {
-    font-size: 1.125rem;
-    font-weight: 600;
+    font-size: var(--text-h4);
+    font-weight: 400;
     margin-bottom: var(--space-sm);
   }
 
   .insight-description {
     color: var(--color-text-secondary);
-    line-height: 1.7;
+    line-height: var(--leading-relaxed);
     margin-bottom: 0;
   }
 </style>

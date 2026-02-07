@@ -49,7 +49,7 @@ const img = `${base}/images/projects/deposify`;
 
 <style>
   .acquisition-note {
-    font-size: 1.125rem;
+    font-size: var(--text-body-lg);
     color: var(--color-text-secondary);
     font-style: italic;
     text-align: center;
@@ -77,21 +77,6 @@ const img = `${base}/images/projects/deposify`;
 </style>
 
 <script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.utils.toArray('.feature-card, .before-after, .section-heading').forEach((el) => {
-    gsap.from(el as Element, {
-      scrollTrigger: {
-        trigger: el as Element,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      opacity: 0,
-      y: 40,
-      duration: 0.6,
-      ease: 'power3.out',
-    });
-  });
+  import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
+  initCaseStudyAnimations('.feature-card, .before-after, .section-heading');
 </script>

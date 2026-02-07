@@ -46,7 +46,7 @@ const { image, title, description, reverse = false } = Astro.props;
   }
 
   .showcase-image-wrapper {
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     background-color: var(--color-surface);
   }
@@ -57,12 +57,12 @@ const { image, title, description, reverse = false } = Astro.props;
   }
 
   .showcase-title {
-    font-size: 1.5rem;
+    font-size: var(--text-h3);
     margin-bottom: var(--space-sm);
   }
 
   .showcase-description {
     color: var(--color-text-secondary);
-    line-height: 1.7;
+    line-height: var(--leading-relaxed);
   }
 </style>

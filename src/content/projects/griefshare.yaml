@@ -5,6 +5,7 @@ slug: griefshare
 tags:
   - Online Search
   - Responsive Web
+thumbnailPosition: "center 25%"
 accentColor: "#1a1a1a"
 order: 1
 featured: true

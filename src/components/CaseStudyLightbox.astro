@@ -1,0 +1,221 @@
+<!--
+  Drop this component into any page to make all images inside
+  .case-section, .before-after, .features, .features-grid, .wireframes-grid,
+  .ia-images, .solution-features, .prototype-images, .research-grid, .reflections-grid
+  clickable in a lightbox. It collects images at mount time and supports
+  prev/next navigation + keyboard controls.
+-->
+
+<div class="lightbox-overlay" id="case-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image lightbox">
+  <button class="lb-close" aria-label="Close lightbox">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  </button>
+  <button class="lb-nav lb-prev" aria-label="Previous image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="15 18 9 12 15 6" />
+    </svg>
+  </button>
+  <button class="lb-nav lb-next" aria-label="Next image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="9 18 15 12 9 6" />
+    </svg>
+  </button>
+  <img class="lb-image" src="" alt="" />
+  <div class="lb-counter"></div>
+</div>
+
+<style>
+  :global(.lightbox-open) {
+    overflow: hidden;
+  }
+
+  :global(.lb-clickable) {
+    cursor: pointer;
+  }
+
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-overlay);
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .lightbox-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .lb-image {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+  }
+
+  .lb-close {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: var(--space-sm);
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    z-index: var(--z-overlay-controls);
+  }
+
+  .lb-close:hover {
+    opacity: 1;
+  }
+
+  .lb-close svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .lb-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: var(--z-overlay-controls);
+  }
+
+  .lb-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .lb-nav svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .lb-prev {
+    left: var(--space-lg);
+  }
+
+  .lb-next {
+    right: var(--space-lg);
+  }
+
+  .lb-counter {
+    position: absolute;
+    bottom: var(--space-lg);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: var(--text-caption);
+  }
+
+  @media (max-width: 767px) {
+    .lb-prev {
+      left: var(--space-sm);
+    }
+
+    .lb-next {
+      right: var(--space-sm);
+    }
+
+    .lb-nav {
+      width: 40px;
+      height: 40px;
+    }
+
+    .lb-close {
+      top: var(--space-md);
+      right: var(--space-md);
+    }
+  }
+</style>
+
+<script>
+  const overlay = document.getElementById('case-lightbox');
+  if (overlay) {
+    const lbImage = overlay.querySelector<HTMLImageElement>('.lb-image');
+    const lbCounter = overlay.querySelector<HTMLDivElement>('.lb-counter');
+    const closeBtn = overlay.querySelector<HTMLButtonElement>('.lb-close');
+    const prevBtn = overlay.querySelector<HTMLButtonElement>('.lb-prev');
+    const nextBtn = overlay.querySelector<HTMLButtonElement>('.lb-next');
+
+    const images = Array.from(
+      document.querySelectorAll<HTMLImageElement>(
+        '.case-section img, .before-after img, .case-hero .hero-image'
+      )
+    );
+
+    if (images.length > 0 && lbImage && lbCounter && closeBtn && prevBtn && nextBtn) {
+      let currentIndex = 0;
+
+      function open(index: number) {
+        currentIndex = index;
+        update();
+        overlay!.classList.add('is-open');
+        overlay!.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+      }
+
+      function close() {
+        overlay!.classList.remove('is-open');
+        overlay!.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+      }
+
+      function update() {
+        const img = images[currentIndex];
+        lbImage!.src = img.src;
+        lbImage!.alt = img.alt;
+        lbCounter!.textContent = `${currentIndex + 1} / ${images.length}`;
+        prevBtn!.hidden = images.length <= 1;
+        nextBtn!.hidden = images.length <= 1;
+      }
+
+      function prev() {
+        currentIndex = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+        update();
+      }
+
+      function next() {
+        currentIndex = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+        update();
+      }
+
+      images.forEach((img, i) => {
+        img.classList.add('lb-clickable');
+        img.addEventListener('click', () => open(i));
+      });
+
+      closeBtn.addEventListener('click', close);
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) close();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!overlay!.classList.contains('is-open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+    }
+  }
+</script>

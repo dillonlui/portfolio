@@ -56,7 +56,7 @@ function isActive(href: string): boolean {
   .header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: var(--z-header);
     background-color: var(--color-background);
     border-bottom: 1px solid var(--color-border);
     height: var(--header-height);
@@ -164,7 +164,7 @@ function isActive(href: string): boolean {
   @media (max-width: 767px) {
     .mobile-menu-btn {
       display: block;
-      z-index: 101;
+      z-index: var(--z-mobile-menu);
     }
 
     .nav-links {
@@ -189,7 +189,7 @@ function isActive(href: string): boolean {
     }
 
     .nav-link {
-      font-size: 1.25rem;
+      font-size: var(--text-h3);
     }
 
     /* Hamburger animation when open */
@@ -211,18 +211,27 @@ function isActive(href: string): boolean {
   const menuBtn = document.querySelector('.mobile-menu-btn');
   const navLinks = document.querySelector('.nav-links');
 
+  function closeMenu() {
+    menuBtn?.setAttribute('aria-expanded', 'false');
+    navLinks?.classList.remove('is-open');
+  }
+
   menuBtn?.addEventListener('click', () => {
     const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
     menuBtn.setAttribute('aria-expanded', (!isOpen).toString());
     navLinks?.classList.toggle('is-open');
   });
 
+  // Close menu when a nav link is clicked
+  navLinks?.querySelectorAll('.nav-link').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
   // Close menu when clicking outside
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
     if (!target.closest('.nav') && navLinks?.classList.contains('is-open')) {
-      menuBtn?.setAttribute('aria-expanded', 'false');
-      navLinks.classList.remove('is-open');
+      closeMenu();
     }
   });
 </script>
