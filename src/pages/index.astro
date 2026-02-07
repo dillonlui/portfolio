@@ -1,42 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import CTAFooter from '../components/CTAFooter.astro';
+import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL;
 
-// Sample project data - replace with content collection later
-// Use placeholder.svg until real images are added
-const projects = [
-  {
-    title: 'Mobile Banking Redesign',
-    description: 'A comprehensive redesign of a mobile banking application focusing on accessibility and user experience.',
-    thumbnail: `${base}images/placeholder.svg`,
-    slug: 'project-1',
-    tags: ['UX Design', 'Mobile', 'Fintech'],
-  },
-  {
-    title: 'SaaS Design System',
-    description: 'Building a design system from the ground up for a growing SaaS platform.',
-    thumbnail: `${base}images/placeholder.svg`,
-    slug: 'project-2',
-    tags: ['Design Systems', 'Web', 'B2B'],
-  },
-  {
-    title: 'E-commerce Optimization',
-    description: 'E-commerce experience redesign that increased conversion rates by 40%.',
-    thumbnail: `${base}images/placeholder.svg`,
-    slug: 'project-3',
-    tags: ['E-commerce', 'UX Research', 'Web'],
-  },
-];
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="Portfolio | Home">
+<BaseLayout title="Dillon Lui — Product Designer">
   <section class="hero section">
     <div class="container">
-      <h1 class="hero-title fade-in">Design & Development</h1>
+      <h1 class="hero-title fade-in">Hello, I'm Dillon 👋🏼</h1>
       <p class="hero-subtitle fade-in">
-        Creating thoughtful digital experiences through design and code.
+        I'm a Product Designer and Webflow Developer with a passion for creating simple solutions to complex problems.
+      </p>
+      <p class="hero-cta fade-in">
+        Interested in working together? <a href="mailto:dillonlui@gmail.com">Email me</a>
       </p>
     </div>
   </section>
@@ -45,11 +26,19 @@ const projects = [
     <div class="container">
       <div class="projects-grid">
         {projects.map((project) => (
-          <ProjectCard {...project} />
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            thumbnail={project.data.thumbnail}
+            slug={project.data.slug}
+            tags={project.data.tags}
+          />
         ))}
       </div>
     </div>
   </section>
+
+  <CTAFooter />
 </BaseLayout>
 
 <style>
@@ -68,6 +57,22 @@ const projects = [
     font-size: clamp(1.125rem, 2.5vw, 1.5rem);
     color: var(--color-text-secondary);
     max-width: 600px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-cta {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+  }
+
+  .hero-cta a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .hero-cta a:hover {
+    color: var(--color-text-secondary);
   }
 
   .projects {
@@ -100,12 +105,11 @@ const projects = [
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Set initial states
   gsap.set('.hero-title', { opacity: 0, y: 30 });
   gsap.set('.hero-subtitle', { opacity: 0, y: 30 });
+  gsap.set('.hero-cta', { opacity: 0, y: 30 });
   gsap.set('.project-card', { opacity: 0, y: 40 });
 
-  // Animate hero elements
   gsap.to('.hero-title', {
     opacity: 1,
     y: 0,
@@ -121,7 +125,14 @@ const projects = [
     ease: 'power3.out',
   });
 
-  // Animate project cards on scroll
+  gsap.to('.hero-cta', {
+    opacity: 1,
+    y: 0,
+    duration: 0.8,
+    delay: 0.3,
+    ease: 'power3.out',
+  });
+
   gsap.utils.toArray('.project-card').forEach((card, i) => {
     gsap.to(card as Element, {
       scrollTrigger: {

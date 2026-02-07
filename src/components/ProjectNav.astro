@@ -1,0 +1,67 @@
+---
+interface Props {
+  previousProject?: { title: string; slug: string };
+  nextProject?: { title: string; slug: string };
+}
+
+const { previousProject, nextProject } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<nav class="project-nav section">
+  <div class="container project-nav-inner">
+    {previousProject ? (
+      <a href={`${base}/projects/${previousProject.slug}`} class="project-nav-link prev">
+        <span class="nav-direction">&larr; Previous</span>
+        <span class="nav-project-title">{previousProject.title}</span>
+      </a>
+    ) : <div />}
+    {nextProject ? (
+      <a href={`${base}/projects/${nextProject.slug}`} class="project-nav-link next">
+        <span class="nav-direction">Next &rarr;</span>
+        <span class="nav-project-title">{nextProject.title}</span>
+      </a>
+    ) : <div />}
+  </div>
+</nav>
+
+<style>
+  .project-nav {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-2xl) 0;
+  }
+
+  .project-nav-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-xl);
+  }
+
+  .project-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: color var(--transition-fast);
+  }
+
+  .project-nav-link:hover {
+    color: var(--color-text-secondary);
+  }
+
+  .project-nav-link.next {
+    text-align: right;
+    margin-left: auto;
+  }
+
+  .nav-direction {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .nav-project-title {
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+</style>

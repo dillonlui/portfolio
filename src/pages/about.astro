@@ -1,101 +1,137 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CTAFooter from '../components/CTAFooter.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Portfolio | About">
+<BaseLayout title="About — Dillon Lui">
   <section class="about-hero section">
     <div class="container">
+      <div class="about-intro">
+        <h1 class="intro-greeting fade-in">hey there 👋🏼</h1>
+        <p class="intro-headline fade-in">I'm Dillon, I like to create experiences for real people.</p>
+      </div>
       <div class="about-grid">
         <div class="about-image-wrapper fade-in">
           <img
-            src={`${base}images/placeholder.svg`}
-            alt="Profile photo"
+            src={`${base}/images/profile/dillon.jpg`}
+            alt="Dillon Lui"
             class="profile-image"
           />
         </div>
-        <div class="about-content">
-          <h1 class="about-title fade-in">About Me</h1>
-          <div class="about-text fade-in">
-            <p>
-              I'm a designer and developer passionate about creating digital experiences
-              that are both beautiful and functional. With a background in both design
-              and engineering, I bring a unique perspective to every project.
-            </p>
-            <p>
-              My work spans across product design, design systems, and front-end
-              development. I believe in the power of thoughtful design to solve
-              complex problems and create meaningful connections with users.
-            </p>
-            <p>
-              When I'm not designing or coding, you can find me exploring new
-              technologies, reading about design theory, or enjoying the outdoors.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="skills section">
-    <div class="container">
-      <h2 class="section-title fade-in">What I Do</h2>
-      <div class="skills-grid">
-        <div class="skill-card fade-in">
-          <h3>Product Design</h3>
+        <div class="about-content fade-in">
           <p>
-            End-to-end product design from research and strategy through to
-            high-fidelity prototypes and design systems.
+            With a background in healthcare and religious non-profits, my passion has always been to serve and help people. I shifted careers into product design 3+ years ago to adopt technology as a new medium to better our world.
           </p>
-        </div>
-        <div class="skill-card fade-in">
-          <h3>Design Systems</h3>
           <p>
-            Building scalable design systems that enable teams to ship consistent,
-            high-quality products faster.
+            I draw from nearly a decade of experience in leading teams to accomplish organizational goals. I believe that problem solving is an ongoing process that requires continuous feedback, tweaks, and reimplementation.
           </p>
-        </div>
-        <div class="skill-card fade-in">
-          <h3>Front-End Development</h3>
           <p>
-            Bringing designs to life with clean, performant code using modern
-            frameworks and best practices.
+            I love going through the problem solving cycle and evaluating processes and decisions. Basically, <strong>figuring out complex problems is my jam.</strong>
           </p>
+          <p>
+            My designs create streamlined flows that always keep the end user in mind. This is because the success or failure of any process or design is measured by the <strong>value given to its users</strong>.
+          </p>
+          <p>
+            My approach requires clearly defined goals that are specific yet flexible as feedback is received. <strong>I keep teams focused by designing structures that keep real people in mind</strong>.
+          </p>
+          <p>
+            Outside of work I find inspiration through spending time in nature, roasting my own coffee, and meeting new people. I also watch a lot of cat videos 😸
+          </p>
+          <a href="https://drive.google.com/file/d/1ziiJcxYVU5AAVi1M4CZld9--_wqJZmOu/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="resume-btn">Download Resume</a>
         </div>
       </div>
     </div>
   </section>
 
   <section class="experience section">
-    <div class="container content-width">
+    <div class="container">
       <h2 class="section-title fade-in">Experience</h2>
-      <div class="timeline">
-        <div class="timeline-item fade-in">
-          <span class="timeline-date">2022 - Present</span>
-          <h3>Senior Product Designer</h3>
-          <p class="timeline-company">Company Name</p>
-          <p>Leading design for core product features and mentoring junior designers.</p>
+      <div class="experience-list">
+        <div class="experience-item fade-in">
+          <div class="experience-header">
+            <h3>LeadsOnline</h3>
+            <span class="experience-meta">Law Enforcement Tech &middot; Senior Product Designer</span>
+            <span class="experience-date">December 2024 &ndash; Present</span>
+          </div>
+          <ul class="experience-details">
+            <li>Primary product designer supporting multiple SaaS products from established products to MVP</li>
+            <li>Established internal design system to unify across brands and products</li>
+            <li>Expanded work to include photo, video, and live streaming as needed</li>
+          </ul>
         </div>
-        <div class="timeline-item fade-in">
-          <span class="timeline-date">2020 - 2022</span>
-          <h3>Product Designer</h3>
-          <p class="timeline-company">Another Company</p>
-          <p>Designed and shipped features used by millions of users.</p>
+
+        <div class="experience-item fade-in">
+          <div class="experience-header">
+            <h3>Church Initiative</h3>
+            <span class="experience-meta">Non-profit &middot; Product Designer</span>
+            <span class="experience-date">July 2023 &ndash; November 2024</span>
+          </div>
+          <ul class="experience-details">
+            <li>Hired as the first and only product designer in the company, becoming the champion for user centered design internally</li>
+            <li>Built internal design system with design token framework for use across product and marketing teams</li>
+            <li>Introduced continuous discovery processes, conducting surveys and user interviews resulting in a new feature backlog</li>
+            <li>Collaborated with product manager to gather requirements and prioritize tasks</li>
+            <li>Produced proto-personas based on user journey mapping that resulted in discovering 4 unique user segments</li>
+          </ul>
         </div>
-        <div class="timeline-item fade-in">
-          <span class="timeline-date">2018 - 2020</span>
-          <h3>UX Designer</h3>
-          <p class="timeline-company">Startup Inc</p>
-          <p>Built the design practice from the ground up at an early-stage startup.</p>
+
+        <div class="experience-item fade-in">
+          <div class="experience-header">
+            <h3>CrateBind</h3>
+            <span class="experience-meta">Agency &middot; Product Designer</span>
+            <span class="experience-date">October 2021 &ndash; June 2023</span>
+          </div>
+          <ul class="experience-details">
+            <li>Led user centered design from initial requirements gathering and wireframes to high fidelity mockups for 6 client projects and 3 internal projects</li>
+            <li>Designed experiences for responsive web and native mobile apps for B2B, B2C, and social media projects</li>
+            <li>Built custom design systems catering to client and project needs</li>
+            <li>Facilitated weekly feedback sessions with clients, leading to 3 project extensions</li>
+            <li>Developed and launched 6 websites using Webflow in collaboration with delivery managers, clients, and design</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
+
+  <section class="featured-project section">
+    <div class="container">
+      <p class="featured-label fade-in">Want to see more? Check out my first case study for GriefShare's Find a Group 😸</p>
+      <a href={`${base}/projects/griefshare`} class="featured-link fade-in">
+        <img
+          src={`${base}/images/projects/griefshare/thumbnail.png`}
+          alt="GriefShare case study"
+          class="featured-image"
+          loading="lazy"
+        />
+      </a>
+    </div>
+  </section>
+
+  <CTAFooter />
 </BaseLayout>
 
 <style>
   .about-hero {
     padding-top: var(--space-3xl);
+  }
+
+  .about-intro {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .intro-greeting {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .intro-headline {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    max-width: 700px;
+    margin-bottom: 0;
   }
 
   .about-grid {
@@ -116,14 +152,33 @@ const base = import.meta.env.BASE_URL;
     object-fit: cover;
   }
 
-  .about-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-  }
-
-  .about-text p {
-    font-size: 1.125rem;
+  .about-content p {
+    font-size: 1.0625rem;
     color: var(--color-text-secondary);
     line-height: 1.7;
+  }
+
+  .about-content strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .resume-btn {
+    display: inline-block;
+    margin-top: var(--space-lg);
+    padding: var(--space-sm) var(--space-xl);
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background-color: var(--color-text);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color var(--transition-fast);
+  }
+
+  .resume-btn:hover {
+    background-color: var(--color-accent-hover);
+    color: white;
   }
 
   @media (min-width: 768px) {
@@ -132,85 +187,90 @@ const base = import.meta.env.BASE_URL;
     }
   }
 
-  /* Skills Section */
+  /* Experience Section */
   .section-title {
     margin-bottom: var(--space-2xl);
   }
 
-  .skills-grid {
-    display: grid;
-    gap: var(--space-xl);
-  }
-
-  @media (min-width: 768px) {
-    .skills-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .skill-card {
-    padding: var(--space-xl);
-    background-color: var(--color-surface);
-    border-radius: 8px;
-  }
-
-  .skill-card h3 {
-    font-size: 1.125rem;
-    margin-bottom: var(--space-sm);
-  }
-
-  .skill-card p {
-    color: var(--color-text-secondary);
-    font-size: 0.9375rem;
-    margin: 0;
-  }
-
-  /* Experience Timeline */
-  .timeline {
+  .experience-list {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2xl);
+    gap: var(--space-3xl);
   }
 
-  .timeline-item {
-    padding-left: var(--space-xl);
-    border-left: 2px solid var(--color-border);
-    position: relative;
+  .experience-item {
+    padding-bottom: var(--space-2xl);
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -6px;
-    top: 0;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--color-accent);
+  .experience-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
 
-  .timeline-date {
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
+  .experience-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .experience-header h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .experience-meta {
     display: block;
-    margin-bottom: var(--space-xs);
-  }
-
-  .timeline-item h3 {
-    font-size: 1.125rem;
-    margin-bottom: var(--space-xs);
-  }
-
-  .timeline-company {
-    font-weight: 500;
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-sm);
-  }
-
-  .timeline-item > p:last-child {
     color: var(--color-text-secondary);
     font-size: 0.9375rem;
-    margin: 0;
+    margin-bottom: var(--space-xs);
+  }
+
+  .experience-date {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .experience-details {
+    list-style: disc;
+    padding-left: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .experience-details li {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Featured Project */
+  .featured-project {
+    background-color: var(--color-surface);
+  }
+
+  .featured-label {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+  }
+
+  .featured-link {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .featured-link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .featured-image {
+    width: 100%;
+    height: auto;
   }
 </style>
 
@@ -220,7 +280,6 @@ const base = import.meta.env.BASE_URL;
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Animate elements on scroll
   gsap.utils.toArray('.fade-in').forEach((el) => {
     gsap.from(el as Element, {
       scrollTrigger: {

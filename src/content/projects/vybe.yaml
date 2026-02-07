@@ -1,0 +1,10 @@
+title: Vybe
+description: "Vybe is a social media app for college students that curates a newsfeed of nearby real time events."
+thumbnail: /portfolio/images/projects/vybe/thumbnail.png
+slug: vybe
+tags:
+  - iOS | Android
+  - Social Media
+accentColor: "#1a1a1a"
+order: 4
+featured: false

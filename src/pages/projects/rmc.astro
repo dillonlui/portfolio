@@ -1,0 +1,104 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import FullWidthImage from '../../components/FullWidthImage.astro';
+import FeatureShowcase from '../../components/FeatureShowcase.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+
+const base = import.meta.env.BASE_URL;
+const img = `${base}/images/projects/rmc`;
+---
+
+<CaseStudyLayout
+  title="RecruitmentMarketing.com"
+  description="RecruitmentMarketing.com (RMC) is a marketplace to help recruitment marketing professionals find the right tools and services."
+  tags={['B2B Marketplace', 'Responsive Web']}
+  heroImage={`${img}/header.png`}
+  logoImage={`${img}/logo.png`}
+  previousProject={{ title: 'Deposify', slug: 'deposify' }}
+  nextProject={{ title: 'Vybe', slug: 'vybe' }}
+>
+  <section class="case-section section">
+    <div class="container">
+      <SectionHeading title="Wireframes" />
+      <div class="wireframes-grid">
+        <FullWidthImage src={`${img}/wireframes1.png`} alt="RMC wireframes - page layouts" />
+        <FullWidthImage src={`${img}/wireframes2.png`} alt="RMC wireframes - component exploration" />
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section section">
+    <div class="container">
+      <SectionHeading title="Resolving the Information Architecture" />
+      <div class="ia-images">
+        <FullWidthImage src={`${img}/categories.png`} alt="Category structure exploration" />
+        <FullWidthImage src={`${img}/ia-exploration.png`} alt="Information architecture exploration" />
+      </div>
+    </div>
+  </section>
+
+  <section class="case-section section">
+    <div class="container">
+      <div class="features">
+        <FeatureShowcase
+          image={`${img}/marketplace.png`}
+          title="An Intuitive Marketplace"
+        />
+        <FeatureShowcase
+          image={`${img}/solutions.png`}
+          title="Customizable Solution Pages"
+          reverse
+        />
+        <FeatureShowcase
+          image={`${img}/category-pages.png`}
+          title="Educating Users with Category Pages"
+        />
+        <FeatureShowcase
+          image={`${img}/search-filter.png`}
+          title="Global Search and Filter"
+          reverse
+        />
+      </div>
+    </div>
+  </section>
+</CaseStudyLayout>
+
+<style>
+  .wireframes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .ia-images {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4xl);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.utils.toArray('.feature-showcase, .full-width-image, .section-heading').forEach((el) => {
+    gsap.from(el as Element, {
+      scrollTrigger: {
+        trigger: el as Element,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      ease: 'power3.out',
+    });
+  });
+</script>

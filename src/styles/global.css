@@ -12,10 +12,11 @@
   --color-background: #ffffff;
   --color-text: #1a1a1a;
   --color-text-secondary: #666666;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
+  --color-accent: #1a1a1a;
+  --color-accent-hover: #444444;
   --color-border: #e5e5e5;
   --color-surface: #f5f5f5;
+  --color-project-accent: #1a1a1a;
 
   /* Typography */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -123,13 +124,6 @@ img {
   }
 }
 
-/* Animation Classes (for non-JS fallback) */
-/* GSAP handles animations - these classes are for identification only */
-.fade-in,
-.slide-up {
-  /* GSAP will set initial state and animate */
-}
-
 /* Focus States for Accessibility */
 :focus-visible {
   outline: 2px solid var(--color-accent);
@@ -151,7 +145,7 @@ img {
 }
 
 .btn-primary {
-  background-color: var(--color-accent);
+  background-color: var(--color-text);
   color: white;
 }
 

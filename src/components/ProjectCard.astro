@@ -11,14 +11,12 @@ const { title, description, thumbnail, slug, tags = [] } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
-<article class="project-card fade-in">
-  <a href={`${base}projects/${slug}`} class="card-link">
+<article class="project-card">
+  <a href={`${base}/projects/${slug}`} class="card-link">
     <div class="thumbnail-wrapper">
       <img src={thumbnail} alt={title} class="thumbnail" loading="lazy" />
     </div>
     <div class="card-content">
-      <h3 class="card-title">{title}</h3>
-      <p class="card-description">{description}</p>
       {tags.length > 0 && (
         <div class="card-tags">
           {tags.map((tag) => (
@@ -26,6 +24,8 @@ const base = import.meta.env.BASE_URL;
           ))}
         </div>
       )}
+      <h3 class="card-title">{title}</h3>
+      <p class="card-description">{description}</p>
     </div>
   </a>
 </article>
@@ -70,6 +70,22 @@ const base = import.meta.env.BASE_URL;
     padding: var(--space-lg);
   }
 
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: var(--space-xs) var(--space-sm);
+    background-color: var(--color-surface);
+    border-radius: 4px;
+    color: var(--color-text-secondary);
+  }
+
   .card-title {
     font-size: 1.25rem;
     margin-bottom: var(--space-sm);
@@ -79,24 +95,10 @@ const base = import.meta.env.BASE_URL;
   .card-description {
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-md);
+    margin-bottom: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-  }
-
-  .tag {
-    font-size: 0.75rem;
-    padding: var(--space-xs) var(--space-sm);
-    background-color: var(--color-surface);
-    border-radius: 4px;
-    color: var(--color-text-secondary);
   }
 </style>

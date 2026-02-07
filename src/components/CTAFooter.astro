@@ -1,0 +1,46 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<section class:list={['cta-footer section', className]}>
+  <div class="container cta-content">
+    <h2 class="cta-heading">Let's work together, drop me a line.</h2>
+    <a href="mailto:dillonlui@gmail.com" class="cta-btn">Email Me</a>
+  </div>
+</section>
+
+<style>
+  .cta-footer {
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 800px;
+  }
+
+  .cta-heading {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 600;
+    margin-bottom: var(--space-lg);
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-xl);
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    background-color: var(--color-text);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color var(--transition-fast);
+  }
+
+  .cta-btn:hover {
+    background-color: var(--color-accent-hover);
+    color: white;
+  }
+</style>

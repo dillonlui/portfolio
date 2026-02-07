@@ -1,0 +1,50 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import CaseStudyHero from '../components/CaseStudyHero.astro';
+import ProjectNav from '../components/ProjectNav.astro';
+import CTAFooter from '../components/CTAFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  heroImage: string;
+  logoImage?: string;
+  accentColor?: string;
+  previousProject?: { title: string; slug: string };
+  nextProject?: { title: string; slug: string };
+}
+
+const {
+  title,
+  description,
+  tags,
+  heroImage,
+  logoImage,
+  accentColor = '#1a1a1a',
+  previousProject,
+  nextProject,
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} Case Study — Dillon Lui`}>
+  <CaseStudyHero
+    title={title}
+    description={description}
+    tags={tags}
+    heroImage={heroImage}
+    logoImage={logoImage}
+  />
+  <slot />
+  <CTAFooter />
+  <ProjectNav
+    previousProject={previousProject}
+    nextProject={nextProject}
+  />
+</BaseLayout>
+
+<style define:vars={{ accentColor }}>
+  :global(:root) {
+    --color-project-accent: var(--accentColor);
+  }
+</style>

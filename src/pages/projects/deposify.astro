@@ -1,0 +1,97 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+
+const base = import.meta.env.BASE_URL;
+const img = `${base}/images/projects/deposify`;
+---
+
+<CaseStudyLayout
+  title="Deposify"
+  description="Deposify is a B2B and B2C SaaS product that offers deposit management for rental properties and their tenants."
+  tags={['Responsive Web', 'B2B | B2C | SaaS']}
+  heroImage={`${img}/header.png`}
+  logoImage={`${img}/logo.png`}
+  previousProject={{ title: 'GriefShare', slug: 'griefshare' }}
+  nextProject={{ title: 'RMC', slug: 'rmc' }}
+>
+  <section class="case-section section">
+    <div class="container">
+      <p class="acquisition-note">Leveraging their redesigned platform Deposify was acquired shortly after this project.</p>
+    </div>
+  </section>
+
+  <section class="case-section section">
+    <div class="container">
+      <BeforeAfter
+        beforeImage={`${img}/before.png`}
+        afterImage={`${img}/after.png`}
+      />
+    </div>
+  </section>
+
+  <section class="case-section section">
+    <div class="container">
+      <SectionHeading title="A Reimagined Platform" subtitle="The new Deposify is designed with both user types in mind. We sought to provide the necessary complexity for a property manager overseeing hundreds to thousands of renters while maintaining a streamlined experience for tenants trying to pay their single deposit." />
+      <div class="features-grid">
+        <FeatureCard image={`${img}/tenant.png`} title="Simplified Tenant Experience" />
+        <FeatureCard image={`${img}/deposit-details.png`} title="Connecting Users with Chat" />
+        <FeatureCard image={`${img}/dashboard.png`} title="Dashboard Data at a Glance" />
+        <FeatureCard image={`${img}/actions.png`} title="Property Manager Task Management" />
+        <FeatureCard image={`${img}/reports.png`} title="Generate Custom Reports" />
+        <FeatureCard image={`${img}/funds.png`} title="Bank Account Management" />
+      </div>
+    </div>
+  </section>
+</CaseStudyLayout>
+
+<style>
+  .acquisition-note {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  @media (min-width: 768px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.utils.toArray('.feature-card, .before-after, .section-heading').forEach((el) => {
+    gsap.from(el as Element, {
+      scrollTrigger: {
+        trigger: el as Element,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      ease: 'power3.out',
+    });
+  });
+</script>

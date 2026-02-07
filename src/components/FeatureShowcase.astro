@@ -1,0 +1,68 @@
+---
+interface Props {
+  image: string;
+  title: string;
+  description?: string;
+  reverse?: boolean;
+}
+
+const { image, title, description, reverse = false } = Astro.props;
+---
+
+<div class:list={['feature-showcase', { reverse }]}>
+  <div class="showcase-image-wrapper">
+    <img src={image} alt={title} loading="lazy" />
+  </div>
+  <div class="showcase-content">
+    <h3 class="showcase-title">{title}</h3>
+    {description && <p class="showcase-description">{description}</p>}
+  </div>
+</div>
+
+<style>
+  .feature-showcase {
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: center;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .feature-showcase {
+      grid-template-columns: 1.2fr 1fr;
+    }
+
+    .feature-showcase.reverse {
+      grid-template-columns: 1fr 1.2fr;
+    }
+
+    .feature-showcase.reverse .showcase-image-wrapper {
+      order: 2;
+    }
+
+    .feature-showcase.reverse .showcase-content {
+      order: 1;
+    }
+  }
+
+  .showcase-image-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+
+  .showcase-image-wrapper img {
+    width: 100%;
+    height: auto;
+  }
+
+  .showcase-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .showcase-description {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+</style>

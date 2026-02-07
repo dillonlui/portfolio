@@ -1,0 +1,41 @@
+---
+interface Props {
+  image: string;
+  title: string;
+}
+
+const { image, title } = Astro.props;
+---
+
+<div class="feature-card">
+  <div class="feature-image-wrapper">
+    <img src={image} alt={title} loading="lazy" />
+  </div>
+  <h3 class="feature-title">{title}</h3>
+</div>
+
+<style>
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .feature-image-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+
+  .feature-image-wrapper img {
+    width: 100%;
+    height: auto;
+  }
+
+  .feature-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0;
+    text-align: center;
+  }
+</style>

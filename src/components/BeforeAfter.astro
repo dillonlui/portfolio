@@ -1,0 +1,64 @@
+---
+interface Props {
+  beforeImage: string;
+  afterImage: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+}
+
+const { beforeImage, afterImage, beforeLabel = 'Before', afterLabel = 'After' } = Astro.props;
+---
+
+<div class="before-after">
+  <div class="ba-item">
+    <span class="ba-label">{beforeLabel}</span>
+    <div class="ba-image-wrapper">
+      <img src={beforeImage} alt={beforeLabel} loading="lazy" />
+    </div>
+  </div>
+  <div class="ba-item">
+    <span class="ba-label">{afterLabel}</span>
+    <div class="ba-image-wrapper">
+      <img src={afterImage} alt={afterLabel} loading="lazy" />
+    </div>
+  </div>
+</div>
+
+<style>
+  .before-after {
+    display: grid;
+    gap: var(--space-xl);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .before-after {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .ba-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .ba-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+  }
+
+  .ba-image-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+
+  .ba-image-wrapper img {
+    width: 100%;
+    height: auto;
+  }
+</style>

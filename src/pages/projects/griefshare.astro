@@ -1,0 +1,253 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import InsightCallout from '../../components/InsightCallout.astro';
+import FullWidthImage from '../../components/FullWidthImage.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+
+const base = import.meta.env.BASE_URL;
+const img = `${base}/images/projects/griefshare`;
+---
+
+<CaseStudyLayout
+  title="GriefShare"
+  description="GriefShare is a program for support groups helping people work through the difficult emotions of grief. The groups go through a guided 13-week curriculum with videos and a participant workbook. Every participant must register using the Find a Group page."
+  tags={['Online Search', 'Responsive Web']}
+  heroImage={`${img}/header.png`}
+  logoImage={`${img}/logo.png`}
+  nextProject={{ title: 'Deposify', slug: 'deposify' }}
+>
+  <div class="case-study-body">
+    <!-- Challenge -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="The Challenge" subtitle="Redesign the Find a Group page, keeping in mind that it is one of the most crucial and most visited pages on the website." />
+        <p class="design-question"><strong>Design Question:</strong> How might we iterate on the current online experience in a way that helps people find the ideal group or event for themselves?</p>
+      </div>
+    </section>
+
+    <!-- Before / After -->
+    <section class="case-section section">
+      <div class="container">
+        <BeforeAfter
+          beforeImage={`${img}/before.png`}
+          afterImage={`${img}/after.png`}
+        />
+      </div>
+    </section>
+
+    <!-- Discover -->
+    <section class="case-section section" id="discover">
+      <div class="container">
+        <SectionHeading title="Discover" subtitle="Currently, users must type in their location before being presented with a list of nearby groups and events. Then the search results did not have a clear visual hierarchy. It was unclear at this point what the motivating factors were for users and how they decided what group to ultimately register for." />
+
+        <div class="research-grid">
+          <div class="research-item">
+            <h3>Proto-persona</h3>
+            <p>Before diving into the redesign, I needed a deeper understanding of the user's motivations and goals. I developed 4 unique proto-personas for different user types, with the most relevant for Find a Group being the "Pre-Registrant".</p>
+            <FullWidthImage src={`${img}/protopersona.png`} alt="Proto-persona for the Pre-Registrant user type" />
+          </div>
+
+          <div class="research-item">
+            <h3>Design Audit</h3>
+            <p>Before starting the redesign I needed to understand what already existed. I performed a design audit of the current Find a Group page that included an inventory of on-page components and accessibility check.</p>
+            <FullWidthImage src={`${img}/designaudit.png`} alt="Design audit of the Find a Group page" />
+          </div>
+
+          <div class="research-item">
+            <h3>Qualitative Interviews</h3>
+            <p>The interviews aimed to understand the decision-making process for users seeking a group. Participants ranked criteria in order of importance for choosing their group. Seven interviews were conducted, transitioning into continuous weekly discovery efforts.</p>
+            <FullWidthImage src={`${img}/interviews.png`} alt="Interview insights and criteria ranking" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Define (Key Insights) -->
+    <section class="case-section section" id="define">
+      <div class="container">
+        <SectionHeading title="Key Insights" />
+        <div class="insights-grid">
+          <InsightCallout
+            title="Schedule"
+            description="A convenient meeting schedule (day of week and time of day) is the most important criteria when deciding on a group for 50% of interviewees."
+          />
+          <InsightCallout
+            title="Format"
+            description="If the meeting format (in-person or online) matters for a participant then it becomes their most important criteria."
+          />
+          <InsightCallout
+            title="Distance"
+            description="Even though distance was never ranked first or second, the majority of participants cited looking for a group near their home or work."
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Ideate (Wireframes) -->
+    <section class="case-section section" id="ideate">
+      <div class="container">
+        <SectionHeading title="Ideate" />
+        <FullWidthImage src={`${img}/wireframes.png`} alt="Wireframe explorations for the Find a Group redesign" />
+      </div>
+    </section>
+
+    <!-- Prototype -->
+    <section class="case-section section" id="prototype">
+      <div class="container">
+        <SectionHeading title="Prototype" subtitle="A complete redesign featured vertical filter alignment for easier scanning, redesigned cards with improved visual hierarchy and accessibility compliance, an interactive map feature with radius search capability, and full responsiveness across devices." />
+        <div class="prototype-images">
+          <FullWidthImage src={`${img}/mockup1.png`} alt="High-fidelity mockup of the redesigned Find a Group page" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution Features -->
+    <section class="case-section section">
+      <div class="container">
+        <div class="solution-features">
+          <div class="solution-item">
+            <h3>Immersive Map</h3>
+            <p>For the visual processors an immersive map view is now available to help users see the distance instead of only reading it.</p>
+            <FullWidthImage src={`${img}/map-view.png`} alt="Immersive map view showing nearby groups" />
+          </div>
+          <div class="solution-item">
+            <h3>Card Only View</h3>
+            <p>The Find a Group page adapts to the preferences of the user by hiding the map if they want a more traditional view with cards only.</p>
+            <FullWidthImage src={`${img}/card-view.png`} alt="Card-only view of search results" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="case-section section" id="reflection">
+      <div class="container">
+        <SectionHeading title="Reflection" />
+        <div class="reflections-grid">
+          <div class="reflection-item">
+            <h3>User Feedback is Essential</h3>
+            <p>The importance of speaking to actual users cannot be understated. There are many behaviors in the real world that are not considered in the controlled environment of the design file. Additionally, design decisions are just assumptions until they are validated by users.</p>
+          </div>
+          <div class="reflection-item">
+            <h3>Read Between the Lines</h3>
+            <p>What a person says may not always align with what they do, that's just part of being human. It's just as important to ask what a user would like as it is to ask how they actually tried to do something.</p>
+          </div>
+          <div class="reflection-item">
+            <h3>Understand Team Constraints</h3>
+            <p>Given the scope of this redesign and developer bandwidth, many of the new features were scaled back for a MVP, opting for iterating on the current design instead of a complete overhaul. The effort wasn't wasted, though, as we now had an end goal to work toward.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</CaseStudyLayout>
+
+<style>
+  .design-question {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    padding: var(--space-xl);
+    background-color: var(--color-surface);
+    border-radius: 8px;
+  }
+
+  .design-question strong {
+    color: var(--color-text);
+  }
+
+  .research-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+  }
+
+  .research-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .research-item p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+  }
+
+  .insights-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .insights-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .prototype-images {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .solution-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+  }
+
+  .solution-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .solution-item p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+  }
+
+  .reflections-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .reflections-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .reflection-item h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .reflection-item p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.utils.toArray('.case-section').forEach((el) => {
+    gsap.from(el as Element, {
+      scrollTrigger: {
+        trigger: el as Element,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+      opacity: 0,
+      y: 40,
+      duration: 0.6,
+      ease: 'power3.out',
+    });
+  });
+</script>

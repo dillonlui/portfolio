@@ -1,0 +1,88 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  heroImage: string;
+  logoImage?: string;
+}
+
+const { title, description, tags, heroImage, logoImage } = Astro.props;
+---
+
+<section class="case-hero">
+  <div class="container">
+    <div class="hero-content">
+      {logoImage && (
+        <img src={logoImage} alt={`${title} logo`} class="hero-logo" />
+      )}
+      <div class="hero-tags">
+        {tags.map((tag) => (
+          <span class="hero-tag">{tag}</span>
+        ))}
+      </div>
+      <p class="hero-description">{description}</p>
+    </div>
+    <div class="hero-image-wrapper">
+      <img src={heroImage} alt={title} class="hero-image" loading="eager" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .case-hero {
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .hero-content {
+    max-width: 700px;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .hero-logo {
+    height: 40px;
+    width: auto;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-tag {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding: var(--space-xs) var(--space-sm);
+    background-color: var(--color-surface);
+    border-radius: 4px;
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+
+  .hero-image-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 768px) {
+    .case-hero {
+      padding-top: var(--space-4xl);
+      padding-bottom: var(--space-3xl);
+    }
+  }
+</style>
