@@ -9,11 +9,10 @@ interface Props {
 }
 
 const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'center center' } = Astro.props;
-const base = import.meta.env.BASE_URL;
 ---
 
 <article class="project-card">
-  <a href={`${base}/projects/${slug}`} class="card-link">
+  <a href={`/projects/${slug}`} class="card-link">
     <div class="thumbnail-wrapper">
       <img src={thumbnail} alt={title} class="thumbnail" loading="lazy" style={`object-position: ${thumbnailPosition};`} />
     </div>

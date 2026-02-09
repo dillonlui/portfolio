@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTAFooter from '../components/CTAFooter.astro';
-const base = import.meta.env.BASE_URL;
 
 const experience = [
   {
@@ -44,7 +43,7 @@ const experience = [
 ];
 ---
 
-<BaseLayout title="About — Dillon Lui" description="Learn about Dillon Lui — a product designer with experience in UX research, interaction design, and building user-centered products." image={`${base}/images/profile/dillon.jpg`}>
+<BaseLayout title="About — Dillon Lui" description="Learn about Dillon Lui — a product designer with experience in UX research, interaction design, and building user-centered products." image="/images/profile/dillon.jpg">
   <section class="about-hero section">
     <div class="container">
       <div class="about-intro">
@@ -54,7 +53,7 @@ const experience = [
       <div class="about-grid">
         <div class="about-image-wrapper fade-in">
           <img
-            src={`${base}/images/profile/dillon.jpg`}
+            src="/images/profile/dillon.jpg"
             alt="Dillon Lui"
             class="profile-image"
           />
@@ -116,11 +115,11 @@ const experience = [
       <div class="featured-content">
         <h2 class="featured-heading">Want to see more?</h2>
         <p class="featured-label">Check out my first case study for GriefShare's Find a Group 😸</p>
-        <a href={`${base}/projects/griefshare`} class="btn btn-secondary">View Case Study</a>
+        <a href="/projects/griefshare" class="btn btn-secondary">View Case Study</a>
       </div>
-      <a href={`${base}/projects/griefshare`} class="featured-link">
+      <a href="/projects/griefshare" class="featured-link">
         <img
-          src={`${base}/images/projects/griefshare/thumbnail.png`}
+          src="/images/projects/griefshare/thumbnail.png"
           alt="GriefShare case study"
           class="featured-image"
           loading="lazy"

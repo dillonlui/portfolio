@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dillonlui.github.io/portfolio/sitemap-index.xml
+Sitemap: https://dillonlui.com/sitemap-index.xml

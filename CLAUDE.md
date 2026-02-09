@@ -4,21 +4,18 @@
 Migrate portfolio from Squarespace to GitHub Pages, then eventually redesign using Figma.
 
 ## Current Status
-**Live at:** https://dillonlui.github.io/portfolio/
+**Live at:** https://dillonlui.com/
 
 **Completed:**
 - Astro project with React integration
 - SSH configured for personal GitHub (github.com-personal alias)
 - GitHub Actions workflow deploying successfully
-- Base path configured for /portfolio subdirectory
 - Phase 5: Squarespace design recreated with real content and assets
 - Typography system with design tokens (Sansita One display, Archivo Black headings)
 - 4 case study pages: GriefShare, Deposify, RMC, Vybe
 - About page with experience section, profile photo, resume link
 - Code review fixes: shared GSAP utilities, consolidated button styles, design tokens for radius/shadow/z-index, accessibility improvements
-
-**Next:**
-- Phase 6: Switch to custom domain (dillonlui.com)
+- Phase 6: Custom domain (dillonlui.com) with CNAME, no base path
 
 ## Tech Stack
 - Astro 5.x (static output)
@@ -59,14 +56,10 @@ Migrate portfolio from Squarespace to GitHub Pages, then eventually redesign usi
 
 ### Images
 - All images in `public/images/` organized by: `profile/`, `projects/griefshare/`, `projects/deposify/`, `projects/rmc/`, `projects/vybe/`
-- `import.meta.env.BASE_URL` returns `/portfolio` (NO trailing slash) — always use `${base}/path`
+- Site serves from root `/` (no base path) — use absolute paths like `/images/...`
 
 ## GitHub Setup
 - Personal account: dillonlui
 - SSH alias: github.com-personal
-- Repository: portfolio (deploys to dillonlui.github.io/portfolio)
-
-## Custom Domain (Phase 6)
-- Domain: dillonlui.com
-- DNS: Configure A records to GitHub IPs + CNAME for www
-- Only switch after new site is ready (keep Squarespace live until then)
+- Repository: portfolio (deploys to dillonlui.com)
+- Custom domain: dillonlui.com (CNAME in `public/CNAME`)

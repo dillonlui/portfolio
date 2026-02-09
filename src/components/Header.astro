@@ -1,17 +1,16 @@
 ---
 const currentPath = Astro.url.pathname;
-const base = import.meta.env.BASE_URL;
 
 const navLinks = [
-  { href: `${base}/about`, label: 'About' },
+  { href: '/about', label: 'About' },
 ];
 
 function isActive(href: string): boolean {
   const normalizedPath = currentPath.endsWith('/') ? currentPath : currentPath + '/';
   const normalizedHref = href.endsWith('/') ? href : href + '/';
 
-  if (href === base) {
-    return normalizedPath === base || normalizedPath === `${base}/`;
+  if (href === '/') {
+    return normalizedPath === '/';
   }
   return normalizedPath.startsWith(normalizedHref);
 }
@@ -19,8 +18,8 @@ function isActive(href: string): boolean {
 
 <header class="header">
   <nav class="nav container">
-    <a href={base} class="logo">
-      <img src={`${base}/favicon.ico`} alt="DL" class="logo-img" />
+    <a href="/" class="logo">
+      <img src="/favicon.ico" alt="DL" class="logo-img" />
     </a>
 
     <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">

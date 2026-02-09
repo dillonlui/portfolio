@@ -6,7 +6,6 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), sitemap()],
-  site: 'https://dillonlui.github.io',
-  base: '/portfolio',
+  site: 'https://dillonlui.com',
   output: 'static',
 });
