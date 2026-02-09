@@ -5,9 +5,10 @@ import CTAFooter from '../components/CTAFooter.astro';
 import { getCollection } from 'astro:content';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Dillon Lui — Product Designer">
+<BaseLayout title="Dillon Lui — Product Designer" description="Product designer crafting thoughtful digital experiences. View case studies for GriefShare, Deposify, RMC, and Vybe." image={`${base}/images/projects/griefshare/thumbnail.png`}>
   <section class="hero section">
     <div class="container">
       <h1 class="hero-title fade-in">Hello, I'm Dillon 👋🏼</h1>

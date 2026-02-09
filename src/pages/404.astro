@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Page Not Found — Dillon Lui" description="The page you're looking for doesn't exist.">
+  <section class="not-found">
+    <div class="container">
+      <h1 class="not-found-title">404</h1>
+      <p class="not-found-message">The page you're looking for doesn't exist.</p>
+      <a href={`${base}/`} class="btn btn-secondary">Back to Home</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - var(--header-height));
+    text-align: center;
+    padding: var(--space-2xl) 0;
+  }
+
+  .not-found-title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    font-weight: 400;
+    margin-bottom: var(--space-md);
+  }
+
+  .not-found-message {
+    font-size: var(--text-h3);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+  }
+</style>
