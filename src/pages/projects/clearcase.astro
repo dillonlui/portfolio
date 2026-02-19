@@ -6,12 +6,12 @@ import SectionHeading from '../../components/SectionHeading.astro';
 
 <CaseStudyLayout
   title="ClearCase"
-  description="ClearCase is a forensic case management tool used by law enforcement to organize digital evidence. The web app could show you results — it couldn't help you do anything with them. I redesigned the full experience and added a web-based exhibit creation workflow to close that gap."
+  description="ClearCase is a fully automated cartridge case triage solution for crime gun investigations. The product worked technically, but it had been built to prove a concept, not to support how investigators work in practice. I led a full UX/UI redesign to fix that, and in the process uncovered a critical gap in the workflow."
   tags={['B2B SaaS', 'Forensics', 'Responsive Web']}
   heroImage="/images/projects/clearcase/thumbnail.png"
   accentColor="#2c3e50"
-  previousProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
-  nextProject={{ title: 'LeadSuite 2.0', slug: 'leadsuite2' }}
+  previousProject={{ title: 'Deposify', slug: 'deposify' }}
+  nextProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
 >
   <div class="case-study-body">
 
@@ -20,49 +20,49 @@ import SectionHeading from '../../components/SectionHeading.astro';
       <div class="container">
         <SectionHeading
           title="The Challenge"
-          subtitle="ClearCase let investigators search forensic databases and view results. That was it. There was no way to organize findings, build an exhibit, or prepare evidence for court — all of which still happened, just outside the tool in Word documents and email threads."
+          subtitle="ClearCase worked. The automated analysis was accurate and investigators could pull results. But the product had been built to a prototype standard: no design system, no responsive layout, and no real consideration for how law enforcement agencies operate day to day. The interface was dense, hard to navigate, and hadn't been designed around how investigators move through a case. A full redesign was needed before ClearCase could be something agencies would genuinely adopt."
         />
-        <p class="design-question"><strong>Design Question:</strong> How do you extend a read-only research tool into a complete workflow — without losing the simplicity that made it usable in the first place?</p>
+        <p class="design-question"><strong>Design Question:</strong> How do you turn a technically capable but workflow-unaware tool into a product investigators actually trust?</p>
       </div>
     </section>
 
     <!-- Before state -->
     <section class="case-section section">
       <div class="container">
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Before — read-only web app state · 16:9"></div>
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Before - read-only web app state · 16:9"></div>
       </div>
     </section>
 
-    <!-- The Missing Piece -->
+    <!-- The Redesign -->
     <section class="case-section section">
       <div class="container">
         <SectionHeading
-          title="The Missing Piece"
-          subtitle="The insight that shaped everything: investigators weren't leaving ClearCase because the search was bad. They were leaving because there was nowhere to put what they found. Every result had to be manually exported, formatted, and assembled elsewhere. Adding exhibit creation to the tool would eliminate that entire downstream workflow."
+          title="The Redesign"
+          subtitle="I redesigned ClearCase from the ground up, aligning it with the LeadsOnline design system to give it consistency with the broader platform investigators already used. Navigation, layout, and visual language were rebuilt to match how agencies operate in the field, not how the original prototype assumed they would. The redesign is fully responsive and built to scale."
+        />
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Redesigned navigation and layouts · 16:9"></div>
+      </div>
+    </section>
+
+    <!-- A Gap Surfaces -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="A Gap Surfaces"
+          subtitle="As the redesign took shape and we gathered feedback from investigators, a bigger problem became clear. The web app had no way to add exhibits. Every exhibit had to be created on mobile, which meant the phone wasn't just a companion device, it was the only real entry point to the workflow. Agencies were hesitant to rely on mobile for core casework, and the redesigned web app, however much improved, still left investigators at a dead end the moment they needed to act on what they found."
         />
         <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="Workflow mapping / gap analysis artifact · 4:3"></div>
       </div>
     </section>
 
-    <!-- Feature 1 -->
+    <!-- Web-Based Exhibit Creation -->
     <section class="case-section section">
       <div class="container">
         <SectionHeading
           title="Web-Based Exhibit Creation"
-          subtitle="The new exhibit workflow lets investigators select results directly from search output and add them to a case exhibit — no export, no copy-paste. From there they can annotate, reorder, and generate a formatted document ready for court or review. The entire process happens inside ClearCase."
+          subtitle="The new web-based exhibit workflow makes the desktop app the primary place investigators create and process exhibits, instead of forcing them to work solely from their phone. In collaboration with engineering, we designed a compliant flow that uses the phone's NFC reader without storing anything locally, easing agencies' concerns around mobile use. The result is an intuitive, web-first experience that directly addresses the core pain point investigators had with the original workflow."
         />
         <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Exhibit creation flow · 16:9"></div>
-      </div>
-    </section>
-
-    <!-- Feature 2 -->
-    <section class="case-section section">
-      <div class="container">
-        <SectionHeading
-          title="Full UX/UI Redesign"
-          subtitle="The exhibit feature needed a foundation to live on. I redesigned ClearCase's navigation, layout system, and visual language to align with the LeadsOnline design system — giving it consistency with LeadSuite while preserving the focused, task-oriented feel that forensic workflows require. The redesign is fully responsive."
-        />
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Redesigned navigation and layouts · 16:9"></div>
       </div>
     </section>
 
@@ -72,16 +72,16 @@ import SectionHeading from '../../components/SectionHeading.astro';
         <SectionHeading title="Reflection" />
         <div class="reflections-grid">
           <div class="reflection-item">
-            <h3>Start with the gap</h3>
-            <p>The most valuable design move was identifying the one missing capability that blocked everything downstream. Exhibit creation wasn't a feature request — it was the reason investigators couldn't stay in the tool. Finding that gap first shaped every decision that followed.</p>
+            <h3>Design surfaces what's missing</h3>
+            <p>The redesign process wasn't just about polish. Mapping real workflows and gathering investigator feedback surfaced the exhibit creation gap that wasn't visible until we looked closely at how the product was being used. The redesign created the conditions for that discovery.</p>
           </div>
           <div class="reflection-item">
             <h3>System as accelerator</h3>
             <p>Building on the LeadsOnline design system meant ClearCase felt native to the platform from day one. Shared tokens, components, and patterns cut design time significantly and gave the redesign a coherence it would have taken much longer to achieve from scratch.</p>
           </div>
           <div class="reflection-item">
-            <h3>Viewer to workflow tool</h3>
-            <p>ClearCase went from a read-only results viewer to a complete investigative workflow tool. The surface area of the product nearly doubled — but the experience feels more focused, not more complex, because each addition has a clear job to do.</p>
+            <h3>From prototype to product</h3>
+            <p>ClearCase went from a technically capable prototype to a product agencies could genuinely adopt. The redesign addressed both the surface-level UX issues and the underlying workflow gaps that had made it hard to rely on.</p>
           </div>
         </div>
       </div>

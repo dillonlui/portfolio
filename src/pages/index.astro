@@ -1,10 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import FeaturedProjectCard from '../components/FeaturedProjectCard.astro';
 import CTAFooter from '../components/CTAFooter.astro';
 import { getCollection } from 'astro:content';
 
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const allProjects = (await getCollection('projects'))
+  .filter((p) => !p.data.archived)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const featuredProject = allProjects.find((p) => p.data.featured);
+const projects = allProjects.filter((p) => !p.data.featured);
 ---
 
 <BaseLayout title="Dillon Lui — Product Designer" description="Product designer crafting thoughtful digital experiences. View case studies for GriefShare, Deposify, RMC, and Vybe." image="/images/projects/griefshare/thumbnail.png">
@@ -12,7 +18,10 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     <div class="container">
       <h1 class="hero-title fade-in">Hello, I'm Dillon 👋🏼</h1>
       <p class="hero-subtitle fade-in">
-        I'm a Product Designer and builder, creating simple solutions to complex problems.
+        Senior product designer and builder, specializing in complex B2B SaaS. I lead design from strategy to delivery.
+      </p>
+      <p class="hero-blurb fade-in">
+        Currently at LeadsOnline, designing and prototyping across a suite of law enforcement investigative tools.
       </p>
       <p class="hero-cta fade-in">
         Interested in working together? <a href="mailto:dillonlui@gmail.com">Email me</a>
@@ -22,6 +31,18 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
   <section class="projects section">
     <div class="container">
+      {featuredProject && (
+        <div class="featured-wrapper">
+          <FeaturedProjectCard
+            title={featuredProject.data.title}
+            description={featuredProject.data.description}
+            thumbnail={featuredProject.data.thumbnail}
+            slug={featuredProject.data.slug}
+            tags={featuredProject.data.tags}
+            thumbnailPosition={featuredProject.data.thumbnailPosition}
+          />
+        </div>
+      )}
       <div class="projects-grid">
         {projects.map((project) => (
           <ProjectCard
@@ -61,8 +82,15 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     margin-bottom: var(--space-md);
   }
 
+  .hero-blurb {
+    font-size: var(--text-body-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-md);
+  }
+
   .hero-cta {
-    font-size: var(--text-h3);
+    font-size: var(--text-body-lg);
     color: var(--color-text-secondary);
   }
 
@@ -78,6 +106,10 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
   .projects {
     padding-top: 0;
+  }
+
+  .featured-wrapper {
+    margin-bottom: var(--space-2xl);
   }
 
   .projects-grid {
@@ -97,6 +129,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 <script>
   import { initHeroAnimation, initStaggerAnimation } from '../scripts/scroll-animations';
 
-  initHeroAnimation(['.hero-title', '.hero-subtitle', '.hero-cta']);
+  initHeroAnimation(['.hero-title', '.hero-subtitle', '.hero-blurb', '.hero-cta']);
   initStaggerAnimation('.project-card');
 </script>

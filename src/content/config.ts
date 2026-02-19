@@ -11,6 +11,7 @@ const projectsCollection = defineCollection({
     thumbnailPosition: z.string().default('center center'),
     order: z.number().default(0),
     featured: z.boolean().default(false),
+    archived: z.boolean().default(false),
   }),
 });
 

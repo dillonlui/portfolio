@@ -9,19 +9,13 @@ const img = '/images/projects/deposify';
 
 <CaseStudyLayout
   title="Deposify"
-  description="Deposify is a B2B and B2C SaaS product that offers deposit management for rental properties and their tenants."
+  description="Deposify is a B2B and B2C SaaS product that offers deposit management for rental properties and their tenants. The platform had grown beyond its original design and needed a ground-up redesign to support both property managers and tenants at scale. Deposify was acquired shortly after the redesign shipped."
   tags={['Responsive Web', 'B2B | B2C | SaaS']}
   heroImage={`${img}/header.png`}
   logoImage={`${img}/logo.png`}
   previousProject={{ title: 'GriefShare', slug: 'griefshare' }}
-  nextProject={{ title: 'RMC', slug: 'rmc' }}
+  nextProject={{ title: 'ClearCase', slug: 'clearcase' }}
 >
-  <section class="case-section section">
-    <div class="container">
-      <p class="acquisition-note">Leveraging their redesigned platform Deposify was acquired shortly after this project.</p>
-    </div>
-  </section>
-
   <section class="case-section section">
     <div class="container">
       <BeforeAfter
@@ -47,15 +41,6 @@ const img = '/images/projects/deposify';
 </CaseStudyLayout>
 
 <style>
-  .acquisition-note {
-    font-size: var(--text-body-lg);
-    color: var(--color-text-secondary);
-    font-style: italic;
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
   .features-grid {
     display: grid;
     grid-template-columns: 1fr;
