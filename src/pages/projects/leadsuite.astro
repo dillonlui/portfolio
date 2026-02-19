@@ -7,11 +7,11 @@ import SectionHeading from '../../components/SectionHeading.astro';
 <CaseStudyLayout
   title="LeadSuite"
   description="LeadSuite is the flagship product at LeadsOnline, a B2B SaaS platform used by law enforcement to work cases and surface insights. I led the redesign of the core person profile and case detail experience, turning an information-dense legacy interface into a structured, scalable investigative tool."
-  tags={['B2B SaaS', 'Law Enforcement', 'Web']}
+  tags={['B2B SaaS', 'Law Enforcement', 'Information Architecture']}
   heroImage="/images/projects/leadsuite/thumbnail.png"
   accentColor="#1c3557"
-  previousProject={{ title: 'ClearCase', slug: 'clearcase' }}
-  nextProject={{ title: 'AI-Assisted Prototyping', slug: 'leadsuite2' }}
+  previousProject={{ title: 'GriefShare', slug: 'griefshare' }}
+  nextProject={{ title: 'Deposify', slug: 'deposify' }}
 >
   <div class="case-study-body">
 
@@ -20,16 +20,16 @@ import SectionHeading from '../../components/SectionHeading.astro';
       <div class="container">
         <SectionHeading
           title="The Challenge"
-          subtitle="LeadSuite was originally a quick reskin of a low-adoption legacy product, carrying over its structure with no rethink of investigative workflows or modern UX patterns. The result: a person profile that put everything on one screen with no structure, and a case detail view that made it hard to follow the thread of an investigation."
+          subtitle="LeadSuite was originally a quick reskin of a low-adoption legacy product, carrying over its structure with no rethink of investigative workflows or modern UX patterns. A UX audit before touching anything confirmed the full scope: a person profile with no structure, and a case detail view that made it hard to follow the thread of an investigation."
         />
-        <p class="design-question"><strong>Design Question:</strong> How do you redesign a tool investigators rely on daily without disrupting their workflow, while making room for everything the platform still needs to grow into?</p>
+        <p class="design-question"><strong>Design Question:</strong> How do you redesign a tool investigators rely on daily so the disruption makes them faster, not just more comfortable?</p>
       </div>
     </section>
 
     <!-- Before state -->
     <section class="case-section section">
       <div class="container">
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Before — person profile (original state) · 16:9"></div>
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Before - person profile (original state) · 16:9"></div>
       </div>
     </section>
 
@@ -43,12 +43,12 @@ import SectionHeading from '../../components/SectionHeading.astro';
             description="The person profile loaded every data point simultaneously with no visual hierarchy. Investigators had to scan the entire page to find what they needed, with no tabbed structure, no grouping, no clear entry point."
           />
           <InsightCallout
-            title="No room to grow"
-            description="The flat layout had no obvious place to surface new data sources as the platform expanded. Every addition meant more clutter on an already dense page."
+            title="Hard to follow, harder to discover"
+            description="The original timeline and map design required cumbersome dual-axis scrolling to navigate. Enough functionality was buried or unclear that investigators, including me during the audit, were missing it entirely."
           />
           <InsightCallout
             title="Vague requirements"
-            description="PM asks were directional, not defined. 'Make it easier to use' was the brief. Part of the design work was translating that into something buildable, defining the problem before solving it."
+            description="PM asks were directional, not defined. 'Make it easier to use' was the brief. I used the audit findings as a foundation, then facilitated team discussions to translate directional asks into specific, buildable decisions."
           />
         </div>
       </div>
@@ -62,8 +62,8 @@ import SectionHeading from '../../components/SectionHeading.astro';
           subtitle="The redesigned person profile introduces a tabbed structure that groups related data, cases, associates, and activity log, so investigators can navigate directly to what they need. Renaming it 'Deep Background' wasn't cosmetic - it reframed the page from a data dump to an investigative starting point."
         />
         <div class="before-after-grid">
-          <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="Before — person profile detail · 4:3"></div>
-          <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="After — redesigned person profile with tabs · 4:3"></div>
+          <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="Before - person profile detail · 4:3"></div>
+          <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="After - redesigned person profile with tabs · 4:3"></div>
         </div>
       </div>
     </section>
@@ -73,9 +73,9 @@ import SectionHeading from '../../components/SectionHeading.astro';
       <div class="container">
         <SectionHeading
           title="Case Detail - Timeline + Map"
-          subtitle="The case detail view needed to tell a story. I added a chronological timeline and an interactive map - two views of the same facts, for two different types of thinkers."
+          subtitle="The original timeline and map design required cumbersome dual-axis scrolling, and enough functionality was buried that investigators were missing it. I redesigned the timeline as a full-width horizontal view, synced to the map, giving investigators two representations of the same facts for two different ways of thinking through a case."
         />
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Case detail — timeline and map view · 16:9"></div>
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Case detail - timeline and map view · 16:9"></div>
       </div>
     </section>
 
@@ -84,7 +84,7 @@ import SectionHeading from '../../components/SectionHeading.astro';
       <div class="container">
         <SectionHeading
           title="Leads"
-          subtitle="The Leads section gives investigators a focused workspace to track investigative threads tied to a case, separate from the raw data views. It's designed to feel like a working surface, not a report."
+          subtitle="Leads is a net new feature, built in close collaboration with one of the developers. He brought the concept, and we workshopped it together until it became a focused workspace where investigators could track threads tied to a case, separate from the raw data views. It's designed to feel like a working surface, not a report."
         />
         <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Leads view · 16:9"></div>
       </div>
@@ -95,7 +95,7 @@ import SectionHeading from '../../components/SectionHeading.astro';
       <div class="container">
         <SectionHeading
           title="What's Next"
-          subtitle="The tabbed architecture opened up space for two major additions: a Dashboard that surfaces personalized investigative activity across all of a user's cases, and an AI-powered search experience that lets investigators find what they need in plain language instead of constructing database queries. Both are in active design."
+          subtitle="The redesign launched first to beta users, then expanded to a controlled subset of existing LeadsOnline customers, with a full rollout weeks away. The tabbed architecture opened up space for two more additions in active design: a Dashboard surfacing personalized investigative activity, and an AI-powered search. That work, and where it leads, is what the next case study covers."
         />
       </div>
     </section>

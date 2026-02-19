@@ -10,19 +10,23 @@ const img = '/images/projects/griefshare';
 
 <CaseStudyLayout
   title="GriefShare"
-  description="GriefShare is a program for support groups helping people work through the difficult emotions of grief. The groups go through a guided 13-week curriculum with videos and a participant workbook. Every participant must register using the Find a Group page."
-  tags={['Online Search', 'Responsive Web']}
+  description="GriefShare's Find a Group page was the front door to everything. I redesigned it from the ground up and, in the process, introduced the first formal UX research practice at Church Initiative."
+  tags={['Online Search', 'UX Research', 'Responsive Web']}
   heroImage={`${img}/header.png`}
   logoImage={`${img}/logo.png`}
-  previousProject={{ title: 'AI-Assisted Prototyping', slug: 'leadsuite2' }}
-  nextProject={{ title: 'Deposify', slug: 'deposify' }}
+  previousProject={{ title: 'ClearCase', slug: 'clearcase' }}
+  nextProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
 >
   <div class="case-study-body">
+
     <!-- Challenge -->
     <section class="case-section section">
       <div class="container">
-        <SectionHeading title="The Challenge" subtitle="Redesign the Find a Group page, keeping in mind that it is one of the most crucial and most visited pages on the website." />
-        <p class="design-question"><strong>Design Question:</strong> How might we iterate on the current online experience in a way that helps people find the ideal group or event for themselves?</p>
+        <SectionHeading
+          title="The Challenge"
+          subtitle="Find a Group was the most important page on the GriefShare website. Every support group participant started here, and the group experience was the entire product. The page had been built on untested assumptions, and visual hierarchy, accessibility, and the rise of online groups after COVID had all created gaps the original design wasn't built to handle."
+        />
+        <p class="design-question"><strong>Design Question:</strong> How do you redesign a search experience for people in grief, where finding the right group, or failing to, has real human consequences?</p>
       </div>
     </section>
 
@@ -39,24 +43,27 @@ const img = '/images/projects/griefshare';
     <!-- Discover -->
     <section class="case-section section" id="discover">
       <div class="container">
-        <SectionHeading title="Discover" subtitle="Currently, users must type in their location before being presented with a list of nearby groups and events. Then the search results did not have a clear visual hierarchy. It was unclear at this point what the motivating factors were for users and how they decided what group to ultimately register for." />
+        <SectionHeading
+          title="Building the Research Practice"
+          subtitle="Church Initiative had no formal UX research practice when I started this project. I introduced one. Beginning with a design audit and proto-personas, I ran seven structured interviews before transitioning into a weekly cadence of ongoing user conversations, all conducted solo."
+        />
 
         <div class="research-grid">
           <div class="research-item">
             <h3>Proto-persona</h3>
-            <p>Before diving into the redesign, I needed a deeper understanding of the user's motivations and goals. I developed 4 unique proto-personas for different user types, with the most relevant for Find a Group being the "Pre-Registrant".</p>
+            <p>Before diving into the redesign, I needed a deeper understanding of who was using Find a Group and why. I developed four proto-personas for different user types. The most relevant for this project was the Pre-Registrant: someone in grief, evaluating options, trying to find a group they could trust before committing.</p>
             <FullWidthImage src={`${img}/protopersona.png`} alt="Proto-persona for the Pre-Registrant user type" />
           </div>
 
           <div class="research-item">
             <h3>Design Audit</h3>
-            <p>Before starting the redesign I needed to understand what already existed. I performed a design audit of the current Find a Group page that included an inventory of on-page components and accessibility check.</p>
+            <p>Before starting the redesign I needed to understand what already existed. I performed a design audit of the current Find a Group page that included an inventory of on-page components and an accessibility check, surfacing gaps in contrast, hierarchy, and responsive behavior.</p>
             <FullWidthImage src={`${img}/designaudit.png`} alt="Design audit of the Find a Group page" />
           </div>
 
           <div class="research-item">
             <h3>Qualitative Interviews</h3>
-            <p>The interviews aimed to understand the decision-making process for users seeking a group. Participants ranked criteria in order of importance for choosing their group. Seven interviews were conducted, transitioning into continuous weekly discovery efforts.</p>
+            <p>Recruiting participants required careful thought. GriefShare serves people processing real loss, so I spoke only with participants who had completed a group within the past year: close enough to remember the experience clearly, but far enough along not to disrupt their grief process. I sent an initial feedback form to surface interested participants, then scheduled batches of interviews from that list. Seven interviews led into ongoing weekly discovery conversations.</p>
             <FullWidthImage src={`${img}/interviews.png`} alt="Interview insights and criteria ranking" />
           </div>
         </div>
@@ -74,11 +81,11 @@ const img = '/images/projects/griefshare';
           />
           <InsightCallout
             title="Format"
-            description="If the meeting format (in-person or online) matters for a participant then it becomes their most important criteria."
+            description="If the meeting format (in-person or online) matters for a participant, it becomes their most important criteria. Online groups had grown significantly and were hard to find in the existing interface."
           />
           <InsightCallout
             title="Distance"
-            description="Even though distance was never ranked first or second, the majority of participants cited looking for a group near their home or work."
+            description="Even though distance was never ranked first or second, the majority of participants said finding a group near their home or work was important to them."
           />
         </div>
       </div>
@@ -95,7 +102,10 @@ const img = '/images/projects/griefshare';
     <!-- Prototype -->
     <section class="case-section section" id="prototype">
       <div class="container">
-        <SectionHeading title="Prototype" subtitle="A complete redesign featured vertical filter alignment for easier scanning, redesigned cards with improved visual hierarchy and accessibility compliance, an interactive map feature with radius search capability, and full responsiveness across devices." />
+        <SectionHeading
+          title="The Redesign"
+          subtitle="The redesign prioritized changes with the most immediate impact: reordered filters, contextual tags, and accessibility fixes throughout. The map view was designed and validated with users but held back from the initial release given development bandwidth at a non-profit, where it remains the direction to build toward."
+        />
         <div class="prototype-images">
           <FullWidthImage src={`${img}/mockup1.png`} alt="High-fidelity mockup of the redesigned Find a Group page" />
         </div>
@@ -108,12 +118,12 @@ const img = '/images/projects/griefshare';
         <div class="solution-features">
           <div class="solution-item">
             <h3>Immersive Map</h3>
-            <p>For the visual processors an immersive map view is now available to help users see the distance instead of only reading it.</p>
+            <p>Designed and validated with users as a way to understand proximity visually rather than reading it. Didn't ship in the initial release but remains the direction to build toward.</p>
             <FullWidthImage src={`${img}/map-view.png`} alt="Immersive map view showing nearby groups" />
           </div>
           <div class="solution-item">
-            <h3>Card Only View</h3>
-            <p>The Find a Group page adapts to the preferences of the user by hiding the map if they want a more traditional view with cards only.</p>
+            <h3>Card View</h3>
+            <p>The baseline experience, rebuilt with improved hierarchy, reordered filters based on research priorities, and contextual tags that surface the details most relevant to someone choosing a group.</p>
             <FullWidthImage src={`${img}/card-view.png`} alt="Card-only view of search results" />
           </div>
         </div>
@@ -126,20 +136,21 @@ const img = '/images/projects/griefshare';
         <SectionHeading title="Reflection" />
         <div class="reflections-grid">
           <div class="reflection-item">
-            <h3>User Feedback is Essential</h3>
-            <p>The importance of speaking to actual users cannot be understated. There are many behaviors in the real world that are not considered in the controlled environment of the design file. Additionally, design decisions are just assumptions until they are validated by users.</p>
+            <h3>Research design is design</h3>
+            <p>The most careful design decision on this project wasn't the UI. It was how to recruit participants. Choosing to speak only with people who had completed their group recently, rather than those still in grief, was an ethical call that made the research more honest and the findings more trustworthy.</p>
           </div>
           <div class="reflection-item">
-            <h3>Read Between the Lines</h3>
-            <p>What a person says may not always align with what they do, that's just part of being human. It's just as important to ask what a user would like as it is to ask how they actually tried to do something.</p>
+            <h3>Introduce the practice, not just the project</h3>
+            <p>The most lasting contribution wasn't the redesigned page. Starting a weekly rhythm of user conversations changed how the organization thought about its product. The research practice outlived the project and stayed alive as long as I was in the role.</p>
           </div>
           <div class="reflection-item">
-            <h3>Understand Team Constraints</h3>
-            <p>Given the scope of this redesign and developer bandwidth, many of the new features were scaled back for a MVP, opting for iterating on the current design instead of a complete overhaul. The effort wasn't wasted, though, as we now had an end goal to work toward.</p>
+            <h3>Ship what's possible, keep the vision</h3>
+            <p>Non-profit bandwidth meant a smaller initial release. The discipline was designing the full vision first, then deciding what shipped now and what stayed as the direction to build toward. The map didn't ship. The direction it set did.</p>
           </div>
         </div>
       </div>
     </section>
+
   </div>
 </CaseStudyLayout>
 

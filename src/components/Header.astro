@@ -6,10 +6,10 @@ const navLinks = [
 ];
 
 const caseStudies = [
-  { href: '/projects/leadsuite', label: 'LeadSuite' },
+  { href: '/projects/unified-platform', label: 'Unifying an Investigative Platform' },
   { href: '/projects/clearcase', label: 'ClearCase' },
-  { href: '/projects/leadsuite2', label: 'AI-Assisted Prototyping' },
   { href: '/projects/griefshare', label: 'GriefShare' },
+  { href: '/projects/leadsuite', label: 'LeadSuite' },
   { href: '/projects/deposify', label: 'Deposify' },
 ];
 
@@ -332,6 +332,7 @@ const isWorkActive = currentPath.startsWith('/projects');
     .dropdown-link {
       font-size: var(--text-body);
       padding: var(--space-xs) 0;
+      white-space: normal;
     }
 
     /* Hamburger animation when open */
@@ -377,7 +378,7 @@ const isWorkActive = currentPath.startsWith('/projects');
   });
 
   // Close menu when a nav link is clicked
-  navLinks?.querySelectorAll('.nav-link, .dropdown-link').forEach((link) => {
+  navLinks?.querySelectorAll('.nav-link:not(.dropdown-trigger), .dropdown-link').forEach((link) => {
     link.addEventListener('click', closeMenu);
   });
 

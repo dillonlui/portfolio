@@ -3,41 +3,114 @@ import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
 import FeatureCard from '../../components/FeatureCard.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
+import InsightCallout from '../../components/InsightCallout.astro';
 
 const img = '/images/projects/deposify';
 ---
 
 <CaseStudyLayout
   title="Deposify"
-  description="Deposify is a B2B and B2C SaaS product that offers deposit management for rental properties and their tenants. The platform had grown beyond its original design and needed a ground-up redesign to support both property managers and tenants at scale. Deposify was acquired shortly after the redesign shipped."
-  tags={['Responsive Web', 'B2B | B2C | SaaS']}
+  description="Deposify had validated its product in the market without a single designer ever being involved. Our agency was brought in to rethink everything - and ended up designing the pitch that sold it."
+  tags={['B2B | B2C | SaaS', 'Product Strategy', 'Responsive Web']}
   heroImage={`${img}/header.png`}
   logoImage={`${img}/logo.png`}
-  previousProject={{ title: 'GriefShare', slug: 'griefshare' }}
-  nextProject={{ title: 'ClearCase', slug: 'clearcase' }}
+  previousProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
+  nextProject={{ title: 'Unifying an Investigative Platform', slug: 'unified-platform' }}
 >
-  <section class="case-section section">
-    <div class="container">
-      <BeforeAfter
-        beforeImage={`${img}/before.png`}
-        afterImage={`${img}/after.png`}
-      />
-    </div>
-  </section>
+  <div class="case-study-body">
 
-  <section class="case-section section">
-    <div class="container">
-      <SectionHeading title="A Reimagined Platform" subtitle="The new Deposify is designed with both user types in mind. We sought to provide the necessary complexity for a property manager overseeing hundreds to thousands of renters while maintaining a streamlined experience for tenants trying to pay their single deposit." />
-      <div class="features-grid">
-        <FeatureCard image={`${img}/tenant.png`} title="Simplified Tenant Experience" />
-        <FeatureCard image={`${img}/deposit-details.png`} title="Connecting Users with Chat" />
-        <FeatureCard image={`${img}/dashboard.png`} title="Dashboard Data at a Glance" />
-        <FeatureCard image={`${img}/actions.png`} title="Property Manager Task Management" />
-        <FeatureCard image={`${img}/reports.png`} title="Generate Custom Reports" />
-        <FeatureCard image={`${img}/funds.png`} title="Bank Account Management" />
+    <!-- Challenge -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="The Challenge"
+          subtitle="The app was built on a flawed assumption: that property managers and renters wanted the same experience. Giving both users the same interface was a ceiling on both: too complex for renters, and not powerful enough for property managers to scale."
+        />
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Before / After -->
+    <section class="case-section section">
+      <div class="container">
+        <BeforeAfter
+          beforeImage={`${img}/before.png`}
+          afterImage={`${img}/after.png`}
+        />
+      </div>
+    </section>
+
+    <!-- Two Products in One -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Two Products in One"
+          subtitle="The solution was to split the app into two distinct experiences, each designed from scratch for its user type. The property manager side is a full operational platform; the renter side is almost aggressively simple."
+        />
+      </div>
+    </section>
+
+    <!-- Tenant experience -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="The Renter Experience"
+          subtitle="Renters have one job: pay their deposit. The redesign stripped everything back to make that as frictionless as possible. Rental agreement details and direct messaging to the property manager are available, but the primary screen is just a payment screen."
+        />
+        <div class="features-grid">
+          <FeatureCard image={`${img}/tenant.png`} title="Simplified Payment Screen" />
+          <FeatureCard image={`${img}/deposit-details.png`} title="Direct Messaging with Property Manager" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Property manager experience -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="The Property Manager Experience"
+          subtitle="Almost everything on the property manager side was net new, with nothing to reference. The most demanding design problem was task management: a multi-property admin view that lets managers assign and track tasks across individual team members at each property."
+        />
+        <div class="features-grid">
+          <FeatureCard image={`${img}/dashboard.png`} title="Multi-Property Dashboard" />
+          <FeatureCard image={`${img}/actions.png`} title="Task Management Across Properties" />
+          <FeatureCard image={`${img}/reports.png`} title="Custom Reports" />
+          <FeatureCard image={`${img}/funds.png`} title="Bank Account Management" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcome -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="The Outcome"
+          subtitle="Development had just begun when the client told us they'd sold the company. They had been using the redesign mockups to pitch potential buyers without telling us, and the designs were the main selling point alongside the technology. Deposify was acquired twice in 2022, ultimately by Rhino as part of a multimillion-dollar deal. Work made to improve a product became the visual case that sold it - twice."
+        />
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="Reflection" />
+        <div class="reflections-grid">
+          <div class="reflection-item">
+            <h3>Question the assumption, not just the interface</h3>
+            <p>The CTO hadn't made a design mistake. He'd made a product assumption: that both user types were the same. Redesigning the UI without questioning that would have missed the real problem entirely.</p>
+          </div>
+          <div class="reflection-item">
+            <h3>Simplicity is also a design decision</h3>
+            <p>The renter experience required as much thought as the property manager side. Deciding what to remove, what to hide, and what to surface as the single primary action is harder than designing a complex screen.</p>
+          </div>
+          <div class="reflection-item">
+            <h3>Design communicates what a product could become</h3>
+            <p>The mockups closing an acquisition they weren't made to close was the clearest signal of the project: a well-designed product doesn't just show what it is, it shows what it's capable of becoming.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </CaseStudyLayout>
 
 <style>
@@ -55,12 +128,34 @@ const img = '/images/projects/deposify';
 
   @media (min-width: 1024px) {
     .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .reflections-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .reflections-grid {
       grid-template-columns: repeat(3, 1fr);
     }
+  }
+
+  .reflection-item h3 {
+    font-size: var(--text-h4);
+    margin-bottom: var(--space-sm);
+  }
+
+  .reflection-item p {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
   }
 </style>
 
 <script>
   import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
-  initCaseStudyAnimations('.feature-card, .before-after, .section-heading');
+  initCaseStudyAnimations('.case-section');
 </script>

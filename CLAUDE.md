@@ -58,6 +58,10 @@ Migrate portfolio from Squarespace to GitHub Pages, then eventually redesign usi
 - All images in `public/images/` organized by: `profile/`, `projects/griefshare/`, `projects/deposify/`, `projects/rmc/`, `projects/vybe/`
 - Site serves from root `/` (no base path) — use absolute paths like `/images/...`
 
+## Writing Conventions
+- No em dashes (—) in copy. Use commas or regular dashes ( - ) where necessary.
+- Regular dashes are acceptable when setting off a parenthetical list that already contains commas (e.g. `hold all of it - item one, item two - and then`), or for emphatic trailing fragments (e.g. `sold it - twice`).
+
 ## GitHub Setup
 - Personal account: dillonlui
 - SSH alias: github.com-personal

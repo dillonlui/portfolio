@@ -1,11 +1,12 @@
 title: GriefShare
-description: "GriefShare is a program for support groups helping people work through the difficult emotions of grief. The groups go through a guided 13-week curriculum with videos and a participant workbook."
+description: "GriefShare's Find a Group page was the front door to everything. I redesigned it from the ground up and, in the process, introduced the first formal UX research practice at Church Initiative."
 thumbnail: /images/projects/griefshare/thumbnail.png
 slug: griefshare
 tags:
   - Online Search
+  - UX Research
   - Responsive Web
 thumbnailPosition: "center 25%"
 accentColor: "#1a1a1a"
-order: 4
+order: 3
 featured: false
