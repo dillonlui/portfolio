@@ -3,9 +3,9 @@ description: "Vybe is a social media app for college students that curates a new
 thumbnail: /images/projects/vybe/thumbnail.png
 slug: vybe
 tags:
-  - iOS | Android
   - Social Media
+  - iOS | Android
 thumbnailPosition: "center 20%"
 accentColor: "#1a1a1a"
-order: 4
+order: 7
 featured: false

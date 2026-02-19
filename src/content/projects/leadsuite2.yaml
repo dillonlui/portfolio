@@ -1,0 +1,11 @@
+title: LeadSuite 2.0
+description: "LeadSuite 2.0 is a ground-up redesign of the flagship law enforcement platform — and a new way of building it. I'm working as a hybrid designer-developer, using AI-assisted prototyping and a shared design system to move from idea to working product faster than a traditional handoff workflow allows."
+thumbnail: /images/projects/leadsuite2/thumbnail.png
+slug: leadsuite2
+tags:
+  - B2B SaaS
+  - Design Systems
+  - Design + Code
+accentColor: "#1a1a2e"
+order: 3
+featured: false

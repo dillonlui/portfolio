@@ -1,0 +1,154 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import InsightCallout from '../../components/InsightCallout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+---
+
+<CaseStudyLayout
+  title="ClearCase"
+  description="ClearCase is a forensic case management tool used by law enforcement to organize digital evidence. The web app could show you results — it couldn't help you do anything with them. I redesigned the full experience and added a web-based exhibit creation workflow to close that gap."
+  tags={['B2B SaaS', 'Forensics', 'Responsive Web']}
+  heroImage="/images/projects/clearcase/thumbnail.png"
+  accentColor="#2c3e50"
+  previousProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
+  nextProject={{ title: 'LeadSuite 2.0', slug: 'leadsuite2' }}
+>
+  <div class="case-study-body">
+
+    <!-- Challenge -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="The Challenge"
+          subtitle="ClearCase let investigators search forensic databases and view results. That was it. There was no way to organize findings, build an exhibit, or prepare evidence for court — all of which still happened, just outside the tool in Word documents and email threads."
+        />
+        <p class="design-question"><strong>Design Question:</strong> How do you extend a read-only research tool into a complete workflow — without losing the simplicity that made it usable in the first place?</p>
+      </div>
+    </section>
+
+    <!-- Before state -->
+    <section class="case-section section">
+      <div class="container">
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Before — read-only web app state · 16:9"></div>
+      </div>
+    </section>
+
+    <!-- The Missing Piece -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="The Missing Piece"
+          subtitle="The insight that shaped everything: investigators weren't leaving ClearCase because the search was bad. They were leaving because there was nowhere to put what they found. Every result had to be manually exported, formatted, and assembled elsewhere. Adding exhibit creation to the tool would eliminate that entire downstream workflow."
+        />
+        <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="Workflow mapping / gap analysis artifact · 4:3"></div>
+      </div>
+    </section>
+
+    <!-- Feature 1 -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Web-Based Exhibit Creation"
+          subtitle="The new exhibit workflow lets investigators select results directly from search output and add them to a case exhibit — no export, no copy-paste. From there they can annotate, reorder, and generate a formatted document ready for court or review. The entire process happens inside ClearCase."
+        />
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Exhibit creation flow · 16:9"></div>
+      </div>
+    </section>
+
+    <!-- Feature 2 -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Full UX/UI Redesign"
+          subtitle="The exhibit feature needed a foundation to live on. I redesigned ClearCase's navigation, layout system, and visual language to align with the LeadsOnline design system — giving it consistency with LeadSuite while preserving the focused, task-oriented feel that forensic workflows require. The redesign is fully responsive."
+        />
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Redesigned navigation and layouts · 16:9"></div>
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="Reflection" />
+        <div class="reflections-grid">
+          <div class="reflection-item">
+            <h3>Start with the gap</h3>
+            <p>The most valuable design move was identifying the one missing capability that blocked everything downstream. Exhibit creation wasn't a feature request — it was the reason investigators couldn't stay in the tool. Finding that gap first shaped every decision that followed.</p>
+          </div>
+          <div class="reflection-item">
+            <h3>System as accelerator</h3>
+            <p>Building on the LeadsOnline design system meant ClearCase felt native to the platform from day one. Shared tokens, components, and patterns cut design time significantly and gave the redesign a coherence it would have taken much longer to achieve from scratch.</p>
+          </div>
+          <div class="reflection-item">
+            <h3>Viewer to workflow tool</h3>
+            <p>ClearCase went from a read-only results viewer to a complete investigative workflow tool. The surface area of the product nearly doubled — but the experience feels more focused, not more complex, because each addition has a clear job to do.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</CaseStudyLayout>
+
+<style>
+  .design-question {
+    font-size: var(--text-body-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    padding: var(--space-xl);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+  }
+
+  .design-question strong {
+    color: var(--color-text);
+  }
+
+  .reflections-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .reflections-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .reflection-item h3 {
+    font-size: var(--text-h4);
+    margin-bottom: var(--space-sm);
+  }
+
+  .reflection-item p {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Placeholder image scaffolding */
+  .img-placeholder {
+    width: 100%;
+    background-color: var(--color-surface);
+    border: 2px dashed var(--color-text-muted);
+    border-radius: var(--radius-md);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .img-placeholder::after {
+    content: attr(data-label);
+    position: absolute;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-align: center;
+    padding: var(--space-md);
+  }
+</style>
+
+<script>
+  import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
+  initCaseStudyAnimations('.case-section');
+</script>

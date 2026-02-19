@@ -1,0 +1,11 @@
+title: ClearCase
+description: "ClearCase is a forensic case management tool used by law enforcement to organize digital evidence. The web app could show you results — it couldn't help you do anything with them. I redesigned the full experience and added a web-based exhibit creation workflow to close that gap."
+thumbnail: /images/projects/clearcase/thumbnail.png
+slug: clearcase
+tags:
+  - B2B SaaS
+  - Forensics
+  - Responsive Web
+accentColor: "#2c3e50"
+order: 2
+featured: false

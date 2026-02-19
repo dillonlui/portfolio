@@ -3,8 +3,8 @@ description: "Deposify is a B2B and B2C SaaS product that offers deposit managem
 thumbnail: /images/projects/deposify/thumbnail.png
 slug: deposify
 tags:
-  - Responsive Web
   - B2B | B2C | SaaS
+  - Responsive Web
 accentColor: "#1a1a1a"
-order: 2
+order: 5
 featured: false

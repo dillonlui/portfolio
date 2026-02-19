@@ -1,0 +1,211 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import InsightCallout from '../../components/InsightCallout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+---
+
+<CaseStudyLayout
+  title="LeadSuite"
+  description="LeadSuite is the flagship product at LeadsOnline, a B2B SaaS platform used by law enforcement to work cases and surface insights. I led the redesign of the core person profile and case detail experience, turning an information-dense legacy interface into a structured, scalable investigative tool."
+  tags={['B2B SaaS', 'Law Enforcement', 'Web']}
+  heroImage="/images/projects/leadsuite/thumbnail.png"
+  accentColor="#1c3557"
+  nextProject={{ title: 'ClearCase', slug: 'clearcase' }}
+>
+  <div class="case-study-body">
+
+    <!-- Challenge -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="The Challenge"
+          subtitle="LeadSuite was originally a quick reskin of a low-adoption legacy product, carrying over its structure with no rethink of investigative workflows or modern UX patterns. The result: a person profile that put everything on one screen with no structure, and a case detail view that made it hard to follow the thread of an investigation."
+        />
+        <p class="design-question"><strong>Design Question:</strong> How do you redesign a tool investigators rely on daily without disrupting their workflow, while making room for everything the platform still needs to grow into?</p>
+      </div>
+    </section>
+
+    <!-- Before state -->
+    <section class="case-section section">
+      <div class="container">
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Before — person profile (original state) · 16:9"></div>
+      </div>
+    </section>
+
+    <!-- Pain Points -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="What We Were Up Against" />
+        <div class="insights-grid">
+          <InsightCallout
+            title="Wall of noise"
+            description="The person profile loaded every data point simultaneously with no visual hierarchy. Investigators had to scan the entire page to find what they needed, with no tabbed structure, no grouping, no clear entry point."
+          />
+          <InsightCallout
+            title="No room to grow"
+            description="The flat layout had no obvious place to surface new data sources as the platform expanded. Every addition meant more clutter on an already dense page."
+          />
+          <InsightCallout
+            title="Vague requirements"
+            description="PM asks were directional, not defined. 'Make it easier to use' was the brief. Part of the design work was translating that into something buildable, defining the problem before solving it."
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 1 -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Person Profile - Deep Background"
+          subtitle="The redesigned person profile introduces a tabbed structure that groups related data, cases, associates, and activity log, so investigators can navigate directly to what they need. Renaming it 'Deep Background' wasn't cosmetic - it reframed the page from a data dump to an investigative starting point."
+        />
+        <div class="before-after-grid">
+          <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="Before — person profile detail · 4:3"></div>
+          <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="After — redesigned person profile with tabs · 4:3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 2 -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Case Detail - Timeline + Map"
+          subtitle="The case detail view needed to tell a story. I added a chronological timeline and an interactive map - two views of the same facts, for two different types of thinkers."
+        />
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Case detail — timeline and map view · 16:9"></div>
+      </div>
+    </section>
+
+    <!-- Feature 3 -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Leads"
+          subtitle="The Leads section gives investigators a focused workspace to track investigative threads tied to a case, separate from the raw data views. It's designed to feel like a working surface, not a report."
+        />
+        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Leads view · 16:9"></div>
+      </div>
+    </section>
+
+    <!-- What's Next -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="What's Next"
+          subtitle="The tabbed architecture opened up space for two major additions: a Dashboard that surfaces personalized investigative activity across all of a user's cases, and an AI-powered search experience that lets investigators find what they need in plain language instead of constructing database queries. Both are in active design as part of LeadSuite 2.0."
+        />
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="Reflection" />
+        <div class="reflections-grid">
+          <div class="reflection-item">
+            <h3>Real usage, real validation</h3>
+            <p>Beta testers gravitated to the redesigned person profile first, and it became the most-used page within weeks of launch. That signal confirmed the tabbed structure was solving a real navigation problem, not just a visual one.</p>
+          </div>
+          <div class="reflection-item">
+            <h3>Scalable structure pays off</h3>
+            <p>The tabbed model has already absorbed two new data source integrations without touching the core layout. Building for growth wasn't over-engineering, it was the right call given the product roadmap.</p>
+          </div>
+          <div class="reflection-item">
+            <h3>Ambiguity is a design surface</h3>
+            <p>The vaguest asks often point to the most important problems. "Make it easier to use" turned into a full information architecture rethink.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</CaseStudyLayout>
+
+<style>
+  .design-question {
+    font-size: var(--text-body-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    padding: var(--space-xl);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+  }
+
+  .design-question strong {
+    color: var(--color-text);
+  }
+
+  .insights-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .insights-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .before-after-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .before-after-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .reflections-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .reflections-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .reflection-item h3 {
+    font-size: var(--text-h4);
+    margin-bottom: var(--space-sm);
+  }
+
+  .reflection-item p {
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Placeholder image scaffolding */
+  .img-placeholder {
+    width: 100%;
+    background-color: var(--color-surface);
+    border: 2px dashed var(--color-text-muted);
+    border-radius: var(--radius-md);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .img-placeholder::after {
+    content: attr(data-label);
+    position: absolute;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-align: center;
+    padding: var(--space-md);
+  }
+</style>
+
+<script>
+  import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
+  initCaseStudyAnimations('.case-section');
+</script>

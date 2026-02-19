@@ -1,0 +1,11 @@
+title: LeadSuite
+description: "LeadSuite is the flagship product at LeadsOnline, a B2B SaaS platform used by law enforcement to work cases and surface insights. I led the redesign of the core person profile and case detail experience, turning an information-dense legacy interface into a structured, scalable investigative tool."
+thumbnail: /images/projects/leadsuite/thumbnail.png
+slug: leadsuite
+tags:
+  - B2B SaaS
+  - Law Enforcement
+  - Web
+accentColor: "#1c3557"
+order: 1
+featured: true
