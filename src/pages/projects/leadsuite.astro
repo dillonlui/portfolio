@@ -2,18 +2,26 @@
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import FullWidthImage from '../../components/FullWidthImage.astro';
+
+const img = '/images/projects/leadsuite';
 ---
 
 <CaseStudyLayout
   title="LeadSuite"
   description="LeadSuite is the flagship product at LeadsOnline, a B2B SaaS platform used by law enforcement to work cases and surface insights. I led the redesign of the core person profile and case detail experience, turning an information-dense legacy interface into a structured, scalable investigative tool."
   tags={['B2B SaaS', 'Law Enforcement', 'Information Architecture']}
-  heroImage="/images/projects/leadsuite/thumbnail.png"
+  heroImage={`${img}/thumbnail.png`}
   accentColor="#1c3557"
   previousProject={{ title: 'GriefShare', slug: 'griefshare' }}
   nextProject={{ title: 'Deposify', slug: 'deposify' }}
 >
   <div class="case-study-body">
+
+    <div class="container">
+      <p class="disclaimer">*This work involves sensitive law-enforcement investigations, so I can't share full details publicly. These visuals are representative of the live product, and I'm glad to walk through the complete case study and design decisions in conversation.*</p>
+    </div>
 
     <!-- Challenge -->
     <section class="case-section section">
@@ -23,13 +31,6 @@ import SectionHeading from '../../components/SectionHeading.astro';
           subtitle="LeadSuite was originally a quick reskin of a low-adoption legacy product, carrying over its structure with no rethink of investigative workflows or modern UX patterns. A UX audit before touching anything confirmed the full scope: a person profile with no structure, and a case detail view that made it hard to follow the thread of an investigation."
         />
         <p class="design-question"><strong>Design Question:</strong> How do you redesign a tool investigators rely on daily so the disruption makes them faster, not just more comfortable?</p>
-      </div>
-    </section>
-
-    <!-- Before state -->
-    <section class="case-section section">
-      <div class="container">
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Before - person profile (original state) · 16:9"></div>
       </div>
     </section>
 
@@ -54,39 +55,64 @@ import SectionHeading from '../../components/SectionHeading.astro';
       </div>
     </section>
 
-    <!-- Feature 1 -->
+    <!-- Person Profile -->
     <section class="case-section section">
       <div class="container">
         <SectionHeading
-          title="Person Profile - Deep Background"
-          subtitle="The redesigned person profile introduces a tabbed structure that groups related data, cases, associates, and activity log, so investigators can navigate directly to what they need. Renaming it 'Deep Background' wasn't cosmetic - it reframed the page from a data dump to an investigative starting point."
+          title="Person Profile"
+          subtitle="The redesign introduces a tabbed structure - Cases, Associates, Activity Log, and a new 'Deep Background' tab that consolidates public records, criminal history, and other investigative data sources into one view. Each tab gives investigators a direct path to what they need instead of forcing them to scan the entire page."
         />
-        <div class="before-after-grid">
-          <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="Before - person profile detail · 4:3"></div>
-          <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="After - redesigned person profile with tabs · 4:3"></div>
-        </div>
+        <BeforeAfter
+          beforeImage={`${img}/Person-page-old.png`}
+          afterImage={`${img}/person-profile-new.png`}
+          beforeLabel="Before"
+          afterLabel="After"
+        />
       </div>
     </section>
 
-    <!-- Feature 2 -->
+    <!-- Case Detail Overview -->
     <section class="case-section section">
       <div class="container">
         <SectionHeading
-          title="Case Detail - Timeline + Map"
-          subtitle="The original timeline and map design required cumbersome dual-axis scrolling, and enough functionality was buried that investigators were missing it. I redesigned the timeline as a full-width horizontal view, synced to the map, giving investigators two representations of the same facts for two different ways of thinking through a case."
+          title="Case Detail"
+          subtitle="The case detail page is where investigators spend most of their time. I restructured it around a vertical navigation with distinct views: an overview with the case summary and map, a timeline and map view for spatial-temporal analysis, and an evidence tab. Each view serves a different mode of investigative thinking without cluttering the others."
         />
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Case detail - timeline and map view · 16:9"></div>
+        <FullWidthImage
+          src={`${img}/case-detail.png`}
+          alt="Redesigned case detail overview showing case summary, leads cards, and map"
+          caption="Case detail overview: summary narrative, leads cards, and geographic context in one view"
+        />
       </div>
     </section>
 
-    <!-- Feature 3 -->
+    <!-- Timeline + Map -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Timeline + Map"
+          subtitle="I redesigned the timeline as a full-width horizontal view, synced to the map, so investigators get two representations of the same facts for two different ways of thinking through a case. Events scroll chronologically left to right, and selecting one highlights its location on the map below."
+        />
+        <FullWidthImage
+          src={`${img}/case-detail-timeline-map.png`}
+          alt="Case detail timeline and map view with narrative events synced to geographic locations"
+          caption="Timeline + Map: narrative events synced to geographic locations for spatial-temporal analysis"
+        />
+      </div>
+    </section>
+
+    <!-- Leads -->
     <section class="case-section section">
       <div class="container">
         <SectionHeading
           title="Leads"
           subtitle="Leads is a net new feature, built in close collaboration with one of the developers. He brought the concept, and we workshopped it together until it became a focused workspace where investigators could track threads tied to a case, separate from the raw data views. It's designed to feel like a working surface, not a report."
         />
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Leads view · 16:9"></div>
+        <FullWidthImage
+          src={`${img}/lead-review-person.png`}
+          alt="Lead review modal showing a person of interest with investigative leads and intel connections"
+          caption="Lead review: surfacing proximity, timing, and cross-case connections for a person of interest"
+        />
       </div>
     </section>
 
@@ -95,7 +121,12 @@ import SectionHeading from '../../components/SectionHeading.astro';
       <div class="container">
         <SectionHeading
           title="What's Next"
-          subtitle="The redesign launched first to beta users, then expanded to a controlled subset of existing LeadsOnline customers, with a full rollout weeks away. The tabbed architecture opened up space for two more additions in active design: a Dashboard surfacing personalized investigative activity, and an AI-powered search. That work, and where it leads, is what the next case study covers."
+          subtitle='The redesign launched first to beta users, then expanded to a controlled subset of existing LeadsOnline customers, with a full rollout weeks away. Alongside the core redesign, two new features are in active design: a Dashboard surfacing personalized investigative activity and trend detection, and an AI-powered search. The vision for where these features lead is covered in <a href="/projects/unified-platform">Unifying an Investigative Platform</a>.'
+        />
+        <FullWidthImage
+          src={`${img}/dashboard-property-panel.png`}
+          alt="LeadSuite dashboard with analytics, trends, and property intelligence panel"
+          caption="Dashboard with property intelligence panel: personalized activity, analytics, and trend detection"
         />
       </div>
     </section>
@@ -123,88 +154,6 @@ import SectionHeading from '../../components/SectionHeading.astro';
 
   </div>
 </CaseStudyLayout>
-
-<style>
-  .design-question {
-    font-size: var(--text-body-lg);
-    color: var(--color-text-secondary);
-    line-height: var(--leading-relaxed);
-    padding: var(--space-xl);
-    background-color: var(--color-surface);
-    border-radius: var(--radius-md);
-  }
-
-  .design-question strong {
-    color: var(--color-text);
-  }
-
-  .insights-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  @media (min-width: 768px) {
-    .insights-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .before-after-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  @media (min-width: 768px) {
-    .before-after-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .reflections-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  @media (min-width: 768px) {
-    .reflections-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .reflection-item h3 {
-    font-size: var(--text-h4);
-    margin-bottom: var(--space-sm);
-  }
-
-  .reflection-item p {
-    color: var(--color-text-secondary);
-    line-height: var(--leading-relaxed);
-  }
-
-  /* Placeholder image scaffolding */
-  .img-placeholder {
-    width: 100%;
-    background-color: var(--color-surface);
-    border: 2px dashed var(--color-text-muted);
-    border-radius: var(--radius-md);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .img-placeholder::after {
-    content: attr(data-label);
-    position: absolute;
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
-    text-align: center;
-    padding: var(--space-md);
-  }
-</style>
 
 <script>
   import { initCaseStudyAnimations } from '../../scripts/scroll-animations';

@@ -5,11 +5,12 @@ interface Props {
 }
 
 const { title, subtitle } = Astro.props;
+const rawHtml = subtitle || '';
 ---
 
 <div class="section-heading">
   <h2 class="heading-title">{title}</h2>
-  {subtitle && <p class="heading-subtitle">{subtitle}</p>}
+  {subtitle && <p class="heading-subtitle" set:html={rawHtml} />}
 </div>
 
 <style>
@@ -31,5 +32,15 @@ const { title, subtitle } = Astro.props;
     line-height: var(--leading-relaxed);
     max-width: 700px;
     margin-bottom: 0;
+  }
+
+  .heading-subtitle :global(a) {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .heading-subtitle :global(a:hover) {
+    color: var(--color-text-secondary);
   }
 </style>

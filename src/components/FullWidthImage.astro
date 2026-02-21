@@ -20,6 +20,10 @@ const { src, alt, caption } = Astro.props;
     margin: 0;
   }
 
+  .full-width-image + .full-width-image {
+    margin-top: var(--space-2xl);
+  }
+
   .image-wrapper {
     border-radius: var(--radius-md);
     overflow: hidden;

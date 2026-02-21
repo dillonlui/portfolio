@@ -29,7 +29,7 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl.href} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Dillon Lui — Product Designer" />
+    <meta property="og:site_name" content="Dillon Lui - Product Designer" />
     {ogImage && <meta property="og:image" content={ogImage} />}
     <!-- Twitter Card -->
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />

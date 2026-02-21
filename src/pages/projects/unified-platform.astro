@@ -2,29 +2,37 @@
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
+import FullWidthImage from '../../components/FullWidthImage.astro';
+
+const img = '/images/projects/unified-platform';
 ---
 
 <CaseStudyLayout
   title="Unifying an Investigative Platform"
   description="When our CEO challenged us to unify two diverged products into a single investigative platform, I led the design from synthesis to working prototype - and introduced a new way of building that the company is now adopting across teams."
   tags={['B2B SaaS', 'Design Systems', 'Design + Code']}
-  heroImage="/images/projects/leadsuite2/thumbnail.png"
+  heroImage={`${img}/thumbnail.png`}
   accentColor="#1a1a2e"
   previousProject={{ title: 'Deposify', slug: 'deposify' }}
   nextProject={{ title: 'ClearCase', slug: 'clearcase' }}
 >
   <div class="case-study-body">
 
+    <div class="container">
+      <p class="disclaimer">*This work involves sensitive law-enforcement investigations, so I can't share full details publicly. These visuals are representative of the live product, and I'm glad to walk through the complete case study and design decisions in conversation.*</p>
+    </div>
+
     <!-- Challenge -->
     <section class="case-section section">
       <div class="container">
         <SectionHeading title="The Challenge" />
-        <div class="challenge-grid">
-          <div class="challenge-item">
+        <p class="design-question"><strong>Design Question:</strong> How do you unify two diverged products when the inputs are coming from every direction at once?</p>
+        <div class="card-grid">
+          <div class="card-item">
             <h3>The product challenge</h3>
             <p>LeadsOnline and LeadSuite had been growing apart, and investigators were feeling it: users kept asking LeadSuite for search capabilities that only existed in LeadsOnline. The product was built case-first, but investigators wanted the freedom to move across their caseload as it evolved. The CEO directive: stop patching the gap and unify them.</p>
           </div>
-          <div class="challenge-item">
+          <div class="card-item">
             <h3>The process challenge</h3>
             <p>A redesign at this scale, with input from PM, engineering, and the CEO simultaneously, can't move through traditional Figma handoff. The real work wasn't generating ideas; it was synthesizing them into something coherent enough to build.</p>
           </div>
@@ -40,6 +48,16 @@ import SectionHeading from '../../components/SectionHeading.astro';
           subtitle="My job was to hold all of it - PM explorations, CEO input, dev constraints, investigator workflows - and turn it into a coherent product. The result wasn't a Figma file; it was a running app that the entire LeadSuite team could react to."
         />
         <p class="pull-quote">"I didn't hand off a spec. I handed off a repo."</p>
+        <FullWidthImage
+          src={`${img}/dashboard.png`}
+          alt="Unified platform dashboard with natural language search bar and primary actions"
+          caption="The unified entry point: a single search bar replacing over ten specialized forms"
+        />
+        <FullWidthImage
+          src={`${img}/case-list.png`}
+          alt="Unified case list view with map and filters"
+          caption="Case list with geographic context, filters, and inline case preview"
+        />
       </div>
     </section>
 
@@ -50,7 +68,25 @@ import SectionHeading from '../../components/SectionHeading.astro';
           title="What the Prototype Revealed"
           subtitle="The knowledge panel wasn't in any of the early concepts. It came from using the prototype and asking what would actually be useful to see alongside results. Investigators can already see the data; the prototype revealed they couldn't always interpret it quickly."
         />
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Search results with knowledge panel · 16:9"></div>
+        <div class="image-pair">
+          <img src={`${img}/search-results-phone.png`} alt="Phone number search results with Phone Intelligence knowledge panel" class="case-image" />
+          <img src={`${img}/search-results-property.png`} alt="Property search results with Item Trend Analysis knowledge panel" class="case-image" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Person Profile -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Rethinking the Person Profile"
+          subtitle="The earlier redesign introduced tabs to bring structure to what had been a wall of data. Unification expanded the data model enough to support a relationship graph - a visual way to explore connections between people, cases, phone numbers, and addresses. It turns the profile from a reference page into an investigative tool."
+        />
+        <FullWidthImage
+          src={`${img}/person-profile.png`}
+          alt="Person profile with relationship graph visualization showing connections between people, cases, and shared data"
+          caption="Person profile with relationship graph: connections mapped across cases, addresses, and phone numbers"
+        />
       </div>
     </section>
 
@@ -58,17 +94,35 @@ import SectionHeading from '../../components/SectionHeading.astro';
     <section class="case-section section">
       <div class="container">
         <SectionHeading title="The Bigger Bets" />
-        <div class="bets-grid">
-          <div class="bet-item">
+        <div class="card-grid card-grid--spaced">
+          <div class="card-item">
             <h3>Universal search</h3>
             <p>Over 25 years, LeadsOnline built more than ten specialized search forms. We're replacing them with a single AI-powered search, and the bet is that if it's genuinely more capable, the transition is worth making.</p>
           </div>
-          <div class="bet-item">
+          <div class="card-item">
             <h3>Lead ranking</h3>
             <p>User feedback on the current leads feature was positive, but every lead looked equally important. Surfacing more insights without a way to prioritize them just recreates the cognitive load we were trying to remove.</p>
           </div>
         </div>
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Universal search and lead ranking views · 16:9"></div>
+        <div class="image-pair">
+          <img src={`${img}/people.png`} alt="People page with ranked leads and person tracking" class="case-image" />
+          <img src={`${img}/property.png`} alt="Property page with ranked leads and item tracking" class="case-image" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Builder -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Case Builder"
+          subtitle="Case Builder is where the AI integration becomes tangible. Investigators upload sources - police reports, CDR records, victim statements - and the system surfaces potential suspects, NCIC matches, and confidence levels. From the same view, they can generate legal documents like property hold requests and search warrants. It turns case assembly from manual cross-referencing into an AI-assisted workflow."
+        />
+        <FullWidthImage
+          src={`${img}/case-builder.png`}
+          alt="Case Builder with uploaded sources, AI analysis showing potential suspects and NCIC matches, and legal document generation"
+          caption="Case Builder: source upload, AI-generated analysis, and legal document generation in one workspace"
+        />
       </div>
     </section>
 
@@ -122,30 +176,38 @@ import SectionHeading from '../../components/SectionHeading.astro';
 </CaseStudyLayout>
 
 <style>
-  .challenge-grid {
+  .design-question {
+    margin-bottom: var(--space-xl);
+  }
+
+  .card-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-xl);
   }
 
   @media (min-width: 768px) {
-    .challenge-grid {
+    .card-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .challenge-item {
+  .card-grid--spaced {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .card-item {
     padding: var(--space-xl);
     background-color: var(--color-surface);
     border-radius: var(--radius-md);
   }
 
-  .challenge-item h3 {
+  .card-item h3 {
     font-size: var(--text-h4);
     margin-bottom: var(--space-sm);
   }
 
-  .challenge-item p {
+  .card-item p {
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
     margin-bottom: 0;
@@ -158,37 +220,8 @@ import SectionHeading from '../../components/SectionHeading.astro';
     border-left: 3px solid var(--color-accent);
     padding-left: var(--space-xl);
     margin-top: var(--space-2xl);
-    line-height: var(--leading-tight);
-  }
-
-  .bets-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
     margin-bottom: var(--space-2xl);
-  }
-
-  @media (min-width: 768px) {
-    .bets-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .bet-item {
-    padding: var(--space-xl);
-    background-color: var(--color-surface);
-    border-radius: var(--radius-md);
-  }
-
-  .bet-item h3 {
-    font-size: var(--text-h4);
-    margin-bottom: var(--space-sm);
-  }
-
-  .bet-item p {
-    color: var(--color-text-secondary);
-    line-height: var(--leading-relaxed);
-    margin-bottom: 0;
+    line-height: var(--leading-tight);
   }
 
   .outcomes-grid {
@@ -203,47 +236,14 @@ import SectionHeading from '../../components/SectionHeading.astro';
     }
   }
 
-  .reflections-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  @media (min-width: 768px) {
-    .reflections-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .reflection-item h3 {
-    font-size: var(--text-h4);
-    margin-bottom: var(--space-sm);
-  }
-
-  .reflection-item p {
-    color: var(--color-text-secondary);
-    line-height: var(--leading-relaxed);
-  }
-
-  /* Placeholder image scaffolding */
-  .img-placeholder {
+  .case-image {
     width: 100%;
-    background-color: var(--color-surface);
-    border: 2px dashed var(--color-text-muted);
     border-radius: var(--radius-md);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-top: var(--space-2xl);
   }
 
-  .img-placeholder::after {
-    content: attr(data-label);
-    position: absolute;
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
-    text-align: center;
-    padding: var(--space-md);
+  .image-pair .case-image {
+    margin-top: 0;
   }
 </style>
 

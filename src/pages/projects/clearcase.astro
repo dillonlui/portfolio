@@ -2,34 +2,51 @@
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import FullWidthImage from '../../components/FullWidthImage.astro';
+
+const img = '/images/projects/clearcase';
 ---
 
 <CaseStudyLayout
   title="ClearCase"
   description="ClearCase is a fully automated cartridge case triage solution for crime gun investigations. The product worked technically, but it had been built to prove a concept, not to support how investigators work in practice. I led a full UX/UI redesign to fix that, and in the process uncovered a critical gap in the workflow."
   tags={['B2B SaaS', 'UX Audit', 'Responsive Web']}
-  heroImage="/images/projects/clearcase/thumbnail.png"
+  heroImage={`${img}/thumbnail.png`}
   accentColor="#2c3e50"
   previousProject={{ title: 'Unifying an Investigative Platform', slug: 'unified-platform' }}
   nextProject={{ title: 'GriefShare', slug: 'griefshare' }}
 >
   <div class="case-study-body">
 
+    <div class="container">
+      <p class="disclaimer">*This work involves sensitive law-enforcement investigations, so I can't share full details publicly. These visuals are representative of the live product, and I'm glad to walk through the complete case study and design decisions in conversation.*</p>
+    </div>
+
     <!-- Challenge -->
     <section class="case-section section">
       <div class="container">
         <SectionHeading
           title="The Challenge"
-          subtitle="ClearCase worked, but it had been built to a prototype standard: no design system, no responsive layout, and no real consideration for how investigators actually operate. I started with a comprehensive UX audit before touching anything, which surfaced deeper workflow gaps that would shape the entire redesign."
+          subtitle="ClearCase had been ported from mobile to web without rethinking the experience. No design system, no responsive layout, and no real consideration for how investigators actually operate. I started with a comprehensive UX audit before touching any designs, which surfaced deeper workflow gaps that would shape the entire redesign."
         />
         <p class="design-question"><strong>Design Question:</strong> How do you turn a technically capable but workflow-unaware tool into a product investigators actually trust?</p>
       </div>
     </section>
 
-    <!-- Before state -->
+    <!-- Before -->
     <section class="case-section section">
       <div class="container">
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Before - original app state · 16:9"></div>
+        <SectionHeading
+          title="Before"
+          subtitle="The existing web app had sparse layouts, minimal information hierarchy, and required too many clicks to reach key data. Investigators couldn't quickly assess a case or drill into exhibit details without navigating through unnecessary intermediary screens."
+        />
+        <BeforeAfter
+          beforeImage={`${img}/before-case-detail.png`}
+          afterImage={`${img}/before-exhibit-detail.png`}
+          beforeLabel="Case Detail"
+          afterLabel="Exhibit Detail"
+        />
       </div>
     </section>
 
@@ -38,20 +55,33 @@ import SectionHeading from '../../components/SectionHeading.astro';
       <div class="container">
         <SectionHeading
           title="The Redesign"
-          subtitle="The original product had been ported from mobile to web without rethinking the layout, leaving investigators with unnecessary intermediary screens and too many clicks to reach key information. I redesigned every page around the increased screen real estate: tightening navigation, increasing information density for power users, and surfacing flexible exhibit views by firearm group or all at once."
+          subtitle="I redesigned every core screen around increased screen real estate and investigator workflows. The case list pairs a searchable, sortable sidebar with a geographic map view. The case detail surfaces the analysis summary, exhibit data, and a downloadable report without extra clicks. And the exhibit detail consolidates photos, metadata, notes, and location into a single view."
         />
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Redesigned navigation and layouts · 16:9"></div>
-      </div>
-    </section>
 
-    <!-- The Analysis Report -->
-    <section class="case-section section">
-      <div class="container">
-        <SectionHeading
-          title="The Analysis Report"
-          subtitle="The analysis report is the core deliverable of ClearCase, effectively the reason investigators use it. But the simplified version wasn't exportable, limiting how they could use it to build a case. I redesigned it to offer both versions on export, surfaced directly on the case detail page instead of buried behind multiple clicks."
+        <FullWidthImage
+          src={`${img}/case-list.png`}
+          alt="Redesigned case list with searchable sidebar and geographic map view"
+          caption="Case list: searchable sidebar with map view and case preview on select"
         />
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Analysis report - simplified and detailed versions · 16:9"></div>
+
+        <div class="image-pair">
+          <FullWidthImage
+            src={`${img}/case-detail.png`}
+            alt="Redesigned case detail showing analysis summary, firearm table, map, and exhibit cards"
+            caption="Case detail: analysis summary, downloadable report, and exhibit views by firearm group"
+          />
+          <FullWidthImage
+            src={`${img}/exhibit-detail.png`}
+            alt="Redesigned exhibit detail with photos, metadata, map location, and notes timeline"
+            caption="Exhibit detail: photos, metadata, location, and investigation notes in one view"
+          />
+        </div>
+
+        <FullWidthImage
+          src={`${img}/mobile-views.png`}
+          alt="ClearCase responsive mobile views showing case map, exhibit detail, and case detail"
+          caption="Fully responsive across devices, built on the LeadsOnline design system"
+        />
       </div>
     </section>
 
@@ -62,7 +92,10 @@ import SectionHeading from '../../components/SectionHeading.astro';
           title="A Gap Surfaces"
           subtitle="The UX audit flagged it, the redesign made it undeniable, and user feedback confirmed it: the web app had no way to add exhibits. Agencies were hesitant to rely on mobile for core casework, but mobile was the only entry point, leaving investigators at a dead end the moment they needed to act."
         />
-        <div class="img-placeholder" style="aspect-ratio: 4/3;" data-label="Workflow mapping / gap analysis artifact · 4:3"></div>
+        <InsightCallout
+          title="Why mobile-only was a non-starter"
+          description="Case data stored on a phone, whether personal or work-issued, can be subpoenaed as evidence. Investigators risked losing their device during proceedings, making agencies reluctant to adopt a mobile-only workflow for something as critical as exhibit entry."
+        />
       </div>
     </section>
 
@@ -71,9 +104,13 @@ import SectionHeading from '../../components/SectionHeading.astro';
       <div class="container">
         <SectionHeading
           title="Web-Based Exhibit Creation"
-          subtitle="Agencies were hesitant to rely on mobile because case data stored on a phone, whether personal or work-issued, can be subpoenaed as evidence, putting investigators at risk of losing their device during proceedings. In collaboration with engineering, we designed a flow that uses the phone's NFC reader to scan exhibits without storing anything locally, removing that risk. This workflow is now live in production."
+          subtitle="In collaboration with engineering, I designed a flow that bridges web and mobile: investigators initiate exhibit creation from the web, scan cartridge cases using the phone's NFC reader via QR code pairing, and the exhibit list updates in real time, all without storing case data on the device. This workflow is now live in production."
         />
-        <div class="img-placeholder" style="aspect-ratio: 16/9;" data-label="Exhibit creation flow · 16:9"></div>
+        <FullWidthImage
+          src={`${img}/add-exhibit-flow.png`}
+          alt="End-to-end exhibit creation flow showing web initiation, QR code pairing, mobile NFC scanning, and real-time exhibit list updates"
+          caption="The full add-exhibit flow: web initiation, QR pairing, NFC scan on device, real-time sync back to case detail"
+        />
       </div>
     </section>
 
@@ -102,60 +139,8 @@ import SectionHeading from '../../components/SectionHeading.astro';
 </CaseStudyLayout>
 
 <style>
-  .design-question {
-    font-size: var(--text-body-lg);
-    color: var(--color-text-secondary);
-    line-height: var(--leading-relaxed);
-    padding: var(--space-xl);
-    background-color: var(--color-surface);
-    border-radius: var(--radius-md);
-  }
-
-  .design-question strong {
-    color: var(--color-text);
-  }
-
-  .reflections-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  @media (min-width: 768px) {
-    .reflections-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .reflection-item h3 {
-    font-size: var(--text-h4);
-    margin-bottom: var(--space-sm);
-  }
-
-  .reflection-item p {
-    color: var(--color-text-secondary);
-    line-height: var(--leading-relaxed);
-  }
-
-  /* Placeholder image scaffolding */
-  .img-placeholder {
-    width: 100%;
-    background-color: var(--color-surface);
-    border: 2px dashed var(--color-text-muted);
-    border-radius: var(--radius-md);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .img-placeholder::after {
-    content: attr(data-label);
-    position: absolute;
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
-    text-align: center;
-    padding: var(--space-md);
+  .image-pair {
+    margin-bottom: var(--space-3xl);
   }
 </style>
 

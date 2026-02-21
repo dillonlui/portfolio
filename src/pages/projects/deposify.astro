@@ -26,6 +26,7 @@ const img = '/images/projects/deposify';
           title="The Challenge"
           subtitle="The app was built on a flawed assumption: that property managers and renters wanted the same experience. Giving both users the same interface was a ceiling on both: too complex for renters, and not powerful enough for property managers to scale."
         />
+        <p class="design-question"><strong>Design Question:</strong> How do you split one product into two without losing what already worked?</p>
       </div>
     </section>
 
@@ -124,34 +125,6 @@ const img = '/images/projects/deposify';
     .features-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-  }
-
-  @media (min-width: 1024px) {
-    .features-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .reflections-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  @media (min-width: 768px) {
-    .reflections-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .reflection-item h3 {
-    font-size: var(--text-h4);
-    margin-bottom: var(--space-sm);
-  }
-
-  .reflection-item p {
-    color: var(--color-text-secondary);
-    line-height: var(--leading-relaxed);
   }
 </style>
 

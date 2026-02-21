@@ -4,6 +4,7 @@ import CaseStudyHero from '../components/CaseStudyHero.astro';
 import ProjectNav from '../components/ProjectNav.astro';
 import CTAFooter from '../components/CTAFooter.astro';
 import CaseStudyLightbox from '../components/CaseStudyLightbox.astro';
+import '../styles/case-study.css';
 
 interface Props {
   title: string;
@@ -28,7 +29,7 @@ const {
 } = Astro.props;
 ---
 
-<BaseLayout title={`${title} Case Study — Dillon Lui`} description={description} image={heroImage}>
+<BaseLayout title={`${title} Case Study - Dillon Lui`} description={description} image={heroImage}>
   <CaseStudyHero
     title={title}
     description={description}

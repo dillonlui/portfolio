@@ -5,6 +5,7 @@ Migrate portfolio from Squarespace to GitHub Pages, then eventually redesign usi
 
 ## Current Status
 **Live at:** https://dillonlui.com/
+**Active branch:** `2026-case-study-updates`
 
 **Completed:**
 - Astro project with React integration
@@ -12,10 +13,12 @@ Migrate portfolio from Squarespace to GitHub Pages, then eventually redesign usi
 - GitHub Actions workflow deploying successfully
 - Phase 5: Squarespace design recreated with real content and assets
 - Typography system with design tokens (Sansita One display, Archivo Black headings)
-- 4 case study pages: GriefShare, Deposify, RMC, Vybe
-- About page with experience section, profile photo, resume link
-- Code review fixes: shared GSAP utilities, consolidated button styles, design tokens for radius/shadow/z-index, accessibility improvements
 - Phase 6: Custom domain (dillonlui.com) with CNAME, no base path
+- Phase 7: 5 case studies with refined copy, updated about page, new portfolio order
+
+**Pending:**
+- Images for ClearCase, LeadSuite, and Unified Platform case studies (all placeholder currently)
+- Image directories to create: `public/images/projects/clearcase/`, `public/images/projects/leadsuite/`, `public/images/projects/unified-platform/`
 
 ## Tech Stack
 - Astro 5.x (static output)
@@ -31,17 +34,27 @@ Migrate portfolio from Squarespace to GitHub Pages, then eventually redesign usi
 - YAML files in `src/content/projects/` hold card-level metadata only
 - Individual case study pages are separate `.astro` files (not dynamic `[slug].astro`)
 
+### Case Studies (in portfolio order)
+1. **Unified Platform** (`unified-platform`) — featured, order 1 — `public/images/projects/unified-platform/`
+2. **ClearCase** (`clearcase`) — order 2 — `public/images/projects/clearcase/`
+3. **GriefShare** (`griefshare`) — order 3 — `public/images/projects/griefshare/`
+4. **LeadSuite** (`leadsuite`) — order 4 — `public/images/projects/leadsuite/`
+5. **Deposify** (`deposify`) — order 5 — `public/images/projects/deposify/`
+
+Nav chain: Unified Platform → ClearCase → GriefShare → LeadSuite → Deposify → (loops back)
+
 ### Pages
-- Home (`src/pages/index.astro`) — hero + project card grid + CTA footer
-- About (`src/pages/about.astro`) — bio, experience, featured project link
-- Case studies (`src/pages/projects/{griefshare,deposify,rmc,vybe}.astro`) — unique layouts per project
+- Home (`src/pages/index.astro`) - hero + featured project card + project grid + CTA footer
+- About (`src/pages/about.astro`) - bio, experience, featured project link (points to Unified Platform)
+- Case studies (`src/pages/projects/{unified-platform,clearcase,griefshare,leadsuite,deposify}.astro`)
 
 ### Shared Components
-- `CaseStudyLayout.astro` — wraps case studies (hero + slot + nav + CTA)
-- `CaseStudyHero.astro` — title, description, tags, hero image
-- `ProjectNav.astro` — previous/next project links
-- `CTAFooter.astro` — "Let's work together" footer with wave divider (supports `surfaceBg` prop)
-- `CaseStudyLightbox.astro` — click-to-zoom image lightbox with keyboard nav
+- `CaseStudyLayout.astro` - wraps case studies (hero + slot + nav + CTA)
+- `CaseStudyHero.astro` - title, description, tags, hero image
+- `ProjectNav.astro` - previous/next project links
+- `CTAFooter.astro` - "Let's work together" footer with wave divider (supports `surfaceBg` prop)
+- `CaseStudyLightbox.astro` - click-to-zoom image lightbox with keyboard nav
+- `Header.astro` - nav with Work dropdown listing all 5 case studies in order
 
 ### Section Components
 - `BeforeAfter`, `FeatureCard`, `FeatureShowcase`, `InsightCallout`, `FullWidthImage`, `SectionHeading`
@@ -55,8 +68,10 @@ Migrate portfolio from Squarespace to GitHub Pages, then eventually redesign usi
 - Z-index: `--z-header`, `--z-mobile-menu`, `--z-overlay`, `--z-overlay-controls`
 
 ### Images
-- All images in `public/images/` organized by: `profile/`, `projects/griefshare/`, `projects/deposify/`, `projects/rmc/`, `projects/vybe/`
-- Site serves from root `/` (no base path) — use absolute paths like `/images/...`
+- Existing images: `public/images/projects/griefshare/`, `public/images/projects/deposify/`, `public/images/projects/rmc/`, `public/images/projects/vybe/`
+- Placeholder images still needed: `clearcase/`, `leadsuite/`, `unified-platform/` (Unified Platform)
+- Profile photo: `public/images/profile/dillon.jpg`
+- Site serves from root `/` (no base path) - use absolute paths like `/images/...`
 
 ## Writing Conventions
 - No em dashes (—) in copy. Use commas or regular dashes ( - ) where necessary.

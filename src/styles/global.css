@@ -74,7 +74,6 @@
 
   /* Layout */
   --max-width: 1200px;
-  --content-width: 800px;
   --header-height: 80px;
 
   /* Transitions */
@@ -154,10 +153,6 @@ img {
   padding: 0 var(--space-lg);
 }
 
-.content-width {
-  max-width: var(--content-width);
-}
-
 /* Section Spacing */
 .section {
   padding: var(--space-2xl) 0;
@@ -187,16 +182,6 @@ img {
   text-decoration: none;
   text-align: center;
   transition: background-color var(--transition-fast);
-}
-
-.btn-primary {
-  background-color: var(--color-accent);
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: var(--color-accent-hover);
-  color: white;
 }
 
 .btn-secondary {
