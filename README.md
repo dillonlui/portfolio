@@ -1,38 +1,50 @@
-# Portfolio
+# dillonlui.com
 
-Personal portfolio website for Dillon Lui.
+Personal portfolio site for Dillon Lui, product designer.
 
-**Status:** In Progress
-
-## About
-
-This project is a migration from Squarespace to a custom-built site using Astro and GitHub Pages. The goal is to recreate the existing design first, then eventually redesign using Figma.
+**Live at:** [dillonlui.com](https://dillonlui.com)
 
 ## Tech Stack
 
-- [Astro](https://astro.build/) - Static site generator
-- [React](https://react.dev/) - Interactive components
-- [GSAP](https://gsap.com/) - Animations
-- [GitHub Pages](https://pages.github.com/) - Hosting
+- [Astro](https://astro.build/) 5.x (static output)
+- [GSAP](https://gsap.com/) scroll animations
+- GitHub Pages hosting
+- Google Fonts (Sansita One, Archivo Black)
 
 ## Development
 
 ```bash
-# Install dependencies
 npm install
-
-# Start dev server
 npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
 ```
 
-## Deployment
+## Build
 
-The site automatically deploys to GitHub Pages via GitHub Actions when changes are pushed to `main`.
+```bash
+npm run build
+```
 
-**Live site:** https://dillonlui.github.io/portfolio
+Output goes to `dist/`. Deployed automatically via GitHub Actions on push to `main`.
+
+## Project Structure
+
+```
+src/
+  components/     # Reusable Astro components
+  content/        # YAML data collection (project card metadata)
+  layouts/        # BaseLayout, CaseStudyLayout
+  pages/          # Routes (index, about, projects/*)
+  scripts/        # GSAP scroll animation utilities
+  styles/         # global.css, case-study.css
+public/
+  images/         # Project screenshots, profile photo
+  CNAME           # Custom domain config
+```
+
+## Case Studies
+
+1. Unifying an Investigative Platform (featured)
+2. ClearCase
+3. GriefShare
+4. LeadSuite
+5. Deposify
