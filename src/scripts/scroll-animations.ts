@@ -104,3 +104,139 @@ export function initParallax(selector: string, speed: number = -50) {
   });
 }
 
+/**
+ * Scrolling timeline for the about page experience section.
+ * Draws an SVG line on scroll, activates node markers, and reveals cards.
+ */
+export function initTimeline() {
+  const container = document.getElementById('experience-timeline');
+  if (!container) return;
+
+  const track = container.querySelector<HTMLElement>('.timeline-track');
+  const fillLine = container.querySelector<HTMLElement>('.timeline-fill-line');
+  const indicator = container.querySelector<HTMLElement>('.timeline-scroll-indicator');
+  const nodes = gsap.utils.toArray<HTMLElement>('.timeline-node-dot');
+  const cards = gsap.utils.toArray<HTMLElement>('.timeline-card');
+  const firstNode = nodes[0];
+  const lastNode = nodes[nodes.length - 1];
+
+  if (!track || !fillLine || !indicator || !firstNode || !lastNode) return;
+
+  // Helper: measure node positions relative to container and update track
+  function measureAndUpdate() {
+    const containerTop = container!.getBoundingClientRect().top + window.scrollY;
+
+    const nodeCentersPx = nodes.map((node) => {
+      const r = node.getBoundingClientRect();
+      return r.top + window.scrollY + r.height / 2 - containerTop;
+    });
+
+    const firstPx = nodeCentersPx[0];
+    const lastPx = nodeCentersPx[nodeCentersPx.length - 1];
+    const height = lastPx - firstPx;
+
+    track!.style.top = `${firstPx}px`;
+    track!.style.height = `${height}px`;
+    track!.style.bottom = 'auto';
+
+    // Return node fractions within the trimmed track
+    return nodeCentersPx.map((px) => (px - firstPx) / height);
+  }
+
+  let nodePositions = measureAndUpdate();
+
+  // Respect reduced motion
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    fillLine.style.transform = 'scaleY(1)';
+    indicator.style.display = 'none';
+    nodes.forEach((node) => node.classList.add('is-active'));
+    cards.forEach((card) => {
+      card.style.opacity = '1';
+      card.style.transform = 'none';
+    });
+    return;
+  }
+
+  // Start fill hidden
+  fillLine.style.transform = 'scaleY(0)';
+
+  // Proxy value that GSAP tweens with scrub smoothing
+  const proxy = { t: 0 };
+
+  // Anchor scroll range directly to first/last node elements
+  // so progress 0→1 = first node center → last node center at the viewport line
+  gsap.to(proxy, {
+    t: 1,
+    ease: 'none',
+    onUpdate: () => {
+      const t = proxy.t;
+
+      fillLine.style.transform = `scaleY(${t})`;
+      indicator.style.top = `${t * 100}%`;
+      indicator.style.opacity = t > 0 ? '1' : '0';
+
+      nodes.forEach((node, i) => {
+        if (t >= nodePositions[i] && !node.classList.contains('is-active')) {
+          node.classList.add('is-active');
+        }
+      });
+    },
+    scrollTrigger: {
+      trigger: firstNode,
+      endTrigger: lastNode,
+      start: 'center 70%',
+      end: 'center 70%',
+      scrub: 1,
+      invalidateOnRefresh: true,
+      onRefresh: () => {
+        nodePositions = measureAndUpdate();
+      },
+    },
+  });
+
+  // Card reveal animations with responsive direction
+  ScrollTrigger.matchMedia({
+    '(min-width: 768px)': function () {
+      cards.forEach((card) => {
+        const entry = card.closest('.timeline-entry');
+        const isLeft = entry?.classList.contains('entry-left');
+        gsap.fromTo(
+          card,
+          { opacity: 0, x: isLeft ? -30 : 30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 82%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      });
+    },
+    '(max-width: 767px)': function () {
+      cards.forEach((card) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, x: 20 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      });
+    },
+  });
+}
+

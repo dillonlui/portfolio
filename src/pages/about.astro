@@ -98,18 +98,22 @@ const experience = [
   <section class="experience section">
     <div class="container">
       <h2 class="section-title fade-in">Experience</h2>
-      <div class="experience-list">
-        {experience.map((job) => (
-          <div class="experience-item fade-in">
-            <div class="experience-left">
-              <h3 class="company-name"><span>{job.company}</span></h3>
-              <h4 class="experience-meta">{job.industry}</h4>
+      <div class="timeline" id="experience-timeline">
+        <div class="timeline-track">
+          <div class="timeline-bg-line"></div>
+          <div class="timeline-fill-line"></div>
+          <div class="timeline-scroll-indicator"></div>
+        </div>
+        {experience.map((job, i) => (
+          <div class={`timeline-entry ${i % 2 === 0 ? 'entry-left' : 'entry-right'}`}>
+            <div class="timeline-node">
+              <div class="timeline-node-dot" />
             </div>
-            <div class="experience-right">
-              <div class="experience-right-header">
-                <span class="experience-role">{job.role}</span>
-                <span class="experience-date">{job.dates}</span>
-              </div>
+            <div class="timeline-card">
+              <h3 class="company-name"><span>{job.company}</span></h3>
+              <p class="experience-meta">{job.industry}</p>
+              <p class="experience-role">{job.role}</p>
+              <p class="experience-date">{job.dates}</p>
               <ul class="experience-details">
                 {job.details.map((detail) => (
                   <li>{detail}</li>
@@ -214,34 +218,118 @@ const experience = [
     margin-bottom: var(--space-2xl);
   }
 
-  .experience-list {
+  /* Timeline — stacked entries, track on the left (mobile) */
+  .timeline {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: var(--space-3xl);
   }
 
-  .experience-item {
+  /* Track: absolutely positioned, JS trims to first/last node */
+  .timeline-track {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 13px;
+    width: 2px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .timeline-bg-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-border);
+  }
+
+  .timeline-fill-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-accent);
+    transform-origin: top center;
+  }
+
+  /* Scroll position indicator — pulsing green dot that rides the line */
+  .timeline-scroll-indicator {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    opacity: 0;
+    box-shadow: 0 0 0 3px rgba(32, 93, 23, 0.25);
+    animation: indicator-pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes indicator-pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(32, 93, 23, 0.3); }
+    50% { box-shadow: 0 0 0 8px rgba(32, 93, 23, 0.05); }
+  }
+
+  /* Each entry is its own row with internal 2-col grid (mobile) */
+  .timeline-entry {
     display: grid;
-    gap: var(--space-xl);
-    padding-bottom: var(--space-2xl);
-    border-bottom: 1px solid var(--color-border);
+    grid-template-columns: 28px 1fr;
+    gap: 0 var(--space-md);
+    margin-bottom: var(--space-2xl);
   }
 
-  .experience-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+  .timeline-entry:last-child {
+    margin-bottom: 0;
   }
 
-  .experience-left {
+  /* Node column */
+  .timeline-node {
+    grid-column: 1;
     display: flex;
-    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding-top: var(--space-lg);
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-node-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    background: var(--color-bg, #fff);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* Active state — solid green, no pulse */
+  :global(.timeline-node-dot.is-active) {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+  }
+
+  /* Card column */
+  .timeline-card {
+    grid-column: 2;
+    padding: var(--space-lg);
+    background: var(--color-surface, #f9f9f9);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
   }
 
   .company-name {
     font-family: var(--font-display);
-    font-size: var(--text-h2);
+    font-size: var(--text-h3);
     color: var(--color-accent);
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--space-2xs);
     line-height: var(--leading-snug);
   }
 
@@ -256,30 +344,24 @@ const experience = [
 
   .experience-meta {
     font-family: var(--font-heading);
-    font-size: var(--text-body);
+    font-size: var(--text-body-sm);
     font-weight: 400;
     color: var(--color-text-secondary);
-    margin-top: var(--space-sm);
-    margin-bottom: 0;
-  }
-
-  .experience-right-header {
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
   }
 
   .experience-role {
-    display: block;
     font-size: var(--text-body);
     font-weight: 600;
     color: var(--color-text);
+    margin-bottom: var(--space-2xs);
   }
 
   .experience-date {
-    display: block;
     font-size: var(--text-caption);
     font-style: italic;
     color: var(--color-text-secondary);
-    margin-top: var(--space-xs);
+    margin-bottom: var(--space-md);
   }
 
   .experience-details {
@@ -296,10 +378,72 @@ const experience = [
     line-height: var(--leading-normal);
   }
 
+  /* Desktop — centered line, cards alternate left/right, one per row */
   @media (min-width: 768px) {
-    .experience-item {
-      grid-template-columns: 300px 1fr;
-      gap: var(--space-3xl);
+    .timeline-track {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .timeline-entry {
+      grid-template-columns: 1fr 48px 1fr;
+      gap: 0;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .timeline-node {
+      grid-column: 2;
+      justify-content: center;
+    }
+
+    .timeline-node-dot {
+      width: 14px;
+      height: 14px;
+    }
+
+    .timeline-scroll-indicator {
+      width: 14px;
+      height: 14px;
+    }
+
+    .timeline-card {
+      padding: var(--space-xl) var(--space-2xl);
+    }
+
+    /* Left entries: card in column 1 */
+    .entry-left .timeline-card {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .entry-left .timeline-node {
+      grid-row: 1;
+    }
+
+    /* Right entries: card in column 3 */
+    .entry-right .timeline-card {
+      grid-column: 3;
+      grid-row: 1;
+    }
+    .entry-right .timeline-node {
+      grid-row: 1;
+    }
+
+    .company-name {
+      font-size: var(--text-h2);
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-fill-line {
+      transform: scaleY(1) !important;
+    }
+    .timeline-scroll-indicator {
+      display: none;
+    }
+    .timeline-card {
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 
@@ -375,6 +519,10 @@ const experience = [
 </style>
 
 <script>
-  import { initFadeIn } from '../scripts/scroll-animations';
-  initFadeIn();
+  import { initFadeIn, initTimeline } from '../scripts/scroll-animations';
+
+  document.addEventListener('astro:page-load', () => {
+    initFadeIn();
+    initTimeline();
+  });
 </script>
