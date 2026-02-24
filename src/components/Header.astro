@@ -96,23 +96,27 @@ const isWorkActive = currentPath.startsWith('/projects');
     position: sticky;
     top: 0;
     z-index: var(--z-header);
-    background-color: transparent;
-    border-bottom: 1px solid transparent;
     height: var(--header-height);
-    transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
-  }
-
-  .header.is-scrolled {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm) var(--space-lg);
     background-color: var(--color-background);
-    border-bottom-color: var(--color-border);
-    box-shadow: var(--shadow-sm);
   }
 
   .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    height: 48px;
+    border-radius: var(--radius-md);
+    padding: 0 var(--space-lg);
+    transition: background-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .header.is-scrolled .nav {
+    background-color: var(--color-background);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   .logo {
@@ -275,6 +279,21 @@ const isWorkActive = currentPath.startsWith('/projects');
 
   /* Mobile styles */
   @media (max-width: 767px) {
+    .header {
+      padding: 0;
+    }
+
+    .nav {
+      border-radius: 0;
+      padding: 0 var(--space-lg);
+      width: 100%;
+      max-width: none;
+    }
+
+    .header.is-scrolled .nav {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+
     .mobile-menu-btn {
       display: block;
       z-index: var(--z-mobile-menu);
@@ -358,62 +377,70 @@ const isWorkActive = currentPath.startsWith('/projects');
 </style>
 
 <script>
-  const menuBtn = document.querySelector('.mobile-menu-btn');
-  const navLinks = document.querySelector('.nav-links');
-  const dropdownTrigger = document.querySelector('.dropdown-trigger');
-  const dropdownMenu = document.querySelector('.dropdown-menu');
+  function initHeader() {
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const dropdownTrigger = document.querySelector('.dropdown-trigger');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
 
-  function closeMenu() {
-    menuBtn?.setAttribute('aria-expanded', 'false');
-    navLinks?.classList.remove('is-open');
+    function closeMenu() {
+      menuBtn?.setAttribute('aria-expanded', 'false');
+      navLinks?.classList.remove('is-open');
+    }
+
+    menuBtn?.addEventListener('click', () => {
+      const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', (!isOpen).toString());
+      navLinks?.classList.toggle('is-open');
+    });
+
+    // Mobile: toggle dropdown on tap
+    dropdownTrigger?.addEventListener('click', () => {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        const isExpanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
+        dropdownTrigger.setAttribute('aria-expanded', (!isExpanded).toString());
+        dropdownMenu?.classList.toggle('is-open');
+      }
+    });
+
+    // Close menu when a nav link is clicked
+    navLinks?.querySelectorAll('.nav-link:not(.dropdown-trigger), .dropdown-link').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.nav') && navLinks?.classList.contains('is-open')) {
+        closeMenu();
+      }
+    });
+
+    // Scroll-aware header background
+    const header = document.querySelector('.header');
+    if (header) {
+      // Clean up any previous sentinel
+      document.querySelector('.header-sentinel')?.remove();
+
+      const sentinel = document.createElement('div');
+      sentinel.className = 'header-sentinel';
+      sentinel.style.position = 'absolute';
+      sentinel.style.top = '0';
+      sentinel.style.height = '50px';
+      sentinel.style.width = '1px';
+      sentinel.style.pointerEvents = 'none';
+      document.body.prepend(sentinel);
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          header.classList.toggle('is-scrolled', !entry.isIntersecting);
+        },
+        { threshold: 0 }
+      );
+      observer.observe(sentinel);
+    }
   }
 
-  menuBtn?.addEventListener('click', () => {
-    const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
-    menuBtn.setAttribute('aria-expanded', (!isOpen).toString());
-    navLinks?.classList.toggle('is-open');
-  });
-
-  // Mobile: toggle dropdown on tap
-  dropdownTrigger?.addEventListener('click', () => {
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) {
-      const isExpanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
-      dropdownTrigger.setAttribute('aria-expanded', (!isExpanded).toString());
-      dropdownMenu?.classList.toggle('is-open');
-    }
-  });
-
-  // Close menu when a nav link is clicked
-  navLinks?.querySelectorAll('.nav-link:not(.dropdown-trigger), .dropdown-link').forEach((link) => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement;
-    if (!target.closest('.nav') && navLinks?.classList.contains('is-open')) {
-      closeMenu();
-    }
-  });
-
-  // Scroll-aware header background
-  const header = document.querySelector('.header');
-  if (header) {
-    const sentinel = document.createElement('div');
-    sentinel.style.position = 'absolute';
-    sentinel.style.top = '0';
-    sentinel.style.height = '50px';
-    sentinel.style.width = '1px';
-    sentinel.style.pointerEvents = 'none';
-    document.body.prepend(sentinel);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        header.classList.toggle('is-scrolled', !entry.isIntersecting);
-      },
-      { threshold: 0 }
-    );
-    observer.observe(sentinel);
-  }
+  document.addEventListener('astro:page-load', initHeader);
 </script>

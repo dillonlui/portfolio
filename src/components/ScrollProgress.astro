@@ -12,7 +12,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    z-index: 1000;
+    z-index: var(--z-overlay);
     pointer-events: none;
   }
 
@@ -25,15 +25,19 @@
 </style>
 
 <script>
-  const bar = document.querySelector('.scroll-progress-bar') as HTMLElement;
-  if (bar) {
-    function updateProgress() {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      bar.style.width = `${progress}%`;
+  function initScrollProgress() {
+    const bar = document.querySelector('.scroll-progress-bar') as HTMLElement;
+    if (bar) {
+      function updateProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = `${progress}%`;
+      }
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
     }
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    updateProgress();
   }
+
+  document.addEventListener('astro:page-load', initScrollProgress);
 </script>

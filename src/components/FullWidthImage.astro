@@ -12,7 +12,7 @@ const { src, alt, caption } = Astro.props;
   <div class="image-wrapper">
     <img src={src} alt={alt} loading="lazy" />
   </div>
-  {caption && <figcaption class="image-caption">{caption}</figcaption>}
+  {caption && <figcaption class="image-caption">&mdash; {caption}</figcaption>}
 </figure>
 
 <style>
@@ -28,6 +28,9 @@ const { src, alt, caption } = Astro.props;
     border-radius: var(--radius-md);
     overflow: hidden;
     background-color: var(--color-surface);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.06),
+      0 12px 40px color-mix(in srgb, var(--color-project-accent, #1a1a1a) 10%, transparent);
   }
 
   .image-wrapper img {
@@ -38,7 +41,8 @@ const { src, alt, caption } = Astro.props;
   .image-caption {
     margin-top: var(--space-sm);
     font-size: var(--text-caption);
+    font-weight: 500;
     color: var(--color-text-secondary);
-    text-align: center;
+    text-align: left;
   }
 </style>

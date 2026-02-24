@@ -35,7 +35,7 @@ src/
   layouts/        # BaseLayout, CaseStudyLayout
   pages/          # Routes (index, about, projects/*)
   scripts/        # GSAP scroll animation utilities
-  styles/         # global.css, case-study.css
+  styles/         # global.css (design tokens), case-study.css (shared case study styles)
 public/
   images/         # Project screenshots, profile photo
   CNAME           # Custom domain config
@@ -48,3 +48,12 @@ public/
 3. GriefShare
 4. LeadSuite
 5. Deposify
+
+## Features
+
+- Per-project accent color theming
+- Pill-shaped sticky nav with scroll-aware background (desktop), full-width on mobile
+- Image lightbox with keyboard navigation
+- Scroll-triggered animations via GSAP
+- Responsive across desktop, tablet, and mobile breakpoints
+- Astro ViewTransitions for smooth page navigation

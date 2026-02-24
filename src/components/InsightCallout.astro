@@ -2,22 +2,39 @@
 interface Props {
   title: string;
   description: string;
+  number?: number;
 }
 
-const { title, description } = Astro.props;
+const { title, description, number } = Astro.props;
+const formattedNumber = number ? String(number).padStart(2, '0') : null;
 ---
 
 <div class="insight-callout">
+  {formattedNumber && <span class="insight-number">{formattedNumber}</span>}
   <h4 class="insight-title">{title}</h4>
   <p class="insight-description">{description}</p>
 </div>
 
 <style>
   .insight-callout {
+    position: relative;
     padding: var(--space-xl);
     background-color: var(--color-surface);
     border-radius: var(--radius-md);
-    border-left: 3px solid var(--color-accent);
+    border-left: 3px solid var(--color-project-accent, var(--color-accent));
+    overflow: hidden;
+  }
+
+  .insight-number {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-md);
+    font-family: var(--font-display);
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--color-project-accent, var(--color-accent));
+    opacity: 0.12;
+    pointer-events: none;
   }
 
   .insight-title {

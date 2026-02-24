@@ -15,6 +15,13 @@ Personal portfolio site for Dillon Lui, product designer. Built with Astro, host
 - Typography system with design tokens
 - Custom domain with GitHub Pages deployment
 - Code review cleanup: removed unused components, eliminated CSS duplication
+- Case study layout refresh: hero titles, accent colors, section heading lines, image shadows, reflection cards, pull quotes
+- Pill-shaped sticky nav with frosted glass on scroll (desktop), full-width on mobile
+- Per-project accent color theming via `--color-project-accent`
+- ViewTransitions-compatible script initialization (`astro:page-load` pattern)
+- Lightbox with keyboard nav and prev/next controls
+- ProjectNav with category tags from YAML data
+- Compact CTA footer with responsive sizing
 
 ## Tech Stack
 - Astro 5.x (static output)
@@ -44,35 +51,45 @@ Nav chain: Unified Platform > ClearCase > GriefShare > LeadSuite > Deposify > (l
 - Case studies (`src/pages/projects/{unified-platform,clearcase,griefshare,leadsuite,deposify}.astro`)
 
 ### Shared Components
-- `CaseStudyLayout.astro` - wraps case studies (hero + slot + nav + CTA), imports shared case study CSS
-- `CaseStudyHero.astro` - title, description, tags, hero image
-- `ProjectNav.astro` - previous/next project links
-- `CTAFooter.astro` - "Let's work together" footer with wave divider (supports `surfaceBg` prop)
+- `CaseStudyLayout.astro` - wraps case studies (hero + slot + nav + CTA), imports shared case study CSS, injects `--color-project-accent` via `<Fragment set:html>`
+- `CaseStudyHero.astro` - accent strip, title (display font), description, tags, hero image with colored shadow
+- `ProjectNav.astro` - previous/next project links with category tags from YAML data
+- `CTAFooter.astro` - "Let's work together" footer with angled clip-path divider
 - `CaseStudyLightbox.astro` - click-to-zoom image lightbox with keyboard nav
-- `Header.astro` - nav with Work dropdown listing all 5 case studies in order
+- `Header.astro` - pill-shaped nav (desktop) with scroll-aware background, full-width on mobile, Work dropdown
+- `ScrollProgress.astro` - scroll progress bar using project accent color
 - `FeaturedProjectCard.astro` - overlay on desktop, stacked on mobile
 - `ProjectCard.astro` - standard project card for grid
 
 ### Section Components
-- `BeforeAfter`, `FeatureCard`, `FeatureShowcase`, `InsightCallout`, `FullWidthImage`, `SectionHeading`
+- `SectionHeading` - heading with accent-colored line decoration
+- `FullWidthImage` - images with layered shadow system and left-aligned captions with em-dash
+- `InsightCallout` - insight cards with optional decorative number and project accent border
+- `BeforeAfter`, `FeatureCard`, `FeatureShowcase`
 
 ### Styles
 - `src/styles/global.css` - design tokens, reset, base typography, button utilities
-- `src/styles/case-study.css` - shared case study styles (disclaimer, design-question, image-pair, insights-grid, reflections-grid, reflection-item)
+- `src/styles/case-study.css` - shared case study styles (design-question callout, image-pair grid, insights-grid, reflections-grid with numbered cards, pull-quote with decorative quotation mark, image-elevated, image-browser chrome)
 
 ### Design Tokens (`src/styles/global.css`)
 - Typography: `--text-display` through `--text-xs`, `--leading-tight` through `--leading-relaxed`
-- Fonts: `--font-display` (Sansita One), `--font-heading` (Archivo Black)
+- Fonts: `--font-display` (Sansita One), `--font-heading` (Archivo Black), `--font-sans`
 - Colors: `--color-accent` (#205d17), `--color-dark-accent`, `--color-dark-accent-hover`, `--color-text-muted`
+- Per-project: `--color-project-accent` (set dynamically per case study via CaseStudyLayout)
 - Radius: `--radius-sm`, `--radius-md`, `--radius-full`
 - Shadows: `--shadow-sm`, `--shadow-md`, `--shadow-lg`
-- Z-index: `--z-header`, `--z-mobile-menu`, `--z-overlay`, `--z-overlay-controls`
+- Z-index: `--z-header`, `--z-mobile-menu`, `--z-overlay`, `--z-overlay-controls`, `--z-cursor`
 
 ### Images
 - All case study images: `public/images/projects/{unified-platform,clearcase,griefshare,leadsuite,deposify}/`
 - Archived projects: `public/images/projects/rmc/`, `public/images/projects/vybe/`
 - Profile photo: `public/images/profile/dillon.jpg`
 - Site serves from root `/` (no base path) - use absolute paths like `/images/...`
+
+### Key Patterns
+- **ViewTransitions**: All component scripts must use `document.addEventListener('astro:page-load', initFn)` to re-initialize after page transitions
+- **Accent color cascading**: Use `<Fragment set:html={...} />` to inject `<style>:root { --color-project-accent: ... }</style>` - do NOT use Astro's `define:vars` for CSS variables that need to cascade to child components
+- **Scoped style specificity**: Astro scoped styles can beat global CSS. Use `!important` on shared overrides (e.g. `.image-pair > figure + figure { margin-top: 0 !important }`) when scoped component styles conflict
 
 ## Writing Conventions
 - No em dashes in copy. Use commas or regular dashes ( - ) where necessary.

@@ -25,14 +25,30 @@ const currentYear = new Date().getFullYear();
 
   .cta-dark {
     background-color: var(--color-dark-accent);
-    padding: var(--space-6xl) 0 var(--space-lg);
+    padding: var(--space-3xl) 0 var(--space-lg);
+    padding-top: calc(var(--space-3xl) + 4vw);
     text-align: center;
-    clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%);
   }
 
   .cta-content {
     max-width: 800px;
-    margin-bottom: var(--space-3xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  @media (max-width: 767px) {
+    .cta-dark {
+      padding: var(--space-2xl) 0 var(--space-md);
+      padding-top: calc(var(--space-2xl) + 4vw);
+    }
+
+    .cta-content {
+      margin-bottom: var(--space-lg);
+    }
+
+    .cta-heading {
+      font-size: var(--text-h2);
+    }
   }
 
   .cta-heading {

@@ -1,10 +1,18 @@
 ---
+import { getCollection } from 'astro:content';
+
 interface Props {
   previousProject?: { title: string; slug: string };
   nextProject?: { title: string; slug: string };
 }
 
 const { previousProject, nextProject } = Astro.props;
+
+const allProjects = await getCollection('projects');
+const projectMap = new Map(allProjects.map(p => [p.data.slug, p.data.tags]));
+
+const prevTags = previousProject ? projectMap.get(previousProject.slug) || [] : [];
+const nextTags = nextProject ? projectMap.get(nextProject.slug) || [] : [];
 ---
 
 <nav class="project-nav section">
@@ -13,12 +21,22 @@ const { previousProject, nextProject } = Astro.props;
       <a href={`/projects/${previousProject.slug}`} class="project-nav-link prev">
         <span class="nav-direction">&larr; Previous</span>
         <span class="nav-project-title">{previousProject.title}</span>
+        <div class="nav-tags">
+          {prevTags.map((tag: string) => (
+            <span class="nav-tag">{tag}</span>
+          ))}
+        </div>
       </a>
     ) : <div />}
     {nextProject ? (
       <a href={`/projects/${nextProject.slug}`} class="project-nav-link next">
         <span class="nav-direction">Next &rarr;</span>
         <span class="nav-project-title">{nextProject.title}</span>
+        <div class="nav-tags">
+          {nextTags.map((tag: string) => (
+            <span class="nav-tag">{tag}</span>
+          ))}
+        </div>
       </a>
     ) : <div />}
   </div>
@@ -42,15 +60,17 @@ const { previousProject, nextProject } = Astro.props;
     text-decoration: none;
     color: var(--color-text);
     transition: color var(--transition-fast);
+    max-width: 45%;
   }
 
   .project-nav-link:hover {
-    color: var(--color-text-secondary);
+    color: var(--color-accent);
   }
 
   .project-nav-link.next {
     text-align: right;
     margin-left: auto;
+    align-items: flex-end;
   }
 
   .nav-direction {
@@ -61,5 +81,25 @@ const { previousProject, nextProject } = Astro.props;
   .nav-project-title {
     font-weight: 600;
     font-size: var(--text-h4);
+  }
+
+  .nav-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+  }
+
+  .project-nav-link.next .nav-tags {
+    justify-content: flex-end;
+  }
+
+  .nav-tag {
+    font-size: var(--text-tag, var(--text-xs));
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    padding: 2px var(--space-sm);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-sm);
   }
 </style>

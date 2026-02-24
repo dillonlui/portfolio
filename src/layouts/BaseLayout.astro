@@ -87,7 +87,7 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     background: var(--color-accent);
     border: 2px solid #fff;
     pointer-events: none;
-    z-index: 10000;
+    z-index: var(--z-cursor);
     opacity: 0;
     transition: opacity 200ms ease, width 200ms ease, height 200ms ease, margin 200ms ease, background 200ms ease;
     will-change: transform;

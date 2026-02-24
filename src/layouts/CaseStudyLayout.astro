@@ -41,6 +41,7 @@ const {
     heroImage={heroImage}
     logoImage={logoImage}
     slug={slug}
+    accentColor={accentColor}
   />
   <slot />
   <CaseStudyLightbox />
@@ -51,8 +52,4 @@ const {
   <CTAFooter />
 </BaseLayout>
 
-<style define:vars={{ accentColor }}>
-  :global(:root) {
-    --color-project-accent: var(--accentColor);
-  }
-</style>
+<Fragment set:html={`<style>:root { --color-project-accent: ${accentColor}; }</style>`} />

@@ -148,8 +148,10 @@
 </style>
 
 <script>
-  const overlay = document.getElementById('case-lightbox');
-  if (overlay) {
+  function initLightbox() {
+    const overlay = document.getElementById('case-lightbox');
+    if (!overlay) return;
+
     const lbImage = overlay.querySelector<HTMLImageElement>('.lb-image');
     const lbCounter = overlay.querySelector<HTMLDivElement>('.lb-counter');
     const closeBtn = overlay.querySelector<HTMLButtonElement>('.lb-close');
@@ -218,4 +220,6 @@
       });
     }
   }
+
+  document.addEventListener('astro:page-load', initLightbox);
 </script>

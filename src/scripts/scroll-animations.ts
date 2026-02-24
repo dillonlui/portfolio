@@ -82,53 +82,6 @@ export function initStaggerAnimation(selector: string) {
 }
 
 /**
- * Line-by-line text reveal using overflow-hidden mask + translateY.
- * Wraps each target element in a clip container and slides it up.
- */
-export function initTextReveal(selector: string) {
-  gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
-    // Wrap element content in a reveal container
-    const wrapper = document.createElement('div');
-    wrapper.style.overflow = 'hidden';
-    el.parentNode?.insertBefore(wrapper, el);
-    wrapper.appendChild(el);
-
-    gsap.set(el, { y: '100%', opacity: 0 });
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: wrapper,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      y: '0%',
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power2.out',
-    });
-  });
-}
-
-/**
- * Image reveal with clip-path wipe animation.
- * Wipes from left to right using inset clip-path.
- */
-export function initImageReveal(selector: string) {
-  gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
-    gsap.set(el, { clipPath: 'inset(0 100% 0 0)' });
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      clipPath: 'inset(0 0% 0 0)',
-      duration: 0.8,
-      ease: 'power2.inOut',
-    });
-  });
-}
-
-/**
  * Scroll-linked parallax movement.
  * Moves elements vertically as user scrolls. Disabled on mobile.
  */
@@ -151,28 +104,3 @@ export function initParallax(selector: string, speed: number = -50) {
   });
 }
 
-/**
- * Diagonal stagger reveal for card grids.
- * Staggers items with increasing delay based on position.
- */
-export function initGridReveal(container: string, items: string) {
-  const containerEl = document.querySelector(container);
-  if (!containerEl) return;
-
-  const itemEls = containerEl.querySelectorAll(items);
-  itemEls.forEach((el, i) => {
-    gsap.set(el, { opacity: 0, y: 50 });
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        toggleActions: 'play none none none',
-      },
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      delay: i * 0.12,
-      ease: 'power3.out',
-    });
-  });
-}

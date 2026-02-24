@@ -39,6 +39,7 @@
   --z-mobile-menu: 101;
   --z-overlay: 1000;
   --z-overlay-controls: 1001;
+  --z-cursor: 10000;
 
   /* Font Families */
   --font-display: 'Sansita One', cursive;

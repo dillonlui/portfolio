@@ -9,6 +9,7 @@ const rawHtml = subtitle || '';
 ---
 
 <div class="section-heading">
+  <div class="heading-accent-line"></div>
   <h2 class="heading-title">{title}</h2>
   {subtitle && <p class="heading-subtitle" set:html={rawHtml} />}
 </div>
@@ -16,6 +17,14 @@ const rawHtml = subtitle || '';
 <style>
   .section-heading {
     margin-bottom: var(--space-2xl);
+  }
+
+  .heading-accent-line {
+    width: 32px;
+    height: 3px;
+    background-color: var(--color-project-accent, var(--color-accent));
+    border-radius: 2px;
+    margin-bottom: var(--space-md);
   }
 
   .heading-title {
@@ -30,7 +39,7 @@ const rawHtml = subtitle || '';
     font-size: var(--text-body-lg);
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
-    max-width: 700px;
+    max-width: 640px;
     margin-bottom: 0;
   }
 
