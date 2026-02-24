@@ -1,0 +1,340 @@
+---
+import { getCollection } from 'astro:content';
+import BubbleHoverCard from './BubbleHoverCard.astro';
+
+const allProjects = (await getCollection('projects'))
+  .filter((p) => !p.data.archived)
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Bubble sizing config: all landscape 16:10, large for visibility
+const bubbleConfig = [
+  { width: 480, height: 300, depth: 1.0 },   // featured - largest
+  { width: 400, height: 250, depth: 0.85 },   // clearcase
+  { width: 380, height: 237, depth: 1.0 },    // griefshare
+  { width: 360, height: 225, depth: 0.85 },   // leadsuite
+  { width: 340, height: 212, depth: 0.7 },    // deposify
+];
+---
+
+<section class="floating-section section">
+  <div class="floating-container" id="floating-container">
+    {allProjects.map((project, i) => {
+      const config = bubbleConfig[i] || bubbleConfig[bubbleConfig.length - 1];
+      const accentColor = project.data.accentColor || '#205d17';
+      return (
+        <a
+          href={`/projects/${project.data.slug}`}
+          class:list={['floating-bubble', { 'floating-bubble--featured': project.data.featured }]}
+          data-slug={project.data.slug}
+          data-title={project.data.title}
+          data-description={project.data.description}
+          data-tags={project.data.tags.join(',')}
+          data-featured={project.data.featured ? 'true' : 'false'}
+          data-accent-color={accentColor}
+          data-depth={config.depth}
+          data-bubble-width={config.width}
+          data-bubble-height={config.height}
+          data-index={i}
+          aria-label={`${project.data.title}: ${project.data.description}`}
+          style={`
+            width: ${config.width}px;
+            height: ${config.height}px;
+            --bubble-accent: ${accentColor};
+          `}
+        >
+          {project.data.featured && <span class="featured-badge">Featured</span>}
+          <img
+            src={project.data.thumbnail}
+            alt={project.data.title}
+            class="bubble-image"
+            loading="eager"
+            style={`object-position: ${project.data.thumbnailPosition};`}
+            transition:name={`project-${project.data.slug}`}
+          />
+        </a>
+      );
+    })}
+
+    <BubbleHoverCard />
+  </div>
+
+  <!-- Mobile fallback: vertical stacked cards -->
+  <div class="floating-mobile-fallback">
+    {allProjects.map((project) => (
+      <a href={`/projects/${project.data.slug}`} class="mobile-bubble-card">
+        <div class="mobile-bubble-image-wrapper">
+          {project.data.featured && <span class="featured-badge">Featured</span>}
+          <img
+            src={project.data.thumbnail}
+            alt={project.data.title}
+            class="mobile-bubble-image"
+            loading="lazy"
+            style={`object-position: ${project.data.thumbnailPosition};`}
+            transition:name={`project-${project.data.slug}`}
+          />
+        </div>
+        <div class="mobile-bubble-info">
+          {project.data.tags.length > 0 && (
+            <div class="mobile-bubble-tags">
+              {project.data.tags.map((tag) => (
+                <span class="mobile-tag">{tag}</span>
+              ))}
+            </div>
+          )}
+          <h3 class="mobile-bubble-title">{project.data.title}</h3>
+          <p class="mobile-bubble-desc">{project.data.description}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .floating-section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  /* Desktop floating container */
+  .floating-container {
+    position: relative;
+    min-height: 750px;
+    height: 85vh;
+    max-height: 1100px;
+    overflow: visible;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-xl);
+  }
+
+  /* Featured badge */
+  .featured-badge {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    z-index: 2;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    pointer-events: none;
+  }
+
+  /* Bubble base */
+  .floating-bubble {
+    position: absolute;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    will-change: transform;
+    z-index: 3;
+    /* Layered shadow: neutral drop + colored ambient + inner highlight */
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      0 12px 40px color-mix(in srgb, var(--bubble-accent) 12%, transparent),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+    transition:
+      box-shadow 300ms ease,
+      filter 100ms ease;
+  }
+
+  .floating-bubble:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  .floating-bubble:hover,
+  .floating-bubble:focus-visible {
+    box-shadow:
+      0 12px 48px rgba(0, 0, 0, 0.14),
+      0 16px 56px color-mix(in srgb, var(--bubble-accent) 20%, transparent),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+    z-index: 5;
+  }
+
+  .bubble-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+    transition: transform 300ms ease;
+  }
+
+  .floating-bubble:hover .bubble-image,
+  .floating-bubble:focus-visible .bubble-image {
+    transform: scale(1.05);
+  }
+
+  /* Depth layers - subtle scale only, all clear/sharp */
+  .floating-bubble {
+    opacity: 1;
+  }
+
+  /* Mobile: hide floating, show fallback */
+  .floating-mobile-fallback {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .floating-container {
+      display: none;
+    }
+
+    .floating-mobile-fallback {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+      padding: 0 var(--space-lg);
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .mobile-bubble-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .mobile-bubble-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .mobile-bubble-image-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mobile-bubble-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .mobile-bubble-info {
+      padding: var(--space-md) 0;
+    }
+
+    .mobile-bubble-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-sm);
+    }
+
+    .mobile-tag {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      padding: var(--space-xs) var(--space-sm);
+      background-color: var(--color-surface);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .mobile-bubble-title {
+      font-family: var(--font-display);
+      font-size: var(--text-h3);
+      font-weight: 400;
+      margin-bottom: var(--space-xs);
+      color: var(--color-text);
+    }
+
+    .mobile-bubble-desc {
+      font-size: var(--text-body-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-normal);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+  }
+
+  /* Reduced motion: static grid */
+  @media (prefers-reduced-motion: reduce) {
+    .floating-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xl);
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      min-height: auto;
+      max-height: none;
+      padding: var(--space-2xl) var(--space-lg);
+    }
+
+    .floating-bubble {
+      position: static !important;
+      transform: none !important;
+      filter: none !important;
+      opacity: 1 !important;
+    }
+  }
+</style>
+
+<script>
+  import { FloatingEngine } from '../scripts/floating-engine';
+
+  let currentEngine: FloatingEngine | null = null;
+
+  function init() {
+    // Destroy previous engine if it exists (page transitions / resize)
+    if (currentEngine) {
+      currentEngine.destroy();
+      currentEngine = null;
+    }
+
+    const container = document.getElementById('floating-container');
+    if (!container) return;
+
+    // Gate: desktop only, respects reduced motion
+    const isDesktop = window.innerWidth >= 768;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!isDesktop || prefersReducedMotion) return;
+
+    const hoverCard = document.getElementById('bubble-hover-card');
+    const bubbleEls = container.querySelectorAll<HTMLAnchorElement>('.floating-bubble');
+
+    if (!hoverCard || bubbleEls.length === 0) return;
+
+    currentEngine = new FloatingEngine(container, bubbleEls, hoverCard);
+    currentEngine.start();
+  }
+
+  // Run after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Re-init on Astro page transitions
+  document.addEventListener('astro:page-load', init);
+
+  // Re-init on resize crossing the mobile/desktop boundary
+  let wasDesktop = window.innerWidth >= 768;
+  window.addEventListener('resize', () => {
+    const isDesktop = window.innerWidth >= 768;
+    if (isDesktop !== wasDesktop) {
+      wasDesktop = isDesktop;
+      init();
+    }
+  });
+</script>

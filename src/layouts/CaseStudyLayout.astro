@@ -4,6 +4,7 @@ import CaseStudyHero from '../components/CaseStudyHero.astro';
 import ProjectNav from '../components/ProjectNav.astro';
 import CTAFooter from '../components/CTAFooter.astro';
 import CaseStudyLightbox from '../components/CaseStudyLightbox.astro';
+import ScrollProgress from '../components/ScrollProgress.astro';
 import '../styles/case-study.css';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
   tags: string[];
   heroImage: string;
   logoImage?: string;
+  slug?: string;
   accentColor?: string;
   previousProject?: { title: string; slug: string };
   nextProject?: { title: string; slug: string };
@@ -23,6 +25,7 @@ const {
   tags,
   heroImage,
   logoImage,
+  slug,
   accentColor = '#1a1a1a',
   previousProject,
   nextProject,
@@ -30,12 +33,14 @@ const {
 ---
 
 <BaseLayout title={`${title} Case Study - Dillon Lui`} description={description} image={heroImage}>
+  <ScrollProgress />
   <CaseStudyHero
     title={title}
     description={description}
     tags={tags}
     heroImage={heroImage}
     logoImage={logoImage}
+    slug={slug}
   />
   <slot />
   <CaseStudyLightbox />

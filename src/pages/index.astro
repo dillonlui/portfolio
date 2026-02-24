@@ -1,16 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import FeaturedProjectCard from '../components/FeaturedProjectCard.astro';
+import FloatingCanvas from '../components/FloatingCanvas.astro';
 import CTAFooter from '../components/CTAFooter.astro';
-import { getCollection } from 'astro:content';
-
-const allProjects = (await getCollection('projects'))
-  .filter((p) => !p.data.archived)
-  .sort((a, b) => a.data.order - b.data.order);
-
-const featuredProject = allProjects.find((p) => p.data.featured);
-const projects = allProjects.filter((p) => !p.data.featured);
 ---
 
 <BaseLayout title="Dillon Lui  - Product Designer" description="Product designer specializing in complex B2B SaaS. Case studies from LeadsOnline, Church Initiative, and CrateBind." image="/images/projects/unified-platform/thumbnail.png">
@@ -29,49 +20,23 @@ const projects = allProjects.filter((p) => !p.data.featured);
     </div>
   </section>
 
-  <section class="projects section">
-    <div class="container">
-      {featuredProject && (
-        <div class="featured-wrapper">
-          <FeaturedProjectCard
-            title={featuredProject.data.title}
-            description={featuredProject.data.description}
-            thumbnail={featuredProject.data.thumbnail}
-            slug={featuredProject.data.slug}
-            tags={featuredProject.data.tags}
-            thumbnailPosition={featuredProject.data.thumbnailPosition}
-          />
-        </div>
-      )}
-      <div class="projects-grid">
-        {projects.map((project) => (
-          <ProjectCard
-            title={project.data.title}
-            description={project.data.description}
-            thumbnail={project.data.thumbnail}
-            slug={project.data.slug}
-            tags={project.data.tags}
-            thumbnailPosition={project.data.thumbnailPosition}
-          />
-        ))}
-      </div>
-
-    </div>
-  </section>
+  <FloatingCanvas />
 
   <CTAFooter />
 </BaseLayout>
 
 <style>
   .hero {
-    padding-top: var(--space-2xl);
-    padding-bottom: var(--space-3xl);
+    padding-top: var(--space-4xl);
+    padding-bottom: var(--space-4xl);
   }
 
   .hero-title {
     font-family: var(--font-display);
-    font-size: var(--text-display);
+    font-size: var(--text-hero);
     font-weight: 400;
+    letter-spacing: var(--tracking-tighter);
+    line-height: var(--leading-tight);
     margin-bottom: var(--space-md);
   }
 
@@ -80,14 +45,14 @@ const projects = allProjects.filter((p) => !p.data.featured);
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
     max-width: none;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
   }
 
   .hero-blurb {
     font-size: var(--text-body-lg);
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
   }
 
   .hero-cta {
@@ -104,32 +69,12 @@ const projects = allProjects.filter((p) => !p.data.featured);
   .hero-cta a:hover {
     color: var(--color-text-secondary);
   }
-
-  .projects {
-    padding-top: 0;
-  }
-
-  .featured-wrapper {
-    margin-bottom: var(--space-2xl);
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-2xl);
-  }
-
-  @media (min-width: 768px) {
-    .projects-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-3xl);
-    }
-  }
 </style>
 
 <script>
-  import { initHeroAnimation, initStaggerAnimation } from '../scripts/scroll-animations';
+  import { initHeroAnimation, initParallax } from '../scripts/scroll-animations';
 
   initHeroAnimation(['.hero-title', '.hero-subtitle', '.hero-blurb', '.hero-cta']);
-  initStaggerAnimation('.project-card');
+  initParallax('.hero-title', -50);
+  initParallax('.hero-subtitle', -30);
 </script>

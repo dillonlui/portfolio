@@ -6,15 +6,16 @@ interface Props {
   slug: string;
   tags?: string[];
   thumbnailPosition?: string;
+  variant?: 'default' | 'wide';
 }
 
-const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'center center' } = Astro.props;
+const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'center center', variant = 'default' } = Astro.props;
 ---
 
-<article class="project-card">
+<article class:list={['project-card', { 'project-card--wide': variant === 'wide' }]}>
   <a href={`/projects/${slug}`} class="card-link">
     <div class="thumbnail-wrapper">
-      <img src={thumbnail} alt={title} class="thumbnail" loading="lazy" style={`object-position: ${thumbnailPosition};`} />
+      <img src={thumbnail} alt={title} class="thumbnail" loading="lazy" style={`object-position: ${thumbnailPosition};`} transition:name={`project-${slug}`} />
     </div>
     <div class="card-content">
       {tags.length > 0 && (
@@ -39,8 +40,8 @@ const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'cen
   }
 
   .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl), 0 0 0 2px var(--color-accent);
   }
 
   .card-link {
@@ -65,7 +66,7 @@ const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'cen
   }
 
   .project-card:hover .thumbnail {
-    transform: scale(1.02);
+    transform: scale(1.05);
   }
 
   .card-content {
@@ -103,5 +104,27 @@ const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'cen
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Wide variant: horizontal layout */
+  @media (min-width: 768px) {
+    .project-card--wide .card-link {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+
+    .project-card--wide .thumbnail-wrapper {
+      aspect-ratio: 16 / 10;
+    }
+
+    .project-card--wide .card-content {
+      padding: var(--space-xl);
+    }
+
+    .project-card--wide .card-description {
+      -webkit-line-clamp: 5;
+    }
   }
 </style>

@@ -14,6 +14,7 @@ const img = '/images/projects/griefshare';
   tags={['Online Search', 'UX Research', 'Responsive Web']}
   heroImage={`${img}/header.png`}
   logoImage={`${img}/logo.png`}
+  slug="griefshare"
   previousProject={{ title: 'ClearCase', slug: 'clearcase' }}
   nextProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
 >
@@ -197,6 +198,7 @@ const img = '/images/projects/griefshare';
 </style>
 
 <script>
-  import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
+  import { initCaseStudyAnimations, initImageReveal } from '../../scripts/scroll-animations';
   initCaseStudyAnimations('.case-section');
+  initImageReveal('.reveal-image');
 </script>

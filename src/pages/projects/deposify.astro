@@ -14,6 +14,7 @@ const img = '/images/projects/deposify';
   tags={['B2B | B2C | SaaS', 'Product Strategy', 'Responsive Web']}
   heroImage={`${img}/header.png`}
   logoImage={`${img}/logo.png`}
+  slug="deposify"
   previousProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
   nextProject={{ title: 'Unifying an Investigative Platform', slug: 'unified-platform' }}
 >
@@ -129,6 +130,7 @@ const img = '/images/projects/deposify';
 </style>
 
 <script>
-  import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
+  import { initCaseStudyAnimations, initImageReveal } from '../../scripts/scroll-animations';
   initCaseStudyAnimations('.case-section');
+  initImageReveal('.reveal-image');
 </script>

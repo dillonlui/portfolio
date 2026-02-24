@@ -1,0 +1,39 @@
+---
+---
+
+<div class="scroll-progress" aria-hidden="true">
+  <div class="scroll-progress-bar"></div>
+</div>
+
+<style>
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  .scroll-progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--color-project-accent, var(--color-accent));
+    transition: width 50ms linear;
+  }
+</style>
+
+<script>
+  const bar = document.querySelector('.scroll-progress-bar') as HTMLElement;
+  if (bar) {
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = `${progress}%`;
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+</script>

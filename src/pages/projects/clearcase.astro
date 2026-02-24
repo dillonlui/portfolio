@@ -13,6 +13,7 @@ const img = '/images/projects/clearcase';
   description="ClearCase is a fully automated cartridge case triage solution for crime gun investigations. The product worked technically, but it had been built to prove a concept, not to support how investigators work in practice. I led a full UX/UI redesign to fix that, and in the process uncovered a critical gap in the workflow."
   tags={['B2B SaaS', 'UX Audit', 'Responsive Web']}
   heroImage={`${img}/thumbnail.png`}
+  slug="clearcase"
   accentColor="#2c3e50"
   previousProject={{ title: 'Unifying an Investigative Platform', slug: 'unified-platform' }}
   nextProject={{ title: 'GriefShare', slug: 'griefshare' }}
@@ -145,6 +146,7 @@ const img = '/images/projects/clearcase';
 </style>
 
 <script>
-  import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
+  import { initCaseStudyAnimations, initImageReveal } from '../../scripts/scroll-animations';
   initCaseStudyAnimations('.case-section');
+  initImageReveal('.reveal-image');
 </script>

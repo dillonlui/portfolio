@@ -5,9 +5,10 @@ interface Props {
   tags: string[];
   heroImage: string;
   logoImage?: string;
+  slug?: string;
 }
 
-const { title, description, tags, heroImage, logoImage } = Astro.props;
+const { title, description, tags, heroImage, logoImage, slug } = Astro.props;
 ---
 
 <section class="case-hero">
@@ -24,7 +25,7 @@ const { title, description, tags, heroImage, logoImage } = Astro.props;
       <p class="hero-description">{description}</p>
     </div>
     <div class="hero-image-wrapper">
-      <img src={heroImage} alt={title} class="hero-image" loading="eager" />
+      <img src={heroImage} alt={title} class="hero-image" loading="eager" transition:name={slug ? `project-${slug}` : undefined} />
     </div>
   </div>
 </section>

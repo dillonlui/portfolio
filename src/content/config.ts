@@ -9,6 +9,7 @@ const projectsCollection = defineCollection({
     slug: z.string(),
     tags: z.array(z.string()),
     thumbnailPosition: z.string().default('center center'),
+    accentColor: z.string().default('#205d17'),
     order: z.number().default(0),
     featured: z.boolean().default(false),
     archived: z.boolean().default(false),

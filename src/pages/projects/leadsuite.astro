@@ -13,6 +13,7 @@ const img = '/images/projects/leadsuite';
   description="LeadSuite is the flagship product at LeadsOnline, a B2B SaaS platform used by law enforcement to work cases and surface insights. I led the redesign of the core person profile and case detail experience, turning an information-dense legacy interface into a structured, scalable investigative tool."
   tags={['B2B SaaS', 'Law Enforcement', 'Information Architecture']}
   heroImage={`${img}/thumbnail.png`}
+  slug="leadsuite"
   accentColor="#1c3557"
   previousProject={{ title: 'GriefShare', slug: 'griefshare' }}
   nextProject={{ title: 'Deposify', slug: 'deposify' }}
@@ -156,6 +157,7 @@ const img = '/images/projects/leadsuite';
 </CaseStudyLayout>
 
 <script>
-  import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
+  import { initCaseStudyAnimations, initImageReveal } from '../../scripts/scroll-animations';
   initCaseStudyAnimations('.case-section');
+  initImageReveal('.reveal-image');
 </script>

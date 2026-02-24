@@ -1,21 +1,15 @@
 ---
 interface Props {
   class?: string;
-  surfaceBg?: boolean;
 }
-const { class: className, surfaceBg = false } = Astro.props;
+const { class: className } = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 
 <section class:list={['cta-footer', className]}>
-  <div class:list={['wave-divider', { 'wave-surface': surfaceBg }]}>
-    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60 L1440,120 L0,120 Z" fill="var(--color-dark-accent)" />
-    </svg>
-  </div>
   <div class="cta-dark">
     <div class="container cta-content">
-      <h2 class="cta-heading">Let's work together, drop me a line.</h2>
+      <h2 class="cta-heading">Let's work together,<br />drop me a line.</h2>
       <a href="mailto:dillonlui@gmail.com" class="cta-btn">Email Me</a>
     </div>
     <div class="container cta-copyright">
@@ -29,25 +23,11 @@ const currentYear = new Date().getFullYear();
     margin-top: auto;
   }
 
-  .wave-divider {
-    line-height: 0;
-    margin-bottom: -1px;
-  }
-
-  .wave-surface {
-    background-color: var(--color-surface);
-  }
-
-  .wave-divider svg {
-    width: 100%;
-    height: 80px;
-    display: block;
-  }
-
   .cta-dark {
     background-color: var(--color-dark-accent);
-    padding: var(--space-3xl) 0 var(--space-lg);
+    padding: var(--space-6xl) 0 var(--space-lg);
     text-align: center;
+    clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
   }
 
   .cta-content {
@@ -56,8 +36,9 @@ const currentYear = new Date().getFullYear();
   }
 
   .cta-heading {
-    font-size: var(--text-h2);
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-size: var(--text-h1);
+    font-weight: 400;
     margin-bottom: var(--space-lg);
     color: var(--color-background);
   }
@@ -85,3 +66,4 @@ const currentYear = new Date().getFullYear();
     margin: 0;
   }
 </style>
+

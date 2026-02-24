@@ -12,6 +12,7 @@ const img = '/images/projects/unified-platform';
   description="When our CEO challenged us to unify two diverged products into a single investigative platform, I led the design from synthesis to working prototype - and introduced a new way of building that the company is now adopting across teams."
   tags={['B2B SaaS', 'Design Systems', 'Design + Code']}
   heroImage={`${img}/thumbnail.png`}
+  slug="unified-platform"
   accentColor="#1a1a2e"
   previousProject={{ title: 'Deposify', slug: 'deposify' }}
   nextProject={{ title: 'ClearCase', slug: 'clearcase' }}
@@ -248,6 +249,7 @@ const img = '/images/projects/unified-platform';
 </style>
 
 <script>
-  import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
+  import { initCaseStudyAnimations, initImageReveal } from '../../scripts/scroll-animations';
   initCaseStudyAnimations('.case-section');
+  initImageReveal('.reveal-image');
 </script>

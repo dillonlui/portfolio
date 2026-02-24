@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import '../styles/global.css';
 
@@ -36,6 +37,7 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <ViewTransitions />
     <title>{title}</title>
   </head>
   <body>
@@ -71,4 +73,74 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     top: var(--space-md);
     color: white;
   }
+
+  /* Custom cursor: accent green fill, white outline */
+  #custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 2px solid #fff;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 200ms ease, width 200ms ease, height 200ms ease, margin 200ms ease, background 200ms ease;
+    will-change: transform;
+    mix-blend-mode: normal;
+  }
+
+  #custom-cursor.is-visible {
+    opacity: 1;
+  }
+
+  #custom-cursor.is-hovering {
+    width: 32px;
+    height: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+    background: rgba(32, 93, 23, 0.15);
+    border-color: var(--color-accent);
+  }
+
+  /* Hide default cursor when custom cursor is active (class added by JS, cross-browser) */
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none !important;
+  }
+
+  /* Don't show custom cursor on mobile/touch */
+  @media (max-width: 767px), (pointer: coarse) {
+    #custom-cursor,
+    #global-trail-canvas {
+      display: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #custom-cursor,
+    #global-trail-canvas {
+      display: none !important;
+    }
+  }
 </style>
+
+<script>
+  import { initGlobalCursor } from '../scripts/light-trail';
+
+  function setupCursor() {
+    initGlobalCursor();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupCursor);
+  } else {
+    setupCursor();
+  }
+
+  document.addEventListener('astro:page-load', setupCursor);
+</script>

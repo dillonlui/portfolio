@@ -72,3 +72,35 @@
   color: var(--color-text-secondary);
   line-height: var(--leading-relaxed);
 }
+
+/* Elevated image: matted photo look with padding frame */
+.image-elevated {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-sm);
+  background-color: #fff;
+}
+
+.image-elevated img {
+  border-radius: var(--radius-sm);
+}
+
+/* Browser chrome frame for app screenshots */
+.image-browser {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background-color: #fff;
+}
+
+.image-browser::before {
+  content: '';
+  display: block;
+  height: 32px;
+  background-color: #f0f0f0;
+  background-image:
+    radial-gradient(circle at 16px 50%, #ff5f57 5px, transparent 5px),
+    radial-gradient(circle at 36px 50%, #febc2e 5px, transparent 5px),
+    radial-gradient(circle at 56px 50%, #28c840 5px, transparent 5px);
+  border-bottom: 1px solid #e0e0e0;
+}

@@ -1,0 +1,166 @@
+---
+// BubbleHoverCard: Single reusable hover card, repositioned via JS on hover.
+// Rendered once, populated dynamically from bubble data-* attributes.
+// Uses a two-layer structure: outer div for shadow, inner div for clip-path wipe.
+---
+
+<div class="bubble-hover-card" id="bubble-hover-card" aria-hidden="true">
+  <div class="hover-card-connector"></div>
+  <div class="hover-card-shadow">
+    <div class="hover-card-inner">
+      <div class="hover-card-accent"></div>
+      <div class="hover-card-tags"></div>
+      <h3 class="hover-card-title"></h3>
+      <p class="hover-card-description"></p>
+      <a href="#" class="hover-card-cta">View Case Study <span class="hover-card-arrow">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bubble-hover-card {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    max-width: 280px;
+    transition: opacity 200ms ease;
+  }
+
+  .bubble-hover-card.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .hover-card-connector {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+  }
+
+  /* Shadow layer - overflow hidden for slide reveal, NO clip-path so shadow is never clipped */
+  .hover-card-shadow {
+    border-radius: 20px 8px 20px 20px;
+    overflow: hidden;
+    background: var(--color-background);
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.12),
+      0 20px 60px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Inner layer - slides in via transform (no clip-path) */
+  .hover-card-inner {
+    padding: var(--space-lg);
+    transform: translateX(100%);
+    transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .bubble-hover-card.is-visible .hover-card-inner {
+    transform: translateX(0);
+  }
+
+  /* Directional wipe variants via transform */
+  .bubble-hover-card[data-wipe="right"] .hover-card-inner {
+    transform: translateX(100%);
+  }
+  .bubble-hover-card[data-wipe="right"].is-visible .hover-card-inner {
+    transform: translateX(0);
+  }
+
+  .bubble-hover-card[data-wipe="left"] .hover-card-inner {
+    transform: translateX(-100%);
+  }
+  .bubble-hover-card[data-wipe="left"].is-visible .hover-card-inner {
+    transform: translateX(0);
+  }
+
+  .bubble-hover-card[data-wipe="down"] .hover-card-inner {
+    transform: translateY(100%);
+  }
+  .bubble-hover-card[data-wipe="down"].is-visible .hover-card-inner {
+    transform: translateY(0);
+  }
+
+  .bubble-hover-card[data-wipe="up"] .hover-card-inner {
+    transform: translateY(-100%);
+  }
+  .bubble-hover-card[data-wipe="up"].is-visible .hover-card-inner {
+    transform: translateY(0);
+  }
+
+  .hover-card-accent {
+    height: 3px;
+    border-radius: 2px;
+    margin-bottom: var(--space-md);
+    background: var(--color-accent);
+  }
+
+  .hover-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .hover-card-tags:empty {
+    display: none;
+  }
+
+  /* :global() needed because tags are inserted via JS innerHTML */
+  :global(.hover-card-tags .tag) {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    background: var(--color-surface);
+    white-space: nowrap;
+  }
+
+  .hover-card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: 400;
+    line-height: var(--leading-tight);
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+  }
+
+  .hover-card-description {
+    font-size: var(--text-body-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-normal);
+    margin-bottom: var(--space-sm);
+  }
+
+  .hover-card-cta {
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-accent);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    text-decoration: none;
+  }
+
+  .hover-card-cta:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .hover-card-arrow {
+    display: inline-block;
+    transition: transform 200ms ease;
+  }
+
+  .bubble-hover-card.is-visible:hover .hover-card-arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 767px) {
+    .bubble-hover-card {
+      display: none;
+    }
+  }
+</style>
