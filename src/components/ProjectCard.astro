@@ -39,9 +39,11 @@ const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'cen
     transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
 
-  .project-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-xl), 0 0 0 2px var(--color-accent);
+  @media (hover: hover) {
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl), 0 0 0 2px var(--color-accent);
+    }
   }
 
   .card-link {
@@ -65,8 +67,10 @@ const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'cen
     transition: transform var(--transition-slow);
   }
 
-  .project-card:hover .thumbnail {
-    transform: scale(1.05);
+  @media (hover: hover) {
+    .project-card:hover .thumbnail {
+      transform: scale(1.05);
+    }
   }
 
   .card-content {

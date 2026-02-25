@@ -39,9 +39,11 @@ const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'cen
     transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
 
-  .featured-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+  @media (hover: hover) {
+    .featured-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
   }
 
   .featured-link {
@@ -65,8 +67,10 @@ const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'cen
     transition: transform var(--transition-slow);
   }
 
-  .featured-card:hover .featured-image {
-    transform: scale(1.02);
+  @media (hover: hover) {
+    .featured-card:hover .featured-image {
+      transform: scale(1.02);
+    }
   }
 
   .featured-overlay {
@@ -118,8 +122,10 @@ const { title, description, thumbnail, slug, tags = [], thumbnailPosition = 'cen
     transition: transform var(--transition-base);
   }
 
-  .featured-card:hover .featured-cta {
-    transform: translateX(4px);
+  @media (hover: hover) {
+    .featured-card:hover .featured-cta {
+      transform: translateX(4px);
+    }
   }
 
   @media (min-width: 768px) {
