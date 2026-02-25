@@ -125,14 +125,14 @@ export function initAvatarTilt() {
 export function initHeroLetterReveal() {
   if (shouldSkip()) {
     // On mobile/reduced-motion, just make sure it's visible
-    const title = document.querySelector('.hero-title');
+    const title = document.querySelector<HTMLElement>('.hero-title-home');
     if (title) {
-      (title as HTMLElement).style.opacity = '1';
+      title.style.opacity = '1';
     }
     return;
   }
 
-  const title = document.querySelector<HTMLElement>('.hero-title');
+  const title = document.querySelector<HTMLElement>('.hero-title-home');
   if (!title) return;
 
   const text = title.textContent || '';
