@@ -7,7 +7,7 @@ import CTAFooter from '../components/CTAFooter.astro';
 <BaseLayout title="Dillon Lui - Product Designer" description="Product designer specializing in complex B2B SaaS. Case studies from LeadsOnline, Church Initiative, and CrateBind." image="/images/projects/unified-platform/thumbnail.png">
   <section class="hero section">
     <div class="container">
-      <h1 class="hero-title fade-in">Hello, I'm Dillon 👋🏼</h1>
+      <h1 class="hero-title fade-in">Hello, I'm Dillon 👋</h1>
       <p class="hero-subtitle fade-in">
         Senior product designer leading design across a B2B SaaS product suite. I shape how teams build, from strategy through working code.
       </p>
@@ -38,6 +38,7 @@ import CTAFooter from '../components/CTAFooter.astro';
     letter-spacing: var(--tracking-tighter);
     line-height: var(--leading-tight);
     margin-bottom: var(--space-md);
+    opacity: 0;
   }
 
   .hero-subtitle {
@@ -73,8 +74,12 @@ import CTAFooter from '../components/CTAFooter.astro';
 
 <script>
   import { initHeroAnimation, initParallax } from '../scripts/scroll-animations';
+  import { initHeroLetterReveal } from '../scripts/hover-effects';
 
-  initHeroAnimation(['.hero-title', '.hero-subtitle', '.hero-blurb', '.hero-cta']);
-  initParallax('.hero-title', -50);
-  initParallax('.hero-subtitle', -30);
+  document.addEventListener('astro:page-load', () => {
+    initHeroLetterReveal();
+    initHeroAnimation(['.hero-subtitle', '.hero-blurb', '.hero-cta']);
+    initParallax('.hero-title', -50);
+    initParallax('.hero-subtitle', -30);
+  });
 </script>

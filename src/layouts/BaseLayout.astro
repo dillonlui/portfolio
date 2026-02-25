@@ -131,16 +131,28 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
 
 <script>
   import { initGlobalCursor } from '../scripts/light-trail';
+  import { initButtonSheen } from '../scripts/hover-effects';
 
   function setupCursor() {
     initGlobalCursor();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupCursor);
-  } else {
-    setupCursor();
+  function setupInteractions() {
+    initButtonSheen();
   }
 
-  document.addEventListener('astro:page-load', setupCursor);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setupCursor();
+      setupInteractions();
+    });
+  } else {
+    setupCursor();
+    setupInteractions();
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    setupCursor();
+    setupInteractions();
+  });
 </script>
