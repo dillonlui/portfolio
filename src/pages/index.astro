@@ -14,9 +14,10 @@ import CTAFooter from '../components/CTAFooter.astro';
       <p class="hero-blurb fade-in">
         Currently at LeadsOnline, where I lead design for investigative tools used by law enforcement agencies nationwide.
       </p>
-      <p class="hero-cta fade-in">
-        Interested in working together? <a href="mailto:dillonlui@gmail.com">Email me</a>
-      </p>
+      <div class="hero-cta fade-in">
+        <p>Interested in working together?</p>
+        <a href="mailto:dillonlui@gmail.com" class="btn btn-secondary">Email me</a>
+      </div>
     </div>
   </section>
 
@@ -27,8 +28,14 @@ import CTAFooter from '../components/CTAFooter.astro';
 
 <style>
   .hero {
-    padding-top: var(--space-4xl);
+    padding-top: var(--space-xl);
     padding-bottom: var(--space-4xl);
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding-top: var(--space-4xl);
+    }
   }
 
   .hero-title {
@@ -37,8 +44,14 @@ import CTAFooter from '../components/CTAFooter.astro';
     font-weight: 400;
     letter-spacing: var(--tracking-tighter);
     line-height: var(--leading-tight);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-title {
+      opacity: 1;
+    }
   }
 
   .hero-subtitle {
@@ -46,29 +59,31 @@ import CTAFooter from '../components/CTAFooter.astro';
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
     max-width: none;
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
+  }
+
+  @media (min-width: 768px) {
+    .hero-subtitle {
+      margin-top: -20px;
+    }
   }
 
   .hero-blurb {
     font-size: var(--text-body-lg);
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
   }
 
   .hero-cta {
     font-size: var(--text-body-lg);
     color: var(--color-text-secondary);
+    margin-top: var(--space-sm);
   }
 
-  .hero-cta a {
-    color: var(--color-text);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .hero-cta a:hover {
-    color: var(--color-text-secondary);
+  .hero-cta .btn {
+    margin-top: 4px;
+    display: inline-block;
   }
 </style>
 
@@ -77,6 +92,7 @@ import CTAFooter from '../components/CTAFooter.astro';
   import { initHeroLetterReveal } from '../scripts/hover-effects';
 
   document.addEventListener('astro:page-load', () => {
+    if (window.location.pathname !== '/') return;
     initHeroLetterReveal();
     initHeroAnimation(['.hero-subtitle', '.hero-blurb', '.hero-cta']);
     initParallax('.hero-title', -50);

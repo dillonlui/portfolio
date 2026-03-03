@@ -236,6 +236,9 @@ const img = '/images/projects/unified-platform';
 <script>
   import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
   import { initScrollVelocityParallax } from '../../scripts/hover-effects';
-  initCaseStudyAnimations('.case-section');
-  initScrollVelocityParallax();
+  document.addEventListener('astro:page-load', () => {
+    if (!window.location.pathname.startsWith('/projects/unified-platform')) return;
+    initCaseStudyAnimations('.case-section');
+    initScrollVelocityParallax();
+  });
 </script>

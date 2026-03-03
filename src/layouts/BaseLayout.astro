@@ -132,6 +132,7 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
 <script>
   import { initGlobalCursor } from '../scripts/light-trail';
   import { initButtonSheen } from '../scripts/hover-effects';
+  import { cleanupGSAP } from '../scripts/scroll-animations';
 
   function setupCursor() {
     initGlobalCursor();
@@ -151,8 +152,23 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     setupInteractions();
   }
 
+  document.addEventListener('astro:before-swap', () => {
+    cleanupGSAP();
+  });
+
   document.addEventListener('astro:page-load', () => {
     setupCursor();
     setupInteractions();
+  });
+
+  // Reinit GSAP when crossing the mobile/desktop breakpoint
+  let wasDesktop = window.innerWidth >= 768;
+  window.addEventListener('resize', () => {
+    const isDesktop = window.innerWidth >= 768;
+    if (isDesktop !== wasDesktop) {
+      wasDesktop = isDesktop;
+      cleanupGSAP();
+      document.dispatchEvent(new Event('astro:page-load'));
+    }
   });
 </script>

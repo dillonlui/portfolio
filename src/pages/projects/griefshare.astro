@@ -199,6 +199,9 @@ const img = '/images/projects/griefshare';
 <script>
   import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
   import { initScrollVelocityParallax } from '../../scripts/hover-effects';
-  initCaseStudyAnimations('.case-section');
-  initScrollVelocityParallax();
+  document.addEventListener('astro:page-load', () => {
+    if (!window.location.pathname.startsWith('/projects/griefshare')) return;
+    initCaseStudyAnimations('.case-section');
+    initScrollVelocityParallax();
+  });
 </script>

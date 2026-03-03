@@ -84,5 +84,8 @@ const img = '/images/projects/rmc';
 
 <script>
   import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
-  initCaseStudyAnimations('.feature-showcase, .full-width-image, .section-heading');
+  document.addEventListener('astro:page-load', () => {
+    if (!window.location.pathname.startsWith('/projects/rmc')) return;
+    initCaseStudyAnimations('.feature-showcase, .full-width-image, .section-heading');
+  });
 </script>

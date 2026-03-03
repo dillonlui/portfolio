@@ -4,6 +4,29 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 /**
+ * Kill all GSAP ScrollTriggers and tweens, and clear inline styles
+ * GSAP leaves behind so they don't persist across breakpoints or pages.
+ */
+export function cleanupGSAP() {
+  ScrollTrigger.getAll().forEach((st) => st.kill());
+  gsap.killTweensOf('*');
+
+  // Remove GSAP inline styles from animated elements
+  const gsapProps = ['transform', 'translate', 'rotate', 'scale', 'opacity'];
+  document.querySelectorAll<HTMLElement>('.fade-in, .hero-title, .hero-subtitle, .hero-blurb, .hero-cta, .floating-bubble, [style*="translate"]').forEach((el) => {
+    gsapProps.forEach((prop) => el.style.removeProperty(prop));
+  });
+
+  // Restore letter-reveal title to plain text so it can re-wrap naturally
+  const letterRevealTitle = document.querySelector<HTMLElement>('.hero-title-home');
+  if (letterRevealTitle && letterRevealTitle.querySelector('span')) {
+    const text = letterRevealTitle.textContent || '';
+    letterRevealTitle.innerHTML = '';
+    letterRevealTitle.textContent = text;
+  }
+}
+
+/**
  * Animate elements with the .fade-in class on scroll.
  * Used on pages with general scroll-reveal content.
  */
@@ -86,21 +109,19 @@ export function initStaggerAnimation(selector: string) {
  * Moves elements vertically as user scrolls. Disabled on mobile.
  */
 export function initParallax(selector: string, speed: number = -50) {
-  ScrollTrigger.matchMedia({
-    '(min-width: 768px)': function () {
-      gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
-        gsap.to(el, {
-          scrollTrigger: {
-            trigger: el,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-          y: speed,
-          ease: 'none',
-        });
-      });
-    },
+  if (window.innerWidth < 768) return;
+
+  gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      },
+      y: speed,
+      ease: 'none',
+    });
   });
 }
 
@@ -196,47 +217,25 @@ export function initTimeline() {
   });
 
   // Card reveal animations with responsive direction
-  ScrollTrigger.matchMedia({
-    '(min-width: 768px)': function () {
-      cards.forEach((card) => {
-        const entry = card.closest('.timeline-entry');
-        const isLeft = entry?.classList.contains('entry-left');
-        gsap.fromTo(
-          card,
-          { opacity: 0, x: isLeft ? -30 : 30 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 82%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
-    },
-    '(max-width: 767px)': function () {
-      cards.forEach((card) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, x: 20 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
-    },
+  const isDesktop = window.innerWidth >= 768;
+  cards.forEach((card) => {
+    const entry = card.closest('.timeline-entry');
+    const isLeft = isDesktop && entry?.classList.contains('entry-left');
+    gsap.fromTo(
+      card,
+      { opacity: 0, x: isLeft ? -30 : isDesktop ? 30 : 20 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: card,
+          start: isDesktop ? 'top 82%' : 'top 85%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
   });
 }
 

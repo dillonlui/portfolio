@@ -131,6 +131,9 @@ const img = '/images/projects/deposify';
 <script>
   import { initCaseStudyAnimations } from '../../scripts/scroll-animations';
   import { initScrollVelocityParallax } from '../../scripts/hover-effects';
-  initCaseStudyAnimations('.case-section');
-  initScrollVelocityParallax();
+  document.addEventListener('astro:page-load', () => {
+    if (!window.location.pathname.startsWith('/projects/deposify')) return;
+    initCaseStudyAnimations('.case-section');
+    initScrollVelocityParallax();
+  });
 </script>
