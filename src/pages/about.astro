@@ -526,7 +526,7 @@ const experience = [
   import { initAvatarTilt } from '../scripts/hover-effects';
 
   document.addEventListener('astro:page-load', () => {
-    if (window.location.pathname !== '/about') return;
+    if (!window.location.pathname.startsWith('/about')) return;
     initFadeIn();
     initTimeline();
     initAvatarTilt();
