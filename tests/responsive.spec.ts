@@ -37,6 +37,23 @@ test.describe('Mobile Responsive', () => {
     expect(count).toBe(5);
   });
 
+  test('Work dropdown links are visible within viewport on mobile', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('.mobile-menu-btn').click();
+    await expect(page.locator('.nav-links')).toHaveClass(/is-open/);
+
+    await page.locator('.dropdown-trigger').click();
+
+    const firstLink = page.locator('.dropdown-menu .dropdown-link').first();
+    await expect(firstLink).toBeVisible();
+
+    const box = await firstLink.boundingBox();
+    expect(box).not.toBeNull();
+    // Link must be within the viewport horizontally (not shifted off-screen)
+    expect(box!.x).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(390);
+  });
+
   test('hero title visible', async ({ page }) => {
     await page.goto('/');
     const heroTitle = page.locator('.hero-title');
