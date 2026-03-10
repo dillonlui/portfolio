@@ -4,15 +4,22 @@ import FullWidthImage from '../../components/FullWidthImage.astro';
 import FeatureShowcase from '../../components/FeatureShowcase.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 
-const img = '/images/projects/rmc';
+import headerImg from '../../assets/images/projects/rmc/header.png';
+import wireframes1 from '../../assets/images/projects/rmc/wireframes1.png';
+import wireframes2 from '../../assets/images/projects/rmc/wireframes2.png';
+import categories from '../../assets/images/projects/rmc/categories.png';
+import iaExploration from '../../assets/images/projects/rmc/ia-exploration.png';
+import marketplace from '../../assets/images/projects/rmc/marketplace.png';
+import solutions from '../../assets/images/projects/rmc/solutions.png';
+import categoryPages from '../../assets/images/projects/rmc/category-pages.png';
+import searchFilter from '../../assets/images/projects/rmc/search-filter.png';
 ---
 
 <CaseStudyLayout
   title="RecruitmentMarketing.com"
   description="RecruitmentMarketing.com (RMC) is a marketplace to help recruitment marketing professionals find the right tools and services."
   tags={['B2B Marketplace', 'Responsive Web']}
-  heroImage={`${img}/header.png`}
-  logoImage={`${img}/logo.png`}
+  heroImage={headerImg}
   previousProject={{ title: 'Deposify', slug: 'deposify' }}
   nextProject={{ title: 'Vybe', slug: 'vybe' }}
 >
@@ -20,8 +27,8 @@ const img = '/images/projects/rmc';
     <div class="container">
       <SectionHeading title="Wireframes" />
       <div class="wireframes-grid">
-        <FullWidthImage src={`${img}/wireframes1.png`} alt="RMC wireframes - page layouts" />
-        <FullWidthImage src={`${img}/wireframes2.png`} alt="RMC wireframes - component exploration" />
+        <FullWidthImage src={wireframes1} alt="RMC wireframes - page layouts" />
+        <FullWidthImage src={wireframes2} alt="RMC wireframes - component exploration" />
       </div>
     </div>
   </section>
@@ -30,8 +37,8 @@ const img = '/images/projects/rmc';
     <div class="container">
       <SectionHeading title="Resolving the Information Architecture" />
       <div class="ia-images">
-        <FullWidthImage src={`${img}/categories.png`} alt="Category structure exploration" />
-        <FullWidthImage src={`${img}/ia-exploration.png`} alt="Information architecture exploration" />
+        <FullWidthImage src={categories} alt="Category structure exploration" />
+        <FullWidthImage src={iaExploration} alt="Information architecture exploration" />
       </div>
     </div>
   </section>
@@ -40,20 +47,20 @@ const img = '/images/projects/rmc';
     <div class="container">
       <div class="features">
         <FeatureShowcase
-          image={`${img}/marketplace.png`}
+          image={marketplace}
           title="An Intuitive Marketplace"
         />
         <FeatureShowcase
-          image={`${img}/solutions.png`}
+          image={solutions}
           title="Customizable Solution Pages"
           reverse
         />
         <FeatureShowcase
-          image={`${img}/category-pages.png`}
+          image={categoryPages}
           title="Educating Users with Category Pages"
         />
         <FeatureShowcase
-          image={`${img}/search-filter.png`}
+          image={searchFilter}
           title="Global Search and Filter"
           reverse
         />

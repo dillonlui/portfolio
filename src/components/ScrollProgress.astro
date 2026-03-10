@@ -28,13 +28,20 @@
   function initScrollProgress() {
     const bar = document.querySelector('.scroll-progress-bar') as HTMLElement;
     if (bar) {
+      let ticking = false;
       function updateProgress() {
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
         bar.style.width = `${progress}%`;
+        ticking = false;
       }
-      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateProgress);
+        }
+      }, { passive: true });
       updateProgress();
     }
   }

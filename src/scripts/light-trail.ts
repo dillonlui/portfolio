@@ -102,18 +102,14 @@ class GlobalCursorTrail {
         '.floating-bubble, .lb-clickable, ' +
         'img[style*="cursor"], figure img, [data-lightbox]'
       );
-      // Also check if the element itself or parent has cursor:pointer via computed style
-      const hasPointerCursor = !isInteractive && (
-        target.tagName === 'IMG' && getComputedStyle(target).cursor === 'pointer'
-      );
-      if (isInteractive || hasPointerCursor) {
+      if (isInteractive) {
         this.cursorEl.classList.add('is-hovering');
       } else {
         this.cursorEl.classList.remove('is-hovering');
       }
     });
 
-    window.addEventListener('resize', () => this.resize());
+    window.addEventListener('resize', () => this.resize(), { passive: true });
   }
 
   private addPoint(x: number, y: number) {

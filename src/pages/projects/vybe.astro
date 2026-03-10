@@ -3,15 +3,19 @@ import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import FeatureShowcase from '../../components/FeatureShowcase.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 
-const img = '/images/projects/vybe';
+import heroImg from '../../assets/images/projects/vybe/hero.png';
+import newsfeed from '../../assets/images/projects/vybe/newsfeed.png';
+import eventDetails from '../../assets/images/projects/vybe/event-details.png';
+import hangoutCreation from '../../assets/images/projects/vybe/hangout-creation.png';
+import textInvites from '../../assets/images/projects/vybe/text-invites.png';
+import feature5 from '../../assets/images/projects/vybe/feature5.png';
 ---
 
 <CaseStudyLayout
   title="Vybe"
   description="Vybe is a social media app that curates a newsfeed of nearby real time events. Vybe is the best way for Gen Z to plan a night out and connect with people in their city."
   tags={['Social Media', 'iOS | Android']}
-  heroImage={`${img}/hero.png`}
-  logoImage={`${img}/logo.png`}
+  heroImage={heroImg}
   previousProject={{ title: 'RMC', slug: 'rmc' }}
   nextProject={{ title: 'Deposify', slug: 'deposify' }}
 >
@@ -19,25 +23,25 @@ const img = '/images/projects/vybe';
     <div class="container">
       <div class="features">
         <FeatureShowcase
-          image={`${img}/newsfeed.png`}
+          image={newsfeed}
           title="Hangout Newsfeed"
         />
         <FeatureShowcase
-          image={`${img}/event-details.png`}
+          image={eventDetails}
           title="Event Details and Guest List"
           reverse
         />
         <FeatureShowcase
-          image={`${img}/hangout-creation.png`}
+          image={hangoutCreation}
           title="Intuitive Hangout Creation Flow"
         />
         <FeatureShowcase
-          image={`${img}/text-invites.png`}
+          image={textInvites}
           title="Custom Text Invites"
           reverse
         />
         <FeatureShowcase
-          image={`${img}/feature5.png`}
+          image={feature5}
           title="Connect with People Nearby"
         />
       </div>

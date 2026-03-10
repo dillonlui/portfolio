@@ -5,14 +5,22 @@ import FeatureCard from '../../components/FeatureCard.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 
-const img = '/images/projects/deposify';
+import headerImg from '../../assets/images/projects/deposify/header.png';
+import beforeImg from '../../assets/images/projects/deposify/before.png';
+import afterImg from '../../assets/images/projects/deposify/after.png';
+import tenantImg from '../../assets/images/projects/deposify/tenant.png';
+import depositDetailsImg from '../../assets/images/projects/deposify/deposit-details.png';
+import dashboardImg from '../../assets/images/projects/deposify/dashboard.png';
+import actionsImg from '../../assets/images/projects/deposify/actions.png';
+import reportsImg from '../../assets/images/projects/deposify/reports.png';
+import fundsImg from '../../assets/images/projects/deposify/funds.png';
 ---
 
 <CaseStudyLayout
   title="Deposify"
   description="Deposify had validated its product in the market without a single designer ever being involved. Our agency was brought in to rethink everything - and ended up designing the pitch that sold it."
   tags={['B2B | B2C | SaaS', 'Product Strategy', 'Responsive Web']}
-  heroImage={`${img}/header.png`}
+  heroImage={headerImg}
   slug="deposify"
   previousProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
   nextProject={{ title: 'Unifying an Investigative Platform', slug: 'unified-platform' }}
@@ -34,8 +42,10 @@ const img = '/images/projects/deposify';
     <section class="case-section section">
       <div class="container">
         <BeforeAfter
-          beforeImage={`${img}/before.png`}
-          afterImage={`${img}/after.png`}
+          beforeImage={beforeImg}
+          afterImage={afterImg}
+          beforeAlt="Original Deposify deposit management interface"
+          afterAlt="Redesigned Deposify interface with streamlined deposit workflow"
         />
       </div>
     </section>
@@ -58,8 +68,8 @@ const img = '/images/projects/deposify';
           subtitle="Renters have one job: pay their deposit. The redesign stripped everything back to make that as frictionless as possible. Rental agreement details and direct messaging to the property manager are available, but the primary screen is just a payment screen."
         />
         <div class="features-grid">
-          <FeatureCard image={`${img}/tenant.png`} title="Simplified Payment Screen" />
-          <FeatureCard image={`${img}/deposit-details.png`} title="Direct Messaging with Property Manager" />
+          <FeatureCard image={tenantImg} title="Simplified Payment Screen" />
+          <FeatureCard image={depositDetailsImg} title="Direct Messaging with Property Manager" />
         </div>
       </div>
     </section>
@@ -72,10 +82,10 @@ const img = '/images/projects/deposify';
           subtitle="Almost everything on the property manager side was net new, with nothing to reference. The most demanding design problem was task management: a multi-property admin view that lets managers assign and track tasks across individual team members at each property."
         />
         <div class="features-grid">
-          <FeatureCard image={`${img}/dashboard.png`} title="Multi-Property Dashboard" />
-          <FeatureCard image={`${img}/actions.png`} title="Task Management Across Properties" />
-          <FeatureCard image={`${img}/reports.png`} title="Custom Reports" />
-          <FeatureCard image={`${img}/funds.png`} title="Bank Account Management" />
+          <FeatureCard image={dashboardImg} title="Multi-Property Dashboard" />
+          <FeatureCard image={actionsImg} title="Task Management Across Properties" />
+          <FeatureCard image={reportsImg} title="Custom Reports" />
+          <FeatureCard image={fundsImg} title="Bank Account Management" />
         </div>
       </div>
     </section>

@@ -43,6 +43,8 @@ export class FloatingEngine {
   private leaveTimeout: number = 0;
   private entranceDone: boolean = false;
   private destroyed: boolean = false;
+  private keydownHandler: ((e: KeyboardEvent) => void) | null = null;
+  private resizeObserver: ResizeObserver | null = null;
 
   constructor(
     container: HTMLElement,
@@ -116,11 +118,10 @@ export class FloatingEngine {
   }
 
   private bindEvents() {
-    // Mouse tracking
+    // Mouse tracking (use cached containerRect)
     this.container.addEventListener('mousemove', (e) => {
-      const rect = this.container.getBoundingClientRect();
-      this.mouseX = e.clientX - rect.left;
-      this.mouseY = e.clientY - rect.top;
+      this.mouseX = e.clientX - this.containerRect.left;
+      this.mouseY = e.clientY - this.containerRect.top;
       this.mouseInContainer = true;
     });
 
@@ -141,11 +142,12 @@ export class FloatingEngine {
     this.hoverCard.addEventListener('mouseleave', () => this.onCardLeave());
 
     // Escape to dismiss card
-    document.addEventListener('keydown', (e) => {
+    this.keydownHandler = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && this.hoveredBubble) {
         this.dismissCard();
       }
-    });
+    };
+    document.addEventListener('keydown', this.keydownHandler);
 
     // Scroll velocity
     ScrollTrigger.create({
@@ -158,10 +160,10 @@ export class FloatingEngine {
     });
 
     // Resize - update container rect
-    const resizeObserver = new ResizeObserver(() => {
+    this.resizeObserver = new ResizeObserver(() => {
       this.containerRect = this.container.getBoundingClientRect();
     });
-    resizeObserver.observe(this.container);
+    this.resizeObserver.observe(this.container);
   }
 
   private onBubbleEnter(bubble: Bubble) {
@@ -280,14 +282,19 @@ export class FloatingEngine {
     }
 
     card.classList.remove('is-visible');
-    void card.offsetHeight;
-    card.classList.add('is-visible');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        card.classList.add('is-visible');
+      });
+    });
     card.setAttribute('aria-hidden', 'false');
+    card.removeAttribute('inert');
   }
 
   private hideCard() {
     this.hoverCard.classList.remove('is-visible');
     this.hoverCard.setAttribute('aria-hidden', 'true');
+    this.hoverCard.setAttribute('inert', '');
   }
 
   start() {
@@ -535,5 +542,13 @@ export class FloatingEngine {
   destroy() {
     this.destroyed = true;
     cancelAnimationFrame(this.rafId);
+    if (this.keydownHandler) {
+      document.removeEventListener('keydown', this.keydownHandler);
+      this.keydownHandler = null;
+    }
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
+    }
   }
 }

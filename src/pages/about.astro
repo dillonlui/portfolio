@@ -1,6 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTAFooter from '../components/CTAFooter.astro';
+import profilePhoto from '../assets/images/profile/dillon.jpg';
+import featuredThumbnail from '../assets/images/projects/unified-platform/thumbnail.png';
 
 const experience = [
   {
@@ -58,7 +61,7 @@ const experience = [
 ];
 ---
 
-<BaseLayout title="About - Dillon Lui" description="Learn about Dillon Lui - a product designer with experience in UX research, interaction design, and building user-centered products." image="/images/profile/dillon.jpg">
+<BaseLayout title="About - Dillon Lui" description="Learn about Dillon Lui - a product designer with experience in UX research, interaction design, and building user-centered products." image={profilePhoto.src}>
   <section class="about-hero section">
     <div class="container">
       <div class="about-intro">
@@ -67,10 +70,14 @@ const experience = [
       </div>
       <div class="about-grid">
         <div class="about-image-wrapper fade-in">
-          <img
-            src="/images/profile/dillon.jpg"
+          <Image
+            src={profilePhoto}
             alt="Dillon Lui"
             class="profile-image"
+            widths={[300, 400, 600]}
+            sizes="(max-width: 768px) 100vw, 400px"
+            loading="eager"
+            decoding="async"
           />
           <a href="https://drive.google.com/file/d/1ziiJcxYVU5AAVi1M4CZld9--_wqJZmOu/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-secondary resume-btn">Download Resume</a>
         </div>
@@ -134,11 +141,14 @@ const experience = [
         <a href="/projects/unified-platform" class="btn btn-secondary">View Case Study</a>
       </div>
       <a href="/projects/unified-platform" class="featured-link">
-        <img
-          src="/images/projects/unified-platform/thumbnail.png"
+        <Image
+          src={featuredThumbnail}
           alt="Unifying an Investigative Platform case study"
           class="featured-image"
+          widths={[360, 600]}
+          sizes="(max-width: 768px) 90vw, 360px"
           loading="lazy"
+          decoding="async"
         />
       </a>
     </div>

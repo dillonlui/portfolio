@@ -22,9 +22,8 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl.href} />
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Sansita+One&family=Archivo+Black&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/fonts/sansita-one-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/archivo-black-latin.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -130,11 +129,15 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
 </style>
 
 <script>
-  import { initGlobalCursor } from '../scripts/light-trail';
   import { initButtonSheen } from '../scripts/hover-effects';
   import { cleanupGSAP } from '../scripts/scroll-animations';
 
-  function setupCursor() {
+  async function setupCursor() {
+    // Only load cursor trail on desktop with fine pointer
+    const isDesktop = window.innerWidth >= 768;
+    const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+    if (!isDesktop || isCoarse) return;
+    const { initGlobalCursor } = await import('../scripts/light-trail');
     initGlobalCursor();
   }
 
@@ -163,12 +166,18 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
 
   // Reinit GSAP when crossing the mobile/desktop breakpoint
   let wasDesktop = window.innerWidth >= 768;
+  let resizeTicking = false;
   window.addEventListener('resize', () => {
-    const isDesktop = window.innerWidth >= 768;
-    if (isDesktop !== wasDesktop) {
-      wasDesktop = isDesktop;
-      cleanupGSAP();
-      document.dispatchEvent(new Event('astro:page-load'));
-    }
-  });
+    if (resizeTicking) return;
+    resizeTicking = true;
+    requestAnimationFrame(() => {
+      resizeTicking = false;
+      const isDesktop = window.innerWidth >= 768;
+      if (isDesktop !== wasDesktop) {
+        wasDesktop = isDesktop;
+        cleanupGSAP();
+        document.dispatchEvent(new Event('astro:page-load'));
+      }
+    });
+  }, { passive: true });
 </script>

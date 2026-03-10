@@ -6,7 +6,7 @@
   prev/next navigation + keyboard controls.
 -->
 
-<div class="lightbox-overlay" id="case-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image lightbox">
+<div class="lightbox-overlay" id="case-lightbox" aria-hidden="true" inert role="dialog" aria-modal="true" aria-label="Image lightbox">
   <button class="lb-close" aria-label="Close lightbox">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <line x1="18" y1="6" x2="6" y2="18" />
@@ -148,7 +148,15 @@
 </style>
 
 <script>
+  let lightboxAbort: AbortController | null = null;
+
   function initLightbox() {
+    // Clean up previous instance (page transitions)
+    if (lightboxAbort) {
+      lightboxAbort.abort();
+      lightboxAbort = null;
+    }
+
     const overlay = document.getElementById('case-lightbox');
     if (!overlay) return;
 
@@ -165,20 +173,31 @@
     );
 
     if (images.length > 0 && lbImage && lbCounter && closeBtn && prevBtn && nextBtn) {
+      lightboxAbort = new AbortController();
+      const { signal } = lightboxAbort;
       let currentIndex = 0;
+      let previouslyFocused: HTMLElement | null = null;
 
       function open(index: number) {
+        previouslyFocused = document.activeElement as HTMLElement;
         currentIndex = index;
         update();
         overlay!.classList.add('is-open');
         overlay!.setAttribute('aria-hidden', 'false');
+        overlay!.removeAttribute('inert');
         document.body.classList.add('lightbox-open');
+        // Move focus into lightbox
+        closeBtn!.focus();
       }
 
       function close() {
         overlay!.classList.remove('is-open');
         overlay!.setAttribute('aria-hidden', 'true');
+        overlay!.setAttribute('inert', '');
         document.body.classList.remove('lightbox-open');
+        // Restore focus
+        previouslyFocused?.focus();
+        previouslyFocused = null;
       }
 
       function update() {
@@ -200,24 +219,51 @@
         update();
       }
 
+      // Focus trap: keep Tab cycling within the lightbox
+      function trapFocus(e: KeyboardEvent) {
+        if (e.key !== 'Tab' || !overlay!.classList.contains('is-open')) return;
+        const focusable = overlay!.querySelectorAll<HTMLElement>(
+          'button:not([hidden]), [href], [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+
       images.forEach((img, i) => {
         img.classList.add('lb-clickable');
-        img.addEventListener('click', () => open(i));
+        img.setAttribute('role', 'button');
+        img.setAttribute('tabindex', '0');
+        img.addEventListener('click', () => open(i), { signal });
+        img.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            open(i);
+          }
+        }, { signal });
       });
 
-      closeBtn.addEventListener('click', close);
-      prevBtn.addEventListener('click', prev);
-      nextBtn.addEventListener('click', next);
+      closeBtn.addEventListener('click', close, { signal });
+      prevBtn.addEventListener('click', prev, { signal });
+      nextBtn.addEventListener('click', next, { signal });
       overlay.addEventListener('click', (e) => {
         if (e.target === overlay) close();
-      });
+      }, { signal });
 
       document.addEventListener('keydown', (e) => {
         if (!overlay!.classList.contains('is-open')) return;
         if (e.key === 'Escape') close();
         if (e.key === 'ArrowLeft') prev();
         if (e.key === 'ArrowRight') next();
-      });
+        trapFocus(e);
+      }, { signal });
     }
   }
 

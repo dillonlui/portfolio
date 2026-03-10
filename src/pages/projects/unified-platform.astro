@@ -1,17 +1,26 @@
 ---
+import { Image } from 'astro:assets';
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import FullWidthImage from '../../components/FullWidthImage.astro';
 
-const img = '/images/projects/unified-platform';
+import thumbnail from '../../assets/images/projects/unified-platform/thumbnail.png';
+import dashboard from '../../assets/images/projects/unified-platform/dashboard.png';
+import caseList from '../../assets/images/projects/unified-platform/case-list.png';
+import searchResultsPhone from '../../assets/images/projects/unified-platform/search-results-phone.png';
+import searchResultsProperty from '../../assets/images/projects/unified-platform/search-results-property.png';
+import personProfile from '../../assets/images/projects/unified-platform/person-profile.png';
+import people from '../../assets/images/projects/unified-platform/people.png';
+import property from '../../assets/images/projects/unified-platform/property.png';
+import caseBuilder from '../../assets/images/projects/unified-platform/case-builder.png';
 ---
 
 <CaseStudyLayout
   title="Unifying an Investigative Platform"
   description="When our CEO challenged us to unify two diverged products into a single investigative platform, I led the design from synthesis to working prototype - and introduced a new way of building that the company is now adopting across teams."
   tags={['B2B SaaS', 'Design Systems', 'Design + Code']}
-  heroImage={`${img}/thumbnail.png`}
+  heroImage={thumbnail}
   slug="unified-platform"
   accentColor="#1a1a2e"
   previousProject={{ title: 'Deposify', slug: 'deposify' }}
@@ -50,12 +59,12 @@ const img = '/images/projects/unified-platform';
         />
         <p class="pull-quote">"I didn't hand off a spec. I handed off a repo."</p>
         <FullWidthImage
-          src={`${img}/dashboard.png`}
+          src={dashboard}
           alt="Unified platform dashboard with natural language search bar and primary actions"
           caption="The unified entry point: a single search bar replacing over ten specialized forms"
         />
         <FullWidthImage
-          src={`${img}/case-list.png`}
+          src={caseList}
           alt="Unified case list view with map and filters"
           caption="Case list with geographic context, filters, and inline case preview"
         />
@@ -70,8 +79,8 @@ const img = '/images/projects/unified-platform';
           subtitle="The knowledge panel wasn't in any of the early concepts. It came from using the prototype and asking what would actually be useful to see alongside results. Investigators can already see the data; the prototype revealed they couldn't always interpret it quickly."
         />
         <div class="image-pair">
-          <img src={`${img}/search-results-phone.png`} alt="Phone number search results with Phone Intelligence knowledge panel" class="case-image" />
-          <img src={`${img}/search-results-property.png`} alt="Property search results with Item Trend Analysis knowledge panel" class="case-image" />
+          <Image src={searchResultsPhone} alt="Phone number search results with Phone Intelligence knowledge panel" class="case-image" widths={[600, 900, 1200]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" decoding="async" />
+          <Image src={searchResultsProperty} alt="Property search results with Item Trend Analysis knowledge panel" class="case-image" widths={[600, 900, 1200]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
@@ -84,7 +93,7 @@ const img = '/images/projects/unified-platform';
           subtitle="The earlier redesign introduced tabs to bring structure to what had been a wall of data. Unification expanded the data model enough to support a relationship graph - a visual way to explore connections between people, cases, phone numbers, and addresses. It turns the profile from a reference page into an investigative tool."
         />
         <FullWidthImage
-          src={`${img}/person-profile.png`}
+          src={personProfile}
           alt="Person profile with relationship graph visualization showing connections between people, cases, and shared data"
           caption="Person profile with relationship graph: connections mapped across cases, addresses, and phone numbers"
         />
@@ -106,8 +115,8 @@ const img = '/images/projects/unified-platform';
           </div>
         </div>
         <div class="image-pair">
-          <img src={`${img}/people.png`} alt="People page with ranked leads and person tracking" class="case-image" />
-          <img src={`${img}/property.png`} alt="Property page with ranked leads and item tracking" class="case-image" />
+          <Image src={people} alt="People page with ranked leads and person tracking" class="case-image" widths={[600, 900, 1200]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" decoding="async" />
+          <Image src={property} alt="Property page with ranked leads and item tracking" class="case-image" widths={[600, 900, 1200]} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" decoding="async" />
         </div>
       </div>
     </section>
@@ -120,7 +129,7 @@ const img = '/images/projects/unified-platform';
           subtitle="Case Builder is where the AI integration becomes tangible. Investigators upload sources - police reports, CDR records, victim statements - and the system surfaces potential suspects, NCIC matches, and confidence levels. From the same view, they can generate legal documents like property hold requests and search warrants. It turns case assembly from manual cross-referencing into an AI-assisted workflow."
         />
         <FullWidthImage
-          src={`${img}/case-builder.png`}
+          src={caseBuilder}
           alt="Case Builder with uploaded sources, AI analysis showing potential suspects and NCIC matches, and legal document generation"
           caption="Case Builder: source upload, AI-generated analysis, and legal document generation in one workspace"
         />

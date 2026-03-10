@@ -1,10 +1,23 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { getCollection } from 'astro:content';
 import BubbleHoverCard from './BubbleHoverCard.astro';
 
 const allProjects = (await getCollection('projects'))
   .filter((p) => !p.data.archived)
   .sort((a, b) => a.data.order - b.data.order);
+
+// Map slug -> processed image via import.meta.glob
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/projects/*/thumbnail.png',
+  { eager: true }
+);
+
+function getProjectImage(slug: string): ImageMetadata | undefined {
+  const key = `/src/assets/images/projects/${slug}/thumbnail.png`;
+  return imageModules[key]?.default;
+}
 
 // Bubble sizing config: all landscape 16:10, large for visibility
 const bubbleConfig = [
@@ -21,6 +34,7 @@ const bubbleConfig = [
     {allProjects.map((project, i) => {
       const config = bubbleConfig[i] || bubbleConfig[bubbleConfig.length - 1];
       const accentColor = project.data.accentColor || '#205d17';
+      const projectImage = getProjectImage(project.data.slug);
       return (
         <a
           href={`/projects/${project.data.slug}`}
@@ -43,14 +57,27 @@ const bubbleConfig = [
           `}
         >
           {project.data.featured && <span class="featured-badge">Featured</span>}
-          <img
-            src={project.data.thumbnail}
-            alt={project.data.title}
-            class="bubble-image"
-            loading="eager"
-            style={`object-position: ${project.data.thumbnailPosition};`}
-            transition:name={`project-${project.data.slug}`}
-          />
+          {projectImage ? (
+            <Image
+              src={projectImage}
+              alt={project.data.title}
+              class="bubble-image"
+              widths={[400, 600, 800]}
+              sizes="480px"
+              loading={project.data.featured ? 'eager' : 'lazy'}
+              decoding="async"
+              style={`object-position: ${project.data.thumbnailPosition || 'center'};`}
+              transition:name={`project-${project.data.slug}`}
+            />
+          ) : (
+            <img
+              src={project.data.thumbnail}
+              alt={project.data.title}
+              class="bubble-image"
+              loading="lazy"
+              style={`object-position: ${project.data.thumbnailPosition || 'center'};`}
+            />
+          )}
         </a>
       );
     })}
@@ -60,32 +87,48 @@ const bubbleConfig = [
 
   <!-- Mobile fallback: vertical stacked cards -->
   <div class="floating-mobile-fallback">
-    {allProjects.map((project) => (
-      <a href={`/projects/${project.data.slug}`} class="mobile-bubble-card">
-        <div class="mobile-bubble-image-wrapper">
-          {project.data.featured && <span class="featured-badge">Featured</span>}
-          <img
-            src={project.data.thumbnail}
-            alt={project.data.title}
-            class="mobile-bubble-image"
-            loading="lazy"
-            style={`object-position: ${project.data.thumbnailPosition};`}
-            transition:name={`project-${project.data.slug}`}
-          />
-        </div>
-        <div class="mobile-bubble-info">
-          {project.data.tags.length > 0 && (
-            <div class="mobile-bubble-tags">
-              {project.data.tags.map((tag) => (
-                <span class="mobile-tag">{tag}</span>
-              ))}
-            </div>
-          )}
-          <h3 class="mobile-bubble-title">{project.data.title}</h3>
-          <p class="mobile-bubble-desc">{project.data.description}</p>
-        </div>
-      </a>
-    ))}
+    {allProjects.map((project) => {
+      const projectImage = getProjectImage(project.data.slug);
+      return (
+        <a href={`/projects/${project.data.slug}`} class="mobile-bubble-card">
+          <div class="mobile-bubble-image-wrapper">
+            {project.data.featured && <span class="featured-badge">Featured</span>}
+            {projectImage ? (
+              <Image
+                src={projectImage}
+                alt={project.data.title}
+                class="mobile-bubble-image"
+                widths={[400, 600, 800]}
+                sizes="(max-width: 768px) 100vw, 600px"
+                loading="lazy"
+                decoding="async"
+                style={`object-position: ${project.data.thumbnailPosition || 'center'};`}
+                transition:name={`project-${project.data.slug}`}
+              />
+            ) : (
+              <img
+                src={project.data.thumbnail}
+                alt={project.data.title}
+                class="mobile-bubble-image"
+                loading="lazy"
+                style={`object-position: ${project.data.thumbnailPosition || 'center'};`}
+              />
+            )}
+          </div>
+          <div class="mobile-bubble-info">
+            {project.data.tags.length > 0 && (
+              <div class="mobile-bubble-tags">
+                {project.data.tags.map((tag) => (
+                  <span class="mobile-tag">{tag}</span>
+                ))}
+              </div>
+            )}
+            <h2 class="mobile-bubble-title">{project.data.title}</h2>
+            <p class="mobile-bubble-desc">{project.data.description}</p>
+          </div>
+        </a>
+      );
+    })}
   </div>
 </section>
 
@@ -132,7 +175,6 @@ const bubbleConfig = [
     cursor: pointer;
     text-decoration: none;
     display: block;
-    will-change: transform;
     z-index: 3;
     /* Layered shadow: neutral drop + colored ambient + inner highlight */
     box-shadow:
@@ -289,11 +331,9 @@ const bubbleConfig = [
 </style>
 
 <script>
-  import { FloatingEngine } from '../scripts/floating-engine';
+  let currentEngine: import('../scripts/floating-engine').FloatingEngine | null = null;
 
-  let currentEngine: FloatingEngine | null = null;
-
-  function init() {
+  async function init() {
     // Destroy previous engine if it exists (page transitions / resize)
     if (currentEngine) {
       currentEngine.destroy();
@@ -314,6 +354,7 @@ const bubbleConfig = [
 
     if (!hoverCard || bubbleEls.length === 0) return;
 
+    const { FloatingEngine } = await import('../scripts/floating-engine');
     currentEngine = new FloatingEngine(container, bubbleEls, hoverCard);
     currentEngine.start();
   }
@@ -330,11 +371,17 @@ const bubbleConfig = [
 
   // Re-init on resize crossing the mobile/desktop boundary
   let wasDesktop = window.innerWidth >= 768;
+  let floatResizeTicking = false;
   window.addEventListener('resize', () => {
-    const isDesktop = window.innerWidth >= 768;
-    if (isDesktop !== wasDesktop) {
-      wasDesktop = isDesktop;
-      init();
-    }
-  });
+    if (floatResizeTicking) return;
+    floatResizeTicking = true;
+    requestAnimationFrame(() => {
+      floatResizeTicking = false;
+      const isDesktop = window.innerWidth >= 768;
+      if (isDesktop !== wasDesktop) {
+        wasDesktop = isDesktop;
+        init();
+      }
+    });
+  }, { passive: true });
 </script>

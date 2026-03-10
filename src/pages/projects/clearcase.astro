@@ -5,14 +5,21 @@ import SectionHeading from '../../components/SectionHeading.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
 import FullWidthImage from '../../components/FullWidthImage.astro';
 
-const img = '/images/projects/clearcase';
+import thumbnail from '../../assets/images/projects/clearcase/thumbnail.png';
+import beforeCaseDetail from '../../assets/images/projects/clearcase/before-case-detail.png';
+import beforeExhibitDetail from '../../assets/images/projects/clearcase/before-exhibit-detail.png';
+import caseListImg from '../../assets/images/projects/clearcase/case-list.png';
+import caseDetailImg from '../../assets/images/projects/clearcase/case-detail.png';
+import exhibitDetailImg from '../../assets/images/projects/clearcase/exhibit-detail.png';
+import mobileViews from '../../assets/images/projects/clearcase/mobile-views.png';
+import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-flow.png';
 ---
 
 <CaseStudyLayout
   title="ClearCase"
   description="ClearCase is a fully automated cartridge case triage solution for crime gun investigations. The product worked technically, but it had been built to prove a concept, not to support how investigators work in practice. I led a full UX/UI redesign to fix that, and in the process uncovered a critical gap in the workflow."
   tags={['B2B SaaS', 'UX Audit', 'Responsive Web']}
-  heroImage={`${img}/thumbnail.png`}
+  heroImage={thumbnail}
   slug="clearcase"
   accentColor="#2c3e50"
   previousProject={{ title: 'Unifying an Investigative Platform', slug: 'unified-platform' }}
@@ -43,10 +50,12 @@ const img = '/images/projects/clearcase';
           subtitle="The existing web app had sparse layouts, minimal information hierarchy, and required too many clicks to reach key data. Investigators couldn't quickly assess a case or drill into exhibit details without navigating through unnecessary intermediary screens."
         />
         <BeforeAfter
-          beforeImage={`${img}/before-case-detail.png`}
-          afterImage={`${img}/before-exhibit-detail.png`}
+          beforeImage={beforeCaseDetail}
+          afterImage={beforeExhibitDetail}
           beforeLabel="Case Detail"
           afterLabel="Exhibit Detail"
+          beforeAlt="Original ClearCase case detail page with sparse layout"
+          afterAlt="Original ClearCase exhibit detail page requiring extra navigation"
         />
       </div>
     </section>
@@ -60,26 +69,26 @@ const img = '/images/projects/clearcase';
         />
 
         <FullWidthImage
-          src={`${img}/case-list.png`}
+          src={caseListImg}
           alt="Redesigned case list with searchable sidebar and geographic map view"
           caption="Case list: searchable sidebar with map view and case preview on select"
         />
 
         <div class="image-pair">
           <FullWidthImage
-            src={`${img}/case-detail.png`}
+            src={caseDetailImg}
             alt="Redesigned case detail showing analysis summary, firearm table, map, and exhibit cards"
             caption="Case detail: analysis summary, downloadable report, and exhibit views by firearm group"
           />
           <FullWidthImage
-            src={`${img}/exhibit-detail.png`}
+            src={exhibitDetailImg}
             alt="Redesigned exhibit detail with photos, metadata, map location, and notes timeline"
             caption="Exhibit detail: photos, metadata, location, and investigation notes in one view"
           />
         </div>
 
         <FullWidthImage
-          src={`${img}/mobile-views.png`}
+          src={mobileViews}
           alt="ClearCase responsive mobile views showing case map, exhibit detail, and case detail"
           caption="Fully responsive across devices, built on the LeadsOnline design system"
         />
@@ -108,7 +117,7 @@ const img = '/images/projects/clearcase';
           subtitle="In collaboration with engineering, I designed a flow that bridges web and mobile: investigators initiate exhibit creation from the web, scan cartridge cases using the phone's NFC reader via QR code pairing, and the exhibit list updates in real time, all without storing case data on the device. This workflow is now live in production."
         />
         <FullWidthImage
-          src={`${img}/add-exhibit-flow.png`}
+          src={addExhibitFlow}
           alt="End-to-end exhibit creation flow showing web initiation, QR code pairing, mobile NFC scanning, and real-time exhibit list updates"
           caption="The full add-exhibit flow: web initiation, QR pairing, NFC scan on device, real-time sync back to case detail"
         />

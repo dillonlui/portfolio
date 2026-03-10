@@ -26,8 +26,15 @@ export function initButtonSheen() {
     if (btn.dataset.sheenInit) return;
     btn.dataset.sheenInit = '1';
 
+    let cachedRect: DOMRect | null = null;
+
+    btn.addEventListener('mouseenter', () => {
+      cachedRect = btn.getBoundingClientRect();
+      btn.classList.add('sheen-active');
+    });
+
     btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
+      const rect = cachedRect || btn.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
@@ -52,11 +59,8 @@ export function initButtonSheen() {
       });
     });
 
-    btn.addEventListener('mouseenter', () => {
-      btn.classList.add('sheen-active');
-    });
-
     btn.addEventListener('mouseleave', () => {
+      cachedRect = null;
       btn.classList.remove('sheen-active');
 
       // Spring back to origin
@@ -84,9 +88,14 @@ export function initAvatarTilt() {
   wrapper.dataset.tiltInit = '1';
 
   const maxRotate = 8;
+  let cachedWrapperRect: DOMRect | null = null;
+
+  wrapper.addEventListener('mouseenter', () => {
+    cachedWrapperRect = wrapper.getBoundingClientRect();
+  });
 
   wrapper.addEventListener('mousemove', (e) => {
-    const rect = wrapper.getBoundingClientRect();
+    const rect = cachedWrapperRect || wrapper.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width; // 0 to 1
     const y = (e.clientY - rect.top) / rect.height;
 
@@ -108,6 +117,7 @@ export function initAvatarTilt() {
   });
 
   wrapper.addEventListener('mouseleave', () => {
+    cachedWrapperRect = null;
     gsap.to(img, {
       rotateX: 0,
       rotateY: 0,

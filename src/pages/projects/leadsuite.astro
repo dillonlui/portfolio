@@ -5,14 +5,20 @@ import SectionHeading from '../../components/SectionHeading.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
 import FullWidthImage from '../../components/FullWidthImage.astro';
 
-const img = '/images/projects/leadsuite';
+import thumbnail from '../../assets/images/projects/leadsuite/thumbnail.png';
+import personPageOld from '../../assets/images/projects/leadsuite/Person-page-old.png';
+import personProfileNew from '../../assets/images/projects/leadsuite/person-profile-new.png';
+import caseDetail from '../../assets/images/projects/leadsuite/case-detail.png';
+import caseDetailTimelineMap from '../../assets/images/projects/leadsuite/case-detail-timeline-map.png';
+import leadReviewPerson from '../../assets/images/projects/leadsuite/lead-review-person.png';
+import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashboard-property-panel.png';
 ---
 
 <CaseStudyLayout
   title="LeadSuite"
   description="LeadSuite is the flagship product at LeadsOnline, a B2B SaaS platform used by law enforcement to work cases and surface insights. I led the redesign of the core person profile and case detail experience, turning an information-dense legacy interface into a structured, scalable investigative tool."
   tags={['B2B SaaS', 'Law Enforcement', 'Information Architecture']}
-  heroImage={`${img}/thumbnail.png`}
+  heroImage={thumbnail}
   slug="leadsuite"
   accentColor="#1c3557"
   previousProject={{ title: 'GriefShare', slug: 'griefshare' }}
@@ -64,10 +70,12 @@ const img = '/images/projects/leadsuite';
           subtitle="The redesign introduces a tabbed structure - Cases, Associates, Activity Log, and a new 'Deep Background' tab that consolidates public records, criminal history, and other investigative data sources into one view. Each tab gives investigators a direct path to what they need instead of forcing them to scan the entire page."
         />
         <BeforeAfter
-          beforeImage={`${img}/Person-page-old.png`}
-          afterImage={`${img}/person-profile-new.png`}
+          beforeImage={personPageOld}
+          afterImage={personProfileNew}
           beforeLabel="Before"
           afterLabel="After"
+          beforeAlt="Original LeadSuite person page with flat layout"
+          afterAlt="Redesigned person profile with tabbed navigation and organized sections"
         />
         <p class="pull-quote">The redesigned person profile now drives over 50% of all traffic in the app.</p>
       </div>
@@ -81,7 +89,7 @@ const img = '/images/projects/leadsuite';
           subtitle="The case detail page is where investigators spend most of their time. I restructured it around a vertical navigation with distinct views: an overview with the case summary and map, a timeline and map view for spatial-temporal analysis, and an evidence tab. Each view serves a different mode of investigative thinking without cluttering the others."
         />
         <FullWidthImage
-          src={`${img}/case-detail.png`}
+          src={caseDetail}
           alt="Redesigned case detail overview showing case summary, leads cards, and map"
           caption="Case detail overview: summary narrative, leads cards, and geographic context in one view"
         />
@@ -96,7 +104,7 @@ const img = '/images/projects/leadsuite';
           subtitle="I redesigned the timeline as a full-width horizontal view, synced to the map, so investigators get two representations of the same facts for two different ways of thinking through a case. Events scroll chronologically left to right, and selecting one highlights its location on the map below."
         />
         <FullWidthImage
-          src={`${img}/case-detail-timeline-map.png`}
+          src={caseDetailTimelineMap}
           alt="Case detail timeline and map view with narrative events synced to geographic locations"
           caption="Timeline + Map: narrative events synced to geographic locations for spatial-temporal analysis"
         />
@@ -111,7 +119,7 @@ const img = '/images/projects/leadsuite';
           subtitle="Leads is a net new feature, built in close collaboration with one of the developers. He brought the concept, and we workshopped it together until it became a focused workspace where investigators could track threads tied to a case, separate from the raw data views. It's designed to feel like a working surface, not a report."
         />
         <FullWidthImage
-          src={`${img}/lead-review-person.png`}
+          src={leadReviewPerson}
           alt="Lead review modal showing a person of interest with investigative leads and intel connections"
           caption="Lead review: surfacing proximity, timing, and cross-case connections for a person of interest"
         />
@@ -126,7 +134,7 @@ const img = '/images/projects/leadsuite';
           subtitle='The redesign launched first to beta users, then expanded to a controlled subset of existing LeadsOnline customers, with a full rollout weeks away. Alongside the core redesign, two new features are in active design: a Dashboard surfacing personalized investigative activity and trend detection, and an AI-powered search. The vision for where these features lead is covered in <a href="/projects/unified-platform">Unifying an Investigative Platform</a>.'
         />
         <FullWidthImage
-          src={`${img}/dashboard-property-panel.png`}
+          src={dashboardPropertyPanel}
           alt="LeadSuite dashboard with analytics, trends, and property intelligence panel"
           caption="Dashboard with property intelligence panel: personalized activity, analytics, and trend detection"
         />

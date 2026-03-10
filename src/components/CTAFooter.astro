@@ -6,7 +6,7 @@ const { class: className } = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 
-<section class:list={['cta-footer', className]}>
+<footer class:list={['cta-footer', className]}>
   <div class="cta-dark">
     <div class="container cta-content">
       <h2 class="cta-heading">Let's work together,<br />drop me a line.</h2>
@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
       <p>&copy; {currentYear} Dillon Lui</p>
     </div>
   </div>
-</section>
+</footer>
 
 <style>
   .cta-footer {

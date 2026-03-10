@@ -8,7 +8,7 @@ test.describe('About page', () => {
   test('profile image loads', async ({ page }) => {
     const img = page.locator('.profile-image');
     await expect(img).toBeVisible();
-    await expect(img).toHaveAttribute('src', '/images/profile/dillon.jpg');
+    await expect(img).toHaveAttribute('src', /((\/_astro\/dillon\..+\.(webp|avif|jpg))|(\/_image\?href=.*dillon))/)
   });
 
   test('experience timeline has cards', async ({ page }) => {

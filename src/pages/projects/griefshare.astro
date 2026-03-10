@@ -5,14 +5,23 @@ import InsightCallout from '../../components/InsightCallout.astro';
 import FullWidthImage from '../../components/FullWidthImage.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 
-const img = '/images/projects/griefshare';
+import header from '../../assets/images/projects/griefshare/header.png';
+import before from '../../assets/images/projects/griefshare/before.png';
+import after from '../../assets/images/projects/griefshare/after.png';
+import protopersona from '../../assets/images/projects/griefshare/protopersona.png';
+import designaudit from '../../assets/images/projects/griefshare/designaudit.png';
+import interviews from '../../assets/images/projects/griefshare/interviews.png';
+import wireframes from '../../assets/images/projects/griefshare/wireframes.png';
+import mockup1 from '../../assets/images/projects/griefshare/mockup1.png';
+import mapView from '../../assets/images/projects/griefshare/map-view.png';
+import cardView from '../../assets/images/projects/griefshare/card-view.png';
 ---
 
 <CaseStudyLayout
   title="GriefShare"
   description="GriefShare's Find a Group page was the front door to everything. I redesigned it from the ground up and, in the process, introduced the first formal UX research practice at Church Initiative."
   tags={['Online Search', 'UX Research', 'Responsive Web']}
-  heroImage={`${img}/header.png`}
+  heroImage={header}
   slug="griefshare"
   previousProject={{ title: 'ClearCase', slug: 'clearcase' }}
   nextProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
@@ -34,8 +43,10 @@ const img = '/images/projects/griefshare';
     <section class="case-section section">
       <div class="container">
         <BeforeAfter
-          beforeImage={`${img}/before.png`}
-          afterImage={`${img}/after.png`}
+          beforeImage={before}
+          afterImage={after}
+          beforeAlt="Original GriefShare participant portal design"
+          afterAlt="Redesigned GriefShare participant portal with improved journey tracking"
         />
       </div>
     </section>
@@ -52,19 +63,19 @@ const img = '/images/projects/griefshare';
           <div class="research-item">
             <h3>Proto-persona</h3>
             <p>Before diving into the redesign, I needed a deeper understanding of who was using Find a Group and why. I developed four proto-personas for different user types. The most relevant for this project was the Pre-Registrant: someone in grief, evaluating options, trying to find a group they could trust before committing.</p>
-            <FullWidthImage src={`${img}/protopersona.png`} alt="Proto-persona for the Pre-Registrant user type" />
+            <FullWidthImage src={protopersona} alt="Proto-persona for the Pre-Registrant user type" />
           </div>
 
           <div class="research-item">
             <h3>Design Audit</h3>
             <p>Before starting the redesign I needed to understand what already existed. I performed a design audit of the current Find a Group page that included an inventory of on-page components and an accessibility check, surfacing gaps in contrast, hierarchy, and responsive behavior.</p>
-            <FullWidthImage src={`${img}/designaudit.png`} alt="Design audit of the Find a Group page" />
+            <FullWidthImage src={designaudit} alt="Design audit of the Find a Group page" />
           </div>
 
           <div class="research-item">
             <h3>Qualitative Interviews</h3>
             <p>Recruiting participants required careful thought. GriefShare serves people processing real loss, so I spoke only with participants who had completed a group within the past year: close enough to remember the experience clearly, but far enough along not to disrupt their grief process. I sent an initial feedback form to surface interested participants, then scheduled batches of interviews from that list. Seven interviews led into ongoing weekly discovery conversations.</p>
-            <FullWidthImage src={`${img}/interviews.png`} alt="Interview insights and criteria ranking" />
+            <FullWidthImage src={interviews} alt="Interview insights and criteria ranking" />
           </div>
         </div>
       </div>
@@ -95,7 +106,7 @@ const img = '/images/projects/griefshare';
     <section class="case-section section" id="ideate">
       <div class="container">
         <SectionHeading title="Ideate" />
-        <FullWidthImage src={`${img}/wireframes.png`} alt="Wireframe explorations for the Find a Group redesign" />
+        <FullWidthImage src={wireframes} alt="Wireframe explorations for the Find a Group redesign" />
       </div>
     </section>
 
@@ -107,7 +118,7 @@ const img = '/images/projects/griefshare';
           subtitle="The redesign prioritized changes with the most immediate impact: reordered filters, contextual tags, and accessibility fixes throughout. The map view was designed and validated with users but held back from the initial release given development bandwidth at a non-profit, where it remains the direction to build toward."
         />
         <div class="prototype-images">
-          <FullWidthImage src={`${img}/mockup1.png`} alt="High-fidelity mockup of the redesigned Find a Group page" />
+          <FullWidthImage src={mockup1} alt="High-fidelity mockup of the redesigned Find a Group page" />
         </div>
       </div>
     </section>
@@ -119,12 +130,12 @@ const img = '/images/projects/griefshare';
           <div class="solution-item">
             <h3>Immersive Map</h3>
             <p>Designed and validated with users as a way to understand proximity visually rather than reading it. Didn't ship in the initial release but remains the direction to build toward.</p>
-            <FullWidthImage src={`${img}/map-view.png`} alt="Immersive map view showing nearby groups" />
+            <FullWidthImage src={mapView} alt="Immersive map view showing nearby groups" />
           </div>
           <div class="solution-item">
             <h3>Card View</h3>
             <p>The baseline experience, rebuilt with improved hierarchy, reordered filters based on research priorities, and contextual tags that surface the details most relevant to someone choosing a group.</p>
-            <FullWidthImage src={`${img}/card-view.png`} alt="Card-only view of search results" />
+            <FullWidthImage src={cardView} alt="Card-only view of search results" />
           </div>
         </div>
       </div>

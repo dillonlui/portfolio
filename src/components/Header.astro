@@ -29,7 +29,7 @@ const isWorkActive = currentPath.startsWith('/projects');
 <header class="header">
   <nav class="nav container">
     <a href="/" class="logo">
-      <img src="/favicon.ico" alt="DL" class="logo-img" />
+      <img src="/favicon.ico" alt="DL" class="logo-img" width="30" height="30" />
     </a>
 
     <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
@@ -205,7 +205,8 @@ const isWorkActive = currentPath.startsWith('/projects');
     transform: translateX(-50%) translateY(-4px);
   }
 
-  .nav-item--dropdown:hover .dropdown-menu {
+  .nav-item--dropdown:hover .dropdown-menu,
+  .dropdown-menu.is-open {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
@@ -384,27 +385,62 @@ const isWorkActive = currentPath.startsWith('/projects');
   function initHeader() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
-    const dropdownTrigger = document.querySelector('.dropdown-trigger');
+    const dropdownTrigger = document.querySelector<HTMLButtonElement>('.dropdown-trigger');
     const dropdownMenu = document.querySelector('.dropdown-menu');
+    const mainContent = document.getElementById('main-content');
 
     function closeMenu() {
       menuBtn?.setAttribute('aria-expanded', 'false');
       navLinks?.classList.remove('is-open');
+      mainContent?.removeAttribute('inert');
+    }
+
+    function openMenu() {
+      menuBtn?.setAttribute('aria-expanded', 'true');
+      navLinks?.classList.add('is-open');
+      mainContent?.setAttribute('inert', '');
     }
 
     menuBtn?.addEventListener('click', () => {
       const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
-      menuBtn.setAttribute('aria-expanded', (!isOpen).toString());
-      navLinks?.classList.toggle('is-open');
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
 
     // Mobile: toggle dropdown on tap
+    // Desktop: toggle dropdown on click for keyboard accessibility
     dropdownTrigger?.addEventListener('click', () => {
-      const isMobile = window.innerWidth < 768;
-      if (isMobile) {
-        const isExpanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
-        dropdownTrigger.setAttribute('aria-expanded', (!isExpanded).toString());
-        dropdownMenu?.classList.toggle('is-open');
+      const isExpanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
+      dropdownTrigger.setAttribute('aria-expanded', (!isExpanded).toString());
+      dropdownMenu?.classList.toggle('is-open');
+    });
+
+    // Desktop: close dropdown on Escape or when focus leaves
+    dropdownTrigger?.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dropdownTrigger.setAttribute('aria-expanded', 'false');
+        dropdownMenu?.classList.remove('is-open');
+      }
+    });
+
+    dropdownMenu?.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dropdownTrigger?.setAttribute('aria-expanded', 'false');
+        dropdownMenu.classList.remove('is-open');
+        dropdownTrigger?.focus();
+      }
+    });
+
+    // Close dropdown when focus leaves the dropdown area
+    const dropdownParent = document.querySelector('.nav-item--dropdown');
+    dropdownParent?.addEventListener('focusout', (e) => {
+      const relatedTarget = (e as FocusEvent).relatedTarget as HTMLElement;
+      if (!dropdownParent.contains(relatedTarget)) {
+        dropdownTrigger?.setAttribute('aria-expanded', 'false');
+        dropdownMenu?.classList.remove('is-open');
       }
     });
 
@@ -418,6 +454,11 @@ const isWorkActive = currentPath.startsWith('/projects');
       const target = e.target as HTMLElement;
       if (!target.closest('.nav') && navLinks?.classList.contains('is-open')) {
         closeMenu();
+      }
+      // Desktop: close dropdown when clicking outside
+      if (!target.closest('.nav-item--dropdown')) {
+        dropdownTrigger?.setAttribute('aria-expanded', 'false');
+        dropdownMenu?.classList.remove('is-open');
       }
     });
 

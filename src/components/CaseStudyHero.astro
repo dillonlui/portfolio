@@ -1,9 +1,12 @@
 ---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   title: string;
   description: string;
   tags: string[];
-  heroImage: string;
+  heroImage: ImageMetadata;
   logoImage?: string;
   slug?: string;
   accentColor?: string;
@@ -28,7 +31,30 @@ const { title, description, tags, heroImage, logoImage, slug, accentColor = '#1a
       <p class="hero-description">{description}</p>
     </div>
     <div class="hero-image-wrapper">
-      <img src={heroImage} alt={title} class="hero-image" loading="eager" transition:name={slug ? `project-${slug}` : undefined} />
+      {slug ? (
+        <Picture
+          src={heroImage}
+          alt={title}
+          widths={[600, 900, 1200, 1600]}
+          formats={['avif', 'webp']}
+          sizes="(max-width: 768px) 100vw, 1200px"
+          loading="eager"
+          fetchpriority="high"
+          class="hero-image"
+          transition:name={`project-${slug}`}
+        />
+      ) : (
+        <Picture
+          src={heroImage}
+          alt={title}
+          widths={[600, 900, 1200, 1600]}
+          formats={['avif', 'webp']}
+          sizes="(max-width: 768px) 100vw, 1200px"
+          loading="eager"
+          fetchpriority="high"
+          class="hero-image"
+        />
+      )}
     </div>
   </div>
 </section>
