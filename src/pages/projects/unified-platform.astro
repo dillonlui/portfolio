@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import AtAGlance from '../../components/AtAGlance.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import FullWidthImage from '../../components/FullWidthImage.astro';
@@ -31,6 +32,24 @@ import caseBuilder from '../../assets/images/projects/unified-platform/case-buil
     <div class="container">
       <p class="disclaimer">*This work involves sensitive law-enforcement investigations, so I can't share full details publicly. These visuals are representative of the live product, and I'm glad to walk through the complete case study and design decisions in conversation.*</p>
     </div>
+
+    <!-- At a Glance -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="At a Glance" />
+        <AtAGlance
+          role="Lead Product Designer"
+          team="1 PM, 1 Tech Lead, 6 Engineers, 1 QA"
+          timeline="2-week concept sprint, now in active development"
+          outcomes={[
+            { label: 'Company-wide shift', text: 'Prototype validated across multiple user demo rounds, leading leadership to repurpose an entire product team toward this platform.' },
+            { label: '2 teams adopting the workflow', text: 'Prototype-driven design process now being adopted by 2 product teams, with PMs requesting workshops to learn the approach.' },
+            { label: 'Prototype became the foundation', text: 'Engineering is building the production app directly from the prototype codebase, compressing handoff from weeks to days.' },
+            { label: 'Overwhelmingly positive user demos', text: 'Investigators responded positively to the unified search and case-building workflows across multiple demo rounds.' },
+          ]}
+        />
+      </div>
+    </section>
 
     <!-- Challenge -->
     <section class="case-section section">
@@ -217,18 +236,6 @@ import caseBuilder from '../../assets/images/projects/unified-platform/case-buil
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
     margin-bottom: 0;
-  }
-
-  .outcomes-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  @media (min-width: 768px) {
-    .outcomes-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 
   .case-image {

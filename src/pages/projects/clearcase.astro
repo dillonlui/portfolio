@@ -1,5 +1,6 @@
 ---
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import AtAGlance from '../../components/AtAGlance.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
@@ -30,6 +31,23 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
     <div class="container">
       <p class="disclaimer">*This work involves sensitive law-enforcement investigations, so I can't share full details publicly. These visuals are representative of the live product, and I'm glad to walk through the complete case study and design decisions in conversation.*</p>
     </div>
+
+    <!-- At a Glance -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="At a Glance" />
+        <AtAGlance
+          role="Lead Product Designer"
+          team="Director of Product (Ballistics), 2 Product Analysts, Director of Software Dev, 1 Senior Engineer, 2 Engineers, 2 QA"
+          timeline="5 months, design to launch"
+          outcomes={[
+            { label: 'New workflow, not just a redesign', text: 'Designed and shipped a web-based exhibit creation flow that didn\'t exist before, allowing lab techs to complete their full workflow on desktop for the first time.' },
+            { label: 'Mobile-to-web unlock', text: 'Lab technicians can now manage their entire workflow through the web portal instead of being limited to a mobile app.' },
+            { label: 'Live in production', text: 'Full redesign including responsive layout, design system integration, and new exhibit creation flow is shipped and in active use.' },
+          ]}
+        />
+      </div>
+    </section>
 
     <!-- Challenge -->
     <section class="case-section section">
@@ -152,6 +170,7 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
   .image-pair {
     margin-bottom: var(--space-3xl);
   }
+
 </style>
 
 <script>

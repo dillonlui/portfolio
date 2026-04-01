@@ -3,6 +3,7 @@ import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
 import FeatureCard from '../../components/FeatureCard.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
+import AtAGlance from '../../components/AtAGlance.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 
 import headerImg from '../../assets/images/projects/deposify/header.png';
@@ -26,6 +27,23 @@ import fundsImg from '../../assets/images/projects/deposify/funds.png';
   nextProject={{ title: 'Unifying an Investigative Platform', slug: 'unified-platform' }}
 >
   <div class="case-study-body">
+
+    <!-- At a Glance -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="At a Glance" />
+        <AtAGlance
+          role="Product Designer"
+          team="1 PM, Director of Brand & Design, 3 Engineers"
+          timeline="~4 months"
+          outcomes={[
+            { label: 'Acquired twice in 2022', text: 'Deposify was acquired twice, ultimately by Rhino in a multimillion-dollar deal. The redesign mockups were used as a primary pitch asset.' },
+            { label: 'One product became two', text: 'Split a shared interface into two distinct experiences: an aggressively simple renter flow and a full operational platform for property managers.' },
+            { label: 'Design sold the vision', text: 'The client used the redesign mockups to pitch buyers without telling us, citing the designs as the main selling point alongside the technology.' },
+          ]}
+        />
+      </div>
+    </section>
 
     <!-- Challenge -->
     <section class="case-section section">

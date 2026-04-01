@@ -18,6 +18,7 @@ interface Props {
   accentColor?: string;
   previousProject?: { title: string; slug: string };
   nextProject?: { title: string; slug: string };
+  noindex?: boolean;
 }
 
 const {
@@ -30,10 +31,11 @@ const {
   accentColor = '#1a1a1a',
   previousProject,
   nextProject,
+  noindex = false,
 } = Astro.props;
 ---
 
-<BaseLayout title={`${title} Case Study - Dillon Lui`} description={description} image={heroImage.src}>
+<BaseLayout title={`${title} Case Study - Dillon Lui`} description={description} image={heroImage.src} noindex={noindex}>
   <ScrollProgress />
   <CaseStudyHero
     title={title}

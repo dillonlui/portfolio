@@ -1,5 +1,6 @@
 ---
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import AtAGlance from '../../components/AtAGlance.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
@@ -29,6 +30,23 @@ import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashb
     <div class="container">
       <p class="disclaimer">*This work involves sensitive law-enforcement investigations, so I can't share full details publicly. These visuals are representative of the live product, and I'm glad to walk through the complete case study and design decisions in conversation.*</p>
     </div>
+
+    <!-- At a Glance -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="At a Glance" />
+        <AtAGlance
+          role="Lead Product Designer"
+          team="1 PM, 1 Product Analyst, 1 Tech Lead, 5 Engineers, 1 QA"
+          timeline="Ongoing since Dec 2024"
+          outcomes={[
+            { label: '50%+ of platform traffic', text: 'The redesigned person profile now drives over half of all traffic in the app, validating the new information architecture.' },
+            { label: 'Scalable by design', text: 'Tabbed architecture has already absorbed 2 new data source integrations without any layout changes.' },
+            { label: 'From vague brief to full IA rethink', text: 'Translated a directional PM ask ("make it easier to use") into a complete information architecture redesign.' },
+          ]}
+        />
+      </div>
+    </section>
 
     <!-- Challenge -->
     <section class="case-section section">

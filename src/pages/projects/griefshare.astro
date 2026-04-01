@@ -1,6 +1,7 @@
 ---
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
 import BeforeAfter from '../../components/BeforeAfter.astro';
+import AtAGlance from '../../components/AtAGlance.astro';
 import InsightCallout from '../../components/InsightCallout.astro';
 import FullWidthImage from '../../components/FullWidthImage.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
@@ -27,6 +28,23 @@ import cardView from '../../assets/images/projects/griefshare/card-view.png';
   nextProject={{ title: 'LeadSuite', slug: 'leadsuite' }}
 >
   <div class="case-study-body">
+
+    <!-- At a Glance -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading title="At a Glance" />
+        <AtAGlance
+          role="Lead Product Designer"
+          team="1 PM, 3 Engineers"
+          timeline="~3 months"
+          outcomes={[
+            { label: 'First UX research practice', text: 'Introduced the organization\'s first formal discovery practice with structured interviews, proto-personas, and weekly user conversations.' },
+            { label: 'Research that outlived the project', text: 'The weekly user conversation rhythm continued as long as I was in the role, changing how the org thought about its product.' },
+            { label: 'Ship what\'s possible, keep the vision', text: 'Prioritized high-impact changes for immediate release while validating a full map-view experience as the future direction.' },
+          ]}
+        />
+      </div>
+    </section>
 
     <!-- Challenge -->
     <section class="case-section section">

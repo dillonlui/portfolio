@@ -7,9 +7,10 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  noindex?: boolean;
 }
 
-const { title, description = 'Portfolio of design and development work', image } = Astro.props;
+const { title, description = 'Portfolio of design and development work', image, noindex = false } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
 ---
@@ -20,7 +21,8 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl.href} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {!noindex && <link rel="canonical" href={canonicalUrl.href} />}
     <link rel="icon" href="/favicon.ico" />
     <link rel="preload" href="/fonts/sansita-one-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/archivo-black-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -106,10 +108,12 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     border-color: var(--color-accent);
   }
 
-  /* Hide default cursor when custom cursor is active (class added by JS, cross-browser) */
-  body.custom-cursor-active,
-  body.custom-cursor-active * {
-    cursor: none !important;
+  /* Hide default cursor when custom cursor is active (desktop with fine pointer only) */
+  @media (min-width: 768px) and (pointer: fine) {
+    body.custom-cursor-active,
+    body.custom-cursor-active * {
+      cursor: none !important;
+    }
   }
 
   /* Don't show custom cursor on mobile/touch */

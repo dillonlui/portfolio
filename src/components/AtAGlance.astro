@@ -1,0 +1,105 @@
+---
+interface Props {
+  role: string;
+  team: string;
+  timeline: string;
+  outcomes: { label: string; text: string }[];
+}
+
+const { role, team, timeline, outcomes } = Astro.props;
+---
+
+<div class="at-a-glance">
+  <div class="glance-meta">
+    <div class="glance-meta-item">
+      <span class="glance-label">Role</span>
+      <span class="glance-value">{role}</span>
+    </div>
+    <div class="glance-meta-item">
+      <span class="glance-label">Team</span>
+      <span class="glance-value">{team}</span>
+    </div>
+    <div class="glance-meta-item">
+      <span class="glance-label">Timeline</span>
+      <span class="glance-value">{timeline}</span>
+    </div>
+  </div>
+  <div class="glance-outcomes">
+    {outcomes.map((outcome) => (
+      <div class="glance-outcome">
+        <span class="glance-outcome-label">{outcome.label}</span>
+        <span class="glance-outcome-text">{outcome.text}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .at-a-glance {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--color-project-accent, var(--color-accent));
+    padding: var(--space-xl);
+  }
+
+  .glance-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .glance-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+  }
+
+  .glance-label {
+    font-family: var(--font-heading);
+    font-size: var(--text-caption);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+  }
+
+  .glance-value {
+    font-size: var(--text-body);
+    color: var(--color-text);
+    line-height: var(--leading-normal);
+  }
+
+  .glance-outcomes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .glance-outcome {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+  }
+
+  .glance-outcome-label {
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .glance-outcome-text {
+    font-size: var(--text-body-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  @media (min-width: 768px) {
+    .at-a-glance {
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-2xl);
+    }
+  }
+</style>
