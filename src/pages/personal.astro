@@ -222,8 +222,12 @@ const newsImages = [
     padding-bottom: var(--space-xl);
   }
 
-  .project-section + .project-section {
-    border-top: 1px solid var(--color-border);
+  .project-section + .project-section > .container::before {
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: var(--color-border);
+    margin-bottom: var(--space-xl);
   }
 
   .project-title {
