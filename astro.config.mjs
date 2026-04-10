@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/projects/rmc') && !page.includes('/projects/vybe'),
+      filter: (page) => !page.includes('/projects/rmc') && !page.includes('/projects/vybe') && !page.includes('/sponsorship'),
     }),
   ],
   site: 'https://dillonlui.com',
