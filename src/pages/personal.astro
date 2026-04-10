@@ -81,6 +81,7 @@ const newsImages = [
         </div>
         <div class="glance-description">
           <p>A lot of churches and non-profits are stuck on aging platforms that nobody on staff knows how to update. I volunteer to rebuild them on a modern stack that non-technical teams can actually maintain. FICCC needed a bilingual site (English and Chinese) with CMS-driven content, form handling, and accessibility built in. The site is live and actively used by the church community.</p>
+          <p><a href="/sponsorship" class="sponsorship-link">Learn more about my non-profit web sponsorship program</a></p>
         </div>
       </div>
     </div>
@@ -318,6 +319,18 @@ const newsImages = [
     font-size: var(--text-body);
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
+  }
+
+  .sponsorship-link {
+    color: var(--color-accent);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .sponsorship-link:hover {
+    color: var(--color-accent-hover, var(--color-accent));
+    text-decoration: underline;
   }
 
   @media (min-width: 768px) {
