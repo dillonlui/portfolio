@@ -190,7 +190,7 @@ const isWorkActive = currentPath.startsWith('/projects');
   /* Dropdown menu */
   .dropdown-menu {
     position: absolute;
-    top: calc(100% + var(--space-sm));
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--color-background);
@@ -200,10 +200,22 @@ const isWorkActive = currentPath.startsWith('/projects');
     list-style: none;
     min-width: 220px;
     padding: var(--space-sm) 0;
+    padding-top: calc(var(--space-sm) + var(--space-sm));
+    margin-top: var(--space-sm);
     opacity: 0;
     visibility: hidden;
     transition: opacity var(--transition-fast), visibility var(--transition-fast), transform var(--transition-fast);
     transform: translateX(-50%) translateY(-4px);
+  }
+
+  /* Bridge the gap between trigger and dropdown to prevent hover loss */
+  .nav-item--dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: var(--space-sm);
   }
 
   .nav-item--dropdown:hover .dropdown-menu,
