@@ -4,9 +4,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CTAFooter from '../components/CTAFooter.astro';
 
 import ficccHomepage from '../assets/images/projects/personal/ficcc-homepage.png';
+import ficccAbout from '../assets/images/projects/personal/ficcc-about.png';
+import ficccVisit from '../assets/images/projects/personal/ficcc-visit.png';
 import barbellDashboard from '../assets/images/projects/personal/barbell-dashboard.png';
+import barbellSession from '../assets/images/projects/personal/barbell-session.png';
 import barbellTrends from '../assets/images/projects/personal/barbell-trends.png';
+import barbellCalendar from '../assets/images/projects/personal/barbell-calendar.png';
 import newsBriefingHomepage from '../assets/images/projects/personal/news-briefing-homepage.png';
+import newsBriefingStory from '../assets/images/projects/personal/news-briefing-story.png';
+
+const ficccImages = [
+  { src: ficccHomepage, alt: 'FICCC homepage with bilingual navigation, hero image, and service times' },
+  { src: ficccAbout, alt: 'FICCC about page showing church history timeline and community stats' },
+  { src: ficccVisit, alt: 'FICCC visit page with Sunday schedule and directions' },
+];
+
+const barbellImages = [
+  { src: barbellDashboard, alt: 'Barbell app dashboard showing today\'s training plan with lifts and weights' },
+  { src: barbellSession, alt: 'Active workout session showing squat warm-up sets and working sets' },
+  { src: barbellTrends, alt: 'Trends view with bench press progression chart over time' },
+  { src: barbellCalendar, alt: 'History calendar showing workout days marked in April 2026' },
+];
+
+const newsImages = [
+  { src: newsBriefingHomepage, alt: 'News Briefing daily edition with clustered story cards and topic filters' },
+  { src: newsBriefingStory, alt: 'Story detail page showing AI-generated summary, key facts, and source attribution' },
+];
 ---
 
 <BaseLayout title="Personal Projects - Dillon Lui" description="Side projects I've built for fun and impact outside of my day job, from non-profit web sponsorship to AI-powered news briefings.">
@@ -19,86 +42,167 @@ import newsBriefingHomepage from '../assets/images/projects/personal/news-briefi
     </div>
   </section>
 
+  <!-- FICCC -->
   <section class="project-section section fade-in">
-    <div class="container project-grid">
-      <div class="project-text">
-        <h2 class="project-title">Non-profit Web Sponsorship</h2>
-        <p class="project-summary">Rebuilding outdated church and non-profit websites on modern, maintainable stacks.</p>
-        <p class="project-tech">Astro, Sanity CMS, Vercel - Design, development, content modeling</p>
-        <p class="project-body">
-          A lot of churches and non-profits are stuck on aging platforms that nobody on staff knows how to update. I volunteer to rebuild them on a modern stack that non-technical teams can actually maintain. First Ithaca Chinese Christian Church needed a bilingual site (English and Chinese) with CMS-driven content, form handling, and accessibility built in. The site is live and actively used by the church community.
-        </p>
-        <p class="project-partner">Partner: First Ithaca Chinese Christian Church</p>
-      </div>
-      <div class="project-image">
-        <Image
-          src={ficccHomepage}
-          alt="FICCC website homepage showing bilingual navigation, hero section, and service times"
-          class="screenshot"
-          widths={[400, 600, 800]}
-          sizes="(max-width: 768px) 100vw, 45vw"
-          loading="eager"
-          decoding="async"
-        />
-      </div>
-    </div>
-  </section>
+    <div class="container">
+      <h2 class="project-title">Non-profit Web Sponsorship</h2>
+      <p class="project-summary">Rebuilding outdated church and non-profit websites on modern, maintainable stacks.</p>
 
-  <section class="project-section project-section--reversed section fade-in">
-    <div class="container project-grid">
-      <div class="project-text">
-        <h2 class="project-title">Barbell - Weightlifting Tracker</h2>
-        <p class="project-summary">A focused app for tracking a minimalist barbell program and seeing progress over time.</p>
-        <p class="project-tech">Next.js, Supabase, Tailwind - Product design, UX, front-end</p>
-        <p class="project-body">
-          Generic fitness apps add a lot of friction for what should be a simple workflow. Barbell strips it down to the essentials: log your sets, follow a structured progression, and see your trends over time. I designed the interaction model around speed and clarity, so logging a workout takes seconds instead of minutes. Built with Claude Code.
-        </p>
+      <div class="gallery gallery--desktop">
+        {ficccImages.map((img) => (
+          <Image
+            src={img.src}
+            alt={img.alt}
+            class="gallery-image"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 768px) 85vw, 33vw"
+            loading="eager"
+            decoding="async"
+          />
+        ))}
       </div>
-      <div class="project-image">
-        <div class="phone-pair">
+      <div class="gallery gallery--mobile">
+        {ficccImages.map((img) => (
           <Image
-            src={barbellDashboard}
-            alt="Barbell app home dashboard showing today's training plan with squat, bench, row, and OHP lifts"
-            class="screenshot phone-screenshot"
-            widths={[193, 386]}
-            sizes="(max-width: 768px) 45vw, 180px"
-            loading="lazy"
+            src={img.src}
+            alt={img.alt}
+            class="gallery-image"
+            widths={[400, 600]}
+            sizes="85vw"
+            loading="eager"
             decoding="async"
           />
-          <Image
-            src={barbellTrends}
-            alt="Barbell app trends view showing bench press progression chart and personal records"
-            class="screenshot phone-screenshot"
-            widths={[193, 386]}
-            sizes="(max-width: 768px) 45vw, 180px"
-            loading="lazy"
-            decoding="async"
-          />
+        ))}
+      </div>
+
+      <div class="glance-card">
+        <div class="glance-meta">
+          <div class="glance-item">
+            <span class="glance-label">Role</span>
+            <span class="glance-value">Design, development, content modeling</span>
+          </div>
+          <div class="glance-item">
+            <span class="glance-label">Stack</span>
+            <span class="glance-value">Astro, Sanity CMS, Vercel</span>
+          </div>
+          <div class="glance-item">
+            <span class="glance-label">Partner</span>
+            <span class="glance-value">First Ithaca Chinese Christian Church</span>
+          </div>
+        </div>
+        <div class="glance-description">
+          <p>A lot of churches and non-profits are stuck on aging platforms that nobody on staff knows how to update. I volunteer to rebuild them on a modern stack that non-technical teams can actually maintain. FICCC needed a bilingual site (English and Chinese) with CMS-driven content, form handling, and accessibility built in. The site is live and actively used by the church community.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Barbell -->
   <section class="project-section section fade-in">
-    <div class="container project-grid">
-      <div class="project-text">
-        <h2 class="project-title">News Briefing - Daily Summary</h2>
-        <p class="project-summary">A lightweight app that clusters headlines into a focused daily briefing.</p>
-        <p class="project-tech">Next.js, Claude API, Neon Postgres - Product design, UX, front-end</p>
-        <p class="project-body">
-          News feeds are noisy and repetitive. I wanted something that would cut through the clutter and give me one clean page to read each morning. News Briefing ingests RSS feeds from 16 sources, uses AI to cluster related articles into unified stories, and serves up a daily edition focused on readability and information hierarchy. Built with Claude Code.
-        </p>
+    <div class="container">
+      <h2 class="project-title">Barbell - Weightlifting Tracker</h2>
+      <p class="project-summary">A focused app for tracking a minimalist barbell program and seeing progress over time.</p>
+
+      <div class="gallery gallery--phones gallery--desktop">
+        {barbellImages.map((img) => (
+          <Image
+            src={img.src}
+            alt={img.alt}
+            class="gallery-image gallery-image--phone"
+            widths={[193, 386]}
+            sizes="(max-width: 768px) 40vw, 160px"
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
       </div>
-      <div class="project-image">
-        <Image
-          src={newsBriefingHomepage}
-          alt="News Briefing app showing daily edition with clustered story cards and topic navigation"
-          class="screenshot"
-          widths={[400, 600, 800]}
-          sizes="(max-width: 768px) 100vw, 45vw"
-          loading="lazy"
-          decoding="async"
-        />
+      <div class="gallery gallery--phones gallery--mobile">
+        {barbellImages.map((img) => (
+          <Image
+            src={img.src}
+            alt={img.alt}
+            class="gallery-image gallery-image--phone"
+            widths={[193, 386]}
+            sizes="55vw"
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </div>
+
+      <div class="glance-card">
+        <div class="glance-meta">
+          <div class="glance-item">
+            <span class="glance-label">Role</span>
+            <span class="glance-value">Product design, UX, front-end</span>
+          </div>
+          <div class="glance-item">
+            <span class="glance-label">Stack</span>
+            <span class="glance-value">Next.js, Supabase, Tailwind</span>
+          </div>
+          <div class="glance-item">
+            <span class="glance-label">Built with</span>
+            <span class="glance-value">Claude Code</span>
+          </div>
+        </div>
+        <div class="glance-description">
+          <p>Generic fitness apps add a lot of friction for what should be a simple workflow. Barbell strips it down to the essentials: log your sets, follow a structured progression, and see your trends over time. I designed the interaction model around speed and clarity, so logging a workout takes seconds instead of minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Briefing -->
+  <section class="project-section section fade-in">
+    <div class="container">
+      <h2 class="project-title">News Briefing - Daily Summary</h2>
+      <p class="project-summary">A lightweight app that clusters headlines into a focused daily briefing.</p>
+
+      <div class="gallery gallery--desktop">
+        {newsImages.map((img) => (
+          <Image
+            src={img.src}
+            alt={img.alt}
+            class="gallery-image"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 768px) 85vw, 50vw"
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </div>
+      <div class="gallery gallery--mobile">
+        {newsImages.map((img) => (
+          <Image
+            src={img.src}
+            alt={img.alt}
+            class="gallery-image"
+            widths={[400, 600]}
+            sizes="85vw"
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </div>
+
+      <div class="glance-card">
+        <div class="glance-meta">
+          <div class="glance-item">
+            <span class="glance-label">Role</span>
+            <span class="glance-value">Product design, UX, front-end</span>
+          </div>
+          <div class="glance-item">
+            <span class="glance-label">Stack</span>
+            <span class="glance-value">Next.js, Claude API, Neon Postgres</span>
+          </div>
+          <div class="glance-item">
+            <span class="glance-label">Built with</span>
+            <span class="glance-value">Claude Code</span>
+          </div>
+        </div>
+        <div class="glance-description">
+          <p>News feeds are noisy and repetitive. I wanted something that would cut through the clutter and give me one clean page to read each morning. News Briefing ingests RSS feeds from 16 sources, uses AI to cluster related articles into unified stories, and serves up a daily edition focused on readability and information hierarchy.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -132,95 +236,141 @@ import newsBriefingHomepage from '../assets/images/projects/personal/news-briefi
     padding-bottom: var(--space-xl);
   }
 
-  .project-grid {
-    display: grid;
-    gap: var(--space-2xl);
-    align-items: center;
+  .project-section + .project-section {
+    border-top: 1px solid var(--color-border);
   }
 
   .project-title {
     font-family: var(--font-heading);
     font-size: var(--text-h2);
     font-weight: 400;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
   }
 
   .project-summary {
     font-size: var(--text-body-lg);
     color: var(--color-text-secondary);
     line-height: var(--leading-normal);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-xl);
   }
 
-  .project-tech {
-    font-size: var(--text-body-sm);
+  /* Image gallery - desktop: side by side */
+  .gallery {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .gallery--desktop {
+    display: flex;
+  }
+
+  .gallery--mobile {
+    display: none;
+  }
+
+  .gallery-image {
+    flex: 1;
+    min-width: 0;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Phone screenshots: don't stretch full width, keep aspect ratio */
+  .gallery--phones {
+    justify-content: center;
+  }
+
+  .gallery-image--phone {
+    flex: 0 0 auto;
+    width: 160px;
+  }
+
+  /* At a Glance card */
+  .glance-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--color-accent);
+    padding: var(--space-xl);
+  }
+
+  .glance-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .glance-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs, 2px);
+  }
+
+  .glance-label {
+    font-family: var(--font-heading);
+    font-size: var(--text-caption);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-md);
   }
 
-  .project-body {
+  .glance-value {
+    font-size: var(--text-body);
+    color: var(--color-text);
+    line-height: var(--leading-normal);
+  }
+
+  .glance-description p {
     font-size: var(--text-body);
     color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
   }
 
-  .project-partner {
-    font-size: var(--text-caption);
-    color: var(--color-text-secondary);
-    font-style: italic;
-    margin-top: var(--space-md);
-  }
-
-  .screenshot {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-  }
-
-  /* Phone pair for Barbell screenshots */
-  .phone-pair {
-    display: flex;
-    gap: var(--space-md);
-    justify-content: center;
-  }
-
-  .phone-screenshot {
-    width: calc(50% - var(--space-sm));
-    height: auto;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-  }
-
-  /* Desktop: two-column grid with alternating layout */
   @media (min-width: 768px) {
-    .project-grid {
-      grid-template-columns: 1.2fr 1fr;
-    }
-
-    /* Reversed: image left, text right */
-    .project-section--reversed .project-grid {
-      grid-template-columns: 1fr 1.2fr;
-    }
-
-    .project-section--reversed .project-text {
-      order: 2;
-    }
-
-    .project-section--reversed .project-image {
-      order: 1;
+    .glance-card {
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-2xl);
     }
   }
 
-  /* Mobile: image above text */
+  /* Mobile: carousel with scroll-snap */
   @media (max-width: 767px) {
-    .project-image {
-      order: -1;
+    .gallery--desktop {
+      display: none;
     }
 
-    .phone-pair {
-      max-width: 320px;
-      margin: 0 auto;
+    .gallery--mobile {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: var(--space-md);
+      padding-bottom: var(--space-sm);
+    }
+
+    .gallery--mobile .gallery-image {
+      flex: 0 0 85%;
+      scroll-snap-align: center;
+    }
+
+    .gallery--mobile .gallery-image--phone {
+      flex: 0 0 55%;
+      width: auto;
+    }
+
+    /* Hide scrollbar but keep functionality */
+    .gallery--mobile {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .gallery--mobile::-webkit-scrollbar {
+      display: none;
     }
   }
 </style>
