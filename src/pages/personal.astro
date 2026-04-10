@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture, Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTAFooter from '../components/CTAFooter.astro';
 
@@ -49,28 +49,16 @@ const newsImages = [
       <h2 class="project-title">Non-profit Web Sponsorship</h2>
       <p class="project-summary">Rebuilding outdated church and non-profit websites on modern, maintainable stacks.</p>
 
-      <div class="gallery gallery--desktop">
+      <div class="gallery">
         {ficccImages.map((img) => (
-          <Image
+          <Picture
             src={img.src}
             alt={img.alt}
             class="gallery-image"
+            formats={['avif', 'webp']}
             widths={[400, 600, 800]}
-            sizes="(max-width: 768px) 85vw, 33vw"
-            loading="eager"
-            decoding="async"
-          />
-        ))}
-      </div>
-      <div class="gallery gallery--mobile">
-        {ficccImages.map((img) => (
-          <Image
-            src={img.src}
-            alt={img.alt}
-            class="gallery-image"
-            widths={[400, 600]}
-            sizes="85vw"
-            loading="eager"
+            sizes="(max-width: 767px) 85vw, 33vw"
+            loading="lazy"
             decoding="async"
           />
         ))}
@@ -104,27 +92,15 @@ const newsImages = [
       <h2 class="project-title">Barbell - Weightlifting Tracker</h2>
       <p class="project-summary">A focused app for tracking a minimalist barbell program and seeing progress over time.</p>
 
-      <div class="gallery gallery--phones gallery--desktop">
+      <div class="gallery gallery--phones">
         {barbellImages.map((img) => (
-          <Image
+          <Picture
             src={img.src}
             alt={img.alt}
             class="gallery-image gallery-image--phone"
+            formats={['avif', 'webp']}
             widths={[193, 386]}
-            sizes="(max-width: 768px) 40vw, 160px"
-            loading="lazy"
-            decoding="async"
-          />
-        ))}
-      </div>
-      <div class="gallery gallery--phones gallery--mobile">
-        {barbellImages.map((img) => (
-          <Image
-            src={img.src}
-            alt={img.alt}
-            class="gallery-image gallery-image--phone"
-            widths={[193, 386]}
-            sizes="55vw"
+            sizes="(max-width: 767px) 45vw, 200px"
             loading="lazy"
             decoding="async"
           />
@@ -159,27 +135,15 @@ const newsImages = [
       <h2 class="project-title">News Briefing - Daily Summary</h2>
       <p class="project-summary">A lightweight AI-powered app that clusters headlines into a focused daily briefing.</p>
 
-      <div class="gallery gallery--desktop">
+      <div class="gallery">
         {newsImages.map((img) => (
-          <Image
+          <Picture
             src={img.src}
             alt={img.alt}
             class="gallery-image"
+            formats={['avif', 'webp']}
             widths={[400, 600, 800]}
-            sizes="(max-width: 768px) 85vw, 50vw"
-            loading="lazy"
-            decoding="async"
-          />
-        ))}
-      </div>
-      <div class="gallery gallery--mobile">
-        {newsImages.map((img) => (
-          <Image
-            src={img.src}
-            alt={img.alt}
-            class="gallery-image"
-            widths={[400, 600]}
-            sizes="85vw"
+            sizes="(max-width: 767px) 85vw, 50vw"
             loading="lazy"
             decoding="async"
           />
@@ -283,14 +247,6 @@ const newsImages = [
     margin-bottom: var(--space-xl);
   }
 
-  .gallery--desktop {
-    display: flex;
-  }
-
-  .gallery--mobile {
-    display: none;
-  }
-
   .gallery-image {
     flex: 1;
     min-width: 0;
@@ -299,16 +255,16 @@ const newsImages = [
     box-shadow: var(--shadow-md);
   }
 
-  /* Phone screenshots: don't stretch full width, keep aspect ratio */
+  /* Phone screenshots: fixed width on desktop, flex in carousel on mobile */
   @media (min-width: 768px) {
     .gallery--phones {
       justify-content: center;
     }
-  }
 
-  .gallery-image--phone {
-    flex: 0 0 auto;
-    width: 200px;
+    .gallery-image--phone {
+      flex: 0 0 auto;
+      width: 200px;
+    }
   }
 
   /* At a Glance card */
@@ -331,7 +287,7 @@ const newsImages = [
   .glance-item {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3xs, 2px);
+    gap: var(--space-3xs);
   }
 
   .glance-label {
@@ -364,38 +320,26 @@ const newsImages = [
 
   /* Mobile: carousel with scroll-snap */
   @media (max-width: 767px) {
-    .gallery--desktop {
-      display: none;
-    }
-
-    .gallery--mobile {
-      display: flex;
+    .gallery {
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      gap: var(--space-md);
       padding-bottom: var(--space-sm);
-      justify-content: flex-start;
-    }
-
-    .gallery--mobile .gallery-image {
-      flex: 0 0 85%;
-      scroll-snap-align: center;
-    }
-
-    .gallery--mobile .gallery-image--phone {
-      flex: 0 0 45%;
-      width: auto;
-    }
-
-    /* Hide scrollbar but keep functionality */
-    .gallery--mobile {
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
 
-    .gallery--mobile::-webkit-scrollbar {
+    .gallery::-webkit-scrollbar {
       display: none;
+    }
+
+    .gallery .gallery-image {
+      flex: 0 0 85%;
+      scroll-snap-align: center;
+    }
+
+    .gallery .gallery-image--phone {
+      flex: 0 0 45%;
     }
   }
 
@@ -474,7 +418,8 @@ const newsImages = [
   import { initFadeIn } from '../scripts/scroll-animations';
 
   document.addEventListener('astro:page-load', () => {
-    if (!window.location.pathname.startsWith('/personal')) return;
+    const path = window.location.pathname.replace(/\/$/, '');
+    if (path !== '/personal') return;
     initFadeIn();
   });
 </script>
