@@ -1,0 +1,182 @@
+---
+import { Picture } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import ficccHomepage from '../assets/images/projects/personal/ficcc-homepage.png';
+import ficccAbout from '../assets/images/projects/personal/ficcc-about.png';
+import ficccVisit from '../assets/images/projects/personal/ficcc-visit.png';
+
+const ficccImages = [
+  { src: ficccHomepage, alt: 'FICCC homepage with bilingual navigation, hero image, and service times' },
+  { src: ficccAbout, alt: 'FICCC about page showing church history timeline and community milestones' },
+  { src: ficccVisit, alt: 'FICCC visit page with Sunday schedule and directions' },
+];
+---
+
+<BaseLayout title="Web Sponsorship - Dillon Lui" description="Modern, maintainable websites for churches and non-profits." noindex={true}>
+  <article class="letter">
+    <div class="letter-content">
+      <img src="/favicon.ico" alt="DL" class="letter-logo" width="40" height="40" />
+
+      <h1 class="letter-headline">A Better Web Presence for Your Church or Non-Profit</h1>
+
+      <p>
+        I'm Dillon, a product designer and developer. I spent five years in church ministry as a college pastor at First Chinese Baptist Church of Dallas, interned with InterVarsity Christian Fellowship after being part of the ministry as a student, and served as the first product designer at Church Initiative, the non-profit behind GriefShare and DivorceCare. I know these communities well because I've been part of them for most of my adult life.
+      </p>
+
+      <p>
+        That background is why this matters to me. I've sat in the meetings where someone asks "can we update the website?" and the answer is always "we don't have anyone who can do that." I've watched churches put their best foot forward on Sunday mornings but struggle to communicate anything clearly online. Visitors can't find service times. Newcomers don't know what to expect. Staff can't make simple updates without calling a developer.
+      </p>
+
+      <p>
+        With current technology, no church or non-profit should have to live with a bad website. The tools exist to build something modern, fast, and easy to maintain - and I now have the skills to make that happen. So I'm offering a sponsorship: I'll handle the design, development, and content setup for your new site. You get a web presence that actually reflects your community and that your team can keep updated on their own.
+      </p>
+
+      <h2 class="letter-subheading">What your site would include</h2>
+
+      <ul class="letter-list">
+        <li>Modern, fast, mobile-friendly design</li>
+        <li>Content management system for easy updates without a developer</li>
+        <li>Bilingual support if needed</li>
+        <li>Accessibility built in from the start</li>
+        <li>Forms for contact, prayer requests, event registration, and more</li>
+        <li>Hosting and deployment handled</li>
+      </ul>
+
+      <h2 class="letter-subheading">Recent work</h2>
+
+      <p>
+        Here's a site I recently completed for First Ithaca Chinese Christian Church - a bilingual English and Chinese site with CMS-driven content, form handling, and full accessibility.
+      </p>
+
+      <div class="letter-gallery">
+        {ficccImages.map((img) => (
+          <Picture
+            src={img.src}
+            alt={img.alt}
+            class="letter-gallery-image"
+            formats={['avif', 'webp']}
+            widths={[400, 600, 800]}
+            sizes="(max-width: 767px) 85vw, 33vw"
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </div>
+
+      <div class="letter-cta">
+        <p>If this sounds like something your community could use, I'd love to hear from you.</p>
+        <a href="mailto:dillonlui@gmail.com" class="btn btn-secondary">Email Me</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .letter {
+    padding: var(--space-3xl) 0 var(--space-4xl);
+  }
+
+  .letter-content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  .letter-logo {
+    display: block;
+    margin: 0 auto var(--space-2xl);
+  }
+
+  .letter-headline {
+    font-family: var(--font-display);
+    font-size: var(--text-h2);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+    line-height: var(--leading-tight);
+  }
+
+  .letter-content > p {
+    font-size: var(--text-body-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-lg);
+  }
+
+  .letter-subheading {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: 400;
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .letter-list {
+    list-style: disc;
+    padding-left: var(--space-xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .letter-list li {
+    font-size: var(--text-body-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Gallery */
+  .letter-gallery {
+    display: flex;
+    gap: var(--space-md);
+    margin: var(--space-xl) 0;
+  }
+
+  .letter-gallery > :global(picture) {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .letter-gallery-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Mobile: carousel */
+  @media (max-width: 767px) {
+    .letter-gallery {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: var(--space-sm);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .letter-gallery::-webkit-scrollbar {
+      display: none;
+    }
+
+    .letter-gallery > :global(picture) {
+      flex: 0 0 85%;
+      min-width: 85%;
+      scroll-snap-align: center;
+    }
+  }
+
+  /* CTA */
+  .letter-cta {
+    text-align: center;
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .letter-cta p {
+    font-size: var(--text-body-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+</style>
