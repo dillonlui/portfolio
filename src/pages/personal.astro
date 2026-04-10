@@ -278,13 +278,15 @@ const newsImages = [
   }
 
   /* Phone screenshots: don't stretch full width, keep aspect ratio */
-  .gallery--phones {
-    justify-content: center;
+  @media (min-width: 768px) {
+    .gallery--phones {
+      justify-content: center;
+    }
   }
 
   .gallery-image--phone {
     flex: 0 0 auto;
-    width: 160px;
+    width: 200px;
   }
 
   /* At a Glance card */
@@ -351,6 +353,7 @@ const newsImages = [
       -webkit-overflow-scrolling: touch;
       gap: var(--space-md);
       padding-bottom: var(--space-sm);
+      justify-content: flex-start;
     }
 
     .gallery--mobile .gallery-image {
@@ -359,7 +362,7 @@ const newsImages = [
     }
 
     .gallery--mobile .gallery-image--phone {
-      flex: 0 0 55%;
+      flex: 0 0 45%;
       width: auto;
     }
 
