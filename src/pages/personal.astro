@@ -251,9 +251,14 @@ const newsImages = [
     margin-bottom: var(--space-xl);
   }
 
-  .gallery-image {
+  /* Target <picture> wrappers as flex children */
+  .gallery > :global(picture) {
     flex: 1;
     min-width: 0;
+  }
+
+  .gallery-image {
+    width: 100%;
     height: auto;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
@@ -265,7 +270,7 @@ const newsImages = [
       justify-content: center;
     }
 
-    .gallery-image--phone {
+    .gallery--phones > :global(picture) {
       flex: 0 0 auto;
       width: 200px;
     }
@@ -337,13 +342,13 @@ const newsImages = [
       display: none;
     }
 
-    .gallery .gallery-image {
+    .gallery > :global(picture) {
       flex: 0 0 85%;
       min-width: 85%;
       scroll-snap-align: center;
     }
 
-    .gallery .gallery-image--phone {
+    .gallery--phones > :global(picture) {
       flex: 0 0 45%;
       min-width: 45%;
     }
