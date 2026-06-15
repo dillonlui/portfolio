@@ -19,8 +19,8 @@ import caseBuilder from '../../assets/images/projects/unified-platform/case-buil
 
 <CaseStudyLayout
   title="Unifying an Investigative Platform"
-  description="When our CEO challenged us to unify two diverged products into a single investigative platform, I led the design from synthesis to working prototype - and introduced a new way of building that the company is now adopting across teams."
-  tags={['B2B SaaS', 'Design Systems', 'Design + Code']}
+  description="LeadsOnline had grown through multiple products and acquisitions, leaving investigators with fragmented workflows and leadership with an open strategic question: could AI help unify the platform? I turned that ambiguity into a working prototype that helped executives align around a company-wide product direction."
+  tags={['B2B SaaS', 'Product Strategy', 'Design + Code']}
   heroImage={thumbnail}
   slug="unified-platform"
   accentColor="#1a1a2e"
@@ -42,10 +42,10 @@ import caseBuilder from '../../assets/images/projects/unified-platform/case-buil
           team="1 PM, 1 Tech Lead, 6 Engineers, 1 QA"
           timeline="2-week concept sprint, now in active development"
           outcomes={[
-            { label: 'Company-wide shift', text: 'Prototype validated across multiple user demo rounds, leading leadership to repurpose an entire product team toward this platform.' },
-            { label: '2 teams adopting the workflow', text: 'Prototype-driven design process now being adopted by 2 product teams, with PMs requesting workshops to learn the approach.' },
+            { label: 'Company direction clarified', text: 'The prototype made a potential platform strategy tangible enough for executive, product, and engineering leaders to evaluate and align around.' },
+            { label: 'Primary product investment', text: 'Leadership repurposed an entire product team toward the unified platform, turning exploration into an active company initiative.' },
+            { label: 'Months compressed into 2 weeks', text: 'AI-assisted prototyping reduced a strategic exploration that could have taken months of workshops and wireframes into a two-week sprint.' },
             { label: 'Prototype became the foundation', text: 'Engineering is building the production app directly from the prototype codebase, compressing handoff from weeks to days.' },
-            { label: 'Overwhelmingly positive user demos', text: 'Investigators responded positively to the unified search and case-building workflows across multiple demo rounds.' },
           ]}
         />
       </div>
@@ -54,29 +54,32 @@ import caseBuilder from '../../assets/images/projects/unified-platform/case-buil
     <!-- Challenge -->
     <section class="case-section section">
       <div class="container">
-        <SectionHeading title="The Challenge" />
-        <p class="design-question"><strong>Design Question:</strong> How do you unify two diverged products when the inputs are coming from every direction at once?</p>
+        <SectionHeading
+          title="The Business Context"
+          subtitle="LeadsOnline had accumulated multiple investigative products over time. Each solved a different problem, but together they created fragmented workflows, duplicated functionality, inconsistent navigation, and disconnected data. Customers increasingly needed to work across products, while leadership wanted to understand whether AI could create a more unified investigative experience."
+        />
+        <p class="design-question"><strong>Strategic Question:</strong> Should we fundamentally rethink how our products work together?</p>
         <div class="card-grid">
           <div class="card-item">
-            <h3>The product challenge</h3>
-            <p>LeadsOnline and LeadSuite had been growing apart, and investigators were feeling it: users kept asking LeadSuite for search capabilities that only existed in LeadsOnline. The product was built case-first, but investigators wanted the freedom to move across their caseload as it evolved. The CEO directive: stop patching the gap and unify them.</p>
+            <h3>The product fragmentation</h3>
+            <p>LeadsOnline and LeadSuite had been growing apart. Investigators kept asking LeadSuite for search capabilities that only existed in LeadsOnline, and the case-first model made it hard to move across data as an investigation evolved.</p>
           </div>
           <div class="card-item">
-            <h3>The process challenge</h3>
-            <p>A redesign at this scale, with input from PM, engineering, and the CEO simultaneously, can't move through traditional Figma handoff. The real work wasn't generating ideas; it was synthesizing them into something coherent enough to build.</p>
+            <h3>The strategic ambiguity</h3>
+            <p>The CEO, product, and engineering teams were all asking what the platform could become. Nobody needed more abstract discussion. The company needed a concrete future state it could react to and make decisions around.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- The Synthesis Role -->
+    <!-- Making Strategy Tangible -->
     <section class="case-section section">
       <div class="container">
         <SectionHeading
-          title="The Synthesis Role"
-          subtitle="My job was to hold all of it - PM explorations, CEO input, dev constraints, investigator workflows - and turn it into a coherent product. The result wasn't a Figma file; it was a running app that the entire LeadSuite team could react to."
+          title="Making Strategy Tangible"
+          subtitle="The prototype wasn't intended to validate interface design. It was intended to help leadership evaluate a potential company-wide product strategy. My job was to hold PM explorations, CEO input, engineering constraints, and investigator workflows at the same time, then turn them into a coherent product direction people could actually use."
         />
-        <p class="pull-quote">"I didn't hand off a spec. I handed off a repo."</p>
+        <p class="pull-quote">"I didn't hand off a spec. I handed off a future state."</p>
         <FullWidthImage
           src={dashboard}
           alt="Unified platform dashboard with natural language search bar and primary actions"
@@ -87,6 +90,30 @@ import caseBuilder from '../../assets/images/projects/unified-platform/case-buil
           alt="Unified case list view with map and filters"
           caption="Case list with geographic context, filters, and inline case preview"
         />
+      </div>
+    </section>
+
+    <!-- Speed as Strategic Leverage -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Speed as Strategic Leverage"
+          subtitle="The two-week timeline mattered because it changed the cost of strategic exploration. A traditional path could have meant months of workshops, wireframes, and debate before leadership could judge the idea. AI-assisted development let me collapse that into a working prototype quickly enough to influence the roadmap while the question was still open."
+        />
+        <div class="insights-grid">
+          <InsightCallout
+            title="From discussion to artifact"
+            description="Instead of asking stakeholders to imagine a unified platform from diagrams or static screens, the prototype let them search, review cases, inspect entities, and see how workflows could connect."
+          />
+          <InsightCallout
+            title="From artifact to decision"
+            description="Because the prototype behaved like a product, leadership could evaluate tradeoffs around AI search, case building, data relationships, and workflow consolidation in the same conversation."
+          />
+          <InsightCallout
+            title="From decision to momentum"
+            description="The prototype gave engineering a concrete starting point, which helped the initiative move from strategic possibility into active implementation without a long handoff cycle."
+          />
+        </div>
       </div>
     </section>
 
@@ -158,23 +185,26 @@ import caseBuilder from '../../assets/images/projects/unified-platform/case-buil
     <!-- Outcomes -->
     <section class="case-section section">
       <div class="container">
-        <SectionHeading title="Impact" />
+        <SectionHeading
+          title="Impact"
+          subtitle="The outcome was not just a validated prototype. The company gained a shared vision for how acquired products, existing workflows, and AI capabilities could become one investigative platform."
+        />
         <div class="outcomes-grid">
           <InsightCallout
-            title="Team alignment in one session"
-            description="The full LeadSuite team reviewed the prototype as a working app, not screens or a deck. Stakeholders specifically noted that the running prototype changed how they could give feedback - reacting to real behavior instead of imagining it from static screens."
+            title="Executive alignment"
+            description="The prototype gave leadership a concrete artifact for evaluating a company-wide product strategy, replacing abstract debate with shared product understanding."
           />
           <InsightCallout
-            title="PMs requested the workshop"
-            description="After seeing a ClearCase feature demoed in production code instead of Figma, the PM team asked for a workshop. I'm hosting it to teach them the new workflow. What started as a personal process is becoming a company practice."
+            title="Team repurposed"
+            description="Leadership repurposed an entire product team toward the unified platform, turning the concept into a primary product investment for the following year."
           />
           <InsightCallout
-            title="Repo as handoff"
-            description="Engineering is starting from my codebase, not a spec. The prototype is already opinionated about component structure, design system tokens, and interaction behavior - fewer clarifying questions, faster starts."
+            title="Implementation accelerated"
+            description="Engineering is starting from my codebase, not a spec. The prototype is already opinionated about component structure, design system tokens, and interaction behavior, reducing handoff from weeks to days."
           />
           <InsightCallout
-            title="Stronger design system"
-            description="Every prototype stress-tests the system. Components that hold up get promoted; gaps that surface get filled. The system improves because it's being used, not just maintained."
+            title="Operating model spreading"
+            description="Prototype-driven design is now being adopted by two product teams, with PMs requesting workshops to learn the process after seeing how quickly it creates alignment."
           />
         </div>
       </div>
@@ -186,16 +216,16 @@ import caseBuilder from '../../assets/images/projects/unified-platform/case-buil
         <SectionHeading title="Reflection" />
         <div class="reflections-grid">
           <div class="reflection-item">
-            <h3>Design and code aren't separate disciplines anymore</h3>
-            <p>The cost of exploring in code is now close to the cost of exploring in Figma. That changes what a designer can own - and what they should.</p>
+            <h3>Clarity is a leadership artifact</h3>
+            <p>The most valuable output was not a screen. It was a shared understanding of what the company could build next, and why that direction was worth pursuing.</p>
           </div>
           <div class="reflection-item">
-            <h3>Synthesis is a design skill</h3>
-            <p>The hardest part of this project wasn't the UI. It was holding CEO input, PM explorations, dev constraints, and user research at the same time and making them coherent. That's product thinking, not just craft.</p>
+            <h3>Speed changes the conversation</h3>
+            <p>When a strategic prototype can be built in two weeks, leadership does not have to choose between moving fast and evaluating deeply. They can react to the product while the strategy is still forming.</p>
           </div>
           <div class="reflection-item">
-            <h3>Prototyping reveals what planning misses</h3>
-            <p>The knowledge panel came from using the prototype, not from a requirements doc. Some of the most important design decisions emerge from building something and seeing what's missing.</p>
+            <h3>Synthesis is strategic work</h3>
+            <p>The hard part was holding CEO input, PM explorations, engineering constraints, acquired product realities, and investigator workflows at the same time. Making that coherent is product leadership, not just craft.</p>
           </div>
         </div>
       </div>

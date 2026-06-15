@@ -18,8 +18,8 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
 
 <CaseStudyLayout
   title="ClearCase"
-  description="ClearCase is a fully automated cartridge case triage solution for crime gun investigations. The product worked technically, but it had been built to prove a concept, not to support how investigators work in practice. I led a full UX/UI redesign to fix that, and in the process uncovered a critical gap in the workflow."
-  tags={['B2B SaaS', 'UX Audit', 'Responsive Web']}
+  description="ClearCase was a primary growth initiative for the ballistics division, but the web product could not support the core evidence workflow customers were buying it to perform. I helped align product and engineering around a platform shift, redesigned the web experience, and made sure exhibit submission was included in launch."
+  tags={['B2B SaaS', 'Product Strategy', 'Responsive Web']}
   heroImage={thumbnail}
   slug="clearcase"
   accentColor="#2c3e50"
@@ -41,9 +41,9 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
           team="Director of Product (Ballistics), 2 Product Analysts, Director of Software Dev, 1 Senior Engineer, 2 Engineers, 2 QA"
           timeline="5 months, design to launch"
           outcomes={[
-            { label: 'New workflow, not just a redesign', text: 'Designed and shipped a web-based exhibit creation flow that didn\'t exist before, allowing lab techs to complete their full workflow on desktop for the first time.' },
-            { label: 'Mobile-to-web unlock', text: 'Lab technicians can now manage their entire workflow through the web portal instead of being limited to a mobile app.' },
-            { label: 'Live in production', text: 'Full redesign including responsive layout, design system integration, and new exhibit creation flow is shipped and in active use.' },
+            { label: '256% of sales plan', text: 'North American sales reached 256% of plan within four months of launch, turning ClearCase into a meaningful growth driver for the ballistics division.' },
+            { label: 'Core workflow unblocked', text: 'Designed and shipped web-based exhibit creation, allowing agencies to complete the primary job-to-be-done without relying on mobile-only entry.' },
+            { label: 'Platform strategy shift', text: 'Helped align product and engineering around separating web and mobile experiences so each platform could evolve around its actual use case.' },
           ]}
         />
       </div>
@@ -53,10 +53,34 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
     <section class="case-section section">
       <div class="container">
         <SectionHeading
-          title="The Challenge"
-          subtitle="ClearCase had been ported from mobile to web without rethinking the experience. No design system, no responsive layout, and no real consideration for how investigators actually operate. I started with a comprehensive UX audit before touching any designs, which surfaced deeper workflow gaps that would shape the entire redesign."
+          title="The Business Challenge"
+          subtitle="ClearCase was a major growth initiative for the ballistics division as the company expanded into North America. The technology worked, but the customer experience did not support the business goal: agencies could review information on web, but they could not complete the evidence submission workflow there. For agencies hesitant to use mobile because of legal and subpoena concerns, that made the product difficult to adopt."
         />
-        <p class="design-question"><strong>Design Question:</strong> How do you turn a technically capable but workflow-unaware tool into a product investigators actually trust?</p>
+        <p class="design-question"><strong>Design Question:</strong> How do you turn a technically capable product into a platform customers can actually adopt, operate, and scale?</p>
+      </div>
+    </section>
+
+    <!-- Strategic Constraint -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="The Strategic Constraint"
+          subtitle="The initial ask looked like a web redesign: improve the layouts, bring the interface into the LeadsOnline design system, and make it responsive. The audit showed something deeper. ClearCase had been ported from mobile to web without rethinking the product model, and the shared architecture was limiting how either platform could serve its users."
+        />
+        <div class="insights-grid">
+          <InsightCallout
+            title="What we thought"
+            description="The web app needed better information hierarchy, responsive layouts, and modern design system patterns so investigators could move through case and exhibit data faster."
+          />
+          <InsightCallout
+            title="What we found"
+            description="Customers could not complete the core job-to-be-done on web. The product could display investigation data, but exhibit submission still depended on the mobile app."
+          />
+          <InsightCallout
+            title="What changed"
+            description="Through discussions with product and engineering leadership, we aligned on a shift from one shared web/mobile codebase to independent platforms designed around their own workflow needs."
+          />
+        </div>
       </div>
     </section>
 
@@ -65,7 +89,7 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
       <div class="container">
         <SectionHeading
           title="Before"
-          subtitle="The existing web app had sparse layouts, minimal information hierarchy, and required too many clicks to reach key data. Investigators couldn't quickly assess a case or drill into exhibit details without navigating through unnecessary intermediary screens."
+          subtitle="The existing web app showed the symptoms of that strategy gap. It had sparse layouts, minimal information hierarchy, and required too many clicks to reach key data. Investigators could not quickly assess a case, drill into exhibit details, or act on the evidence workflow without moving to another device."
         />
         <BeforeAfter
           beforeImage={beforeCaseDetail}
@@ -83,7 +107,7 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
       <div class="container">
         <SectionHeading
           title="The Redesign"
-          subtitle="I redesigned every core screen around increased screen real estate and investigator workflows. The case list pairs a searchable, sortable sidebar with a geographic map view. The case detail surfaces the analysis summary, exhibit data, and a downloadable report without extra clicks. And the exhibit detail consolidates photos, metadata, notes, and location into a single view."
+          subtitle="With the platform direction clarified, I redesigned every core web screen around the desktop workflows agencies needed to trust. The case list pairs a searchable, sortable sidebar with a geographic map view. The case detail surfaces the analysis summary, exhibit data, and a downloadable report without extra clicks. The exhibit detail consolidates photos, metadata, notes, and location into a single view."
         />
 
         <FullWidthImage
@@ -117,8 +141,8 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
     <section class="case-section section">
       <div class="container">
         <SectionHeading
-          title="A Gap Surfaces"
-          subtitle="The UX audit flagged it, the redesign made it undeniable, and user feedback confirmed it: the web app had no way to add exhibits. Agencies were hesitant to rely on mobile for core casework, but mobile was the only entry point, leaving investigators at a dead end the moment they needed to act."
+          title="The Critical Workflow Gap"
+          subtitle="The redesign would have failed if the web app still could not support exhibit submission. Agencies needed to investigate evidence, add exhibits, and process cases through the platform. But the web product had no way to add exhibits, while the mobile app was a legal and operational concern for some customers."
         />
         <InsightCallout
           title="Why mobile-only was a non-starter"
@@ -132,7 +156,7 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
       <div class="container">
         <SectionHeading
           title="Web-Based Exhibit Creation"
-          subtitle="In collaboration with engineering, I designed a flow that bridges web and mobile: investigators initiate exhibit creation from the web, scan cartridge cases using the phone's NFC reader via QR code pairing, and the exhibit list updates in real time, all without storing case data on the device. This workflow is now live in production."
+          subtitle="I advocated for web-based exhibit submission because it represented the platform's core job-to-be-done. In collaboration with engineering, I designed a flow that bridges web and mobile: investigators initiate exhibit creation from the web, scan cartridge cases using the phone's NFC reader via QR code pairing, and the exhibit list updates in real time, all without storing case data on the device. This workflow is now live in production."
         />
         <FullWidthImage
           src={addExhibitFlow}
@@ -142,22 +166,50 @@ import addExhibitFlow from '../../assets/images/projects/clearcase/add-exhibit-f
       </div>
     </section>
 
+    <!-- Impact -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Impact"
+          subtitle="The launch gave ClearCase more than a cleaner interface. It removed a core adoption barrier, modernized the platform direction, and supported the business case for ClearCase as a growth product."
+        />
+        <div class="outcomes-grid">
+          <InsightCallout
+            title="Business growth"
+            description="North American sales reached 256% of plan within four months of launch, helping validate ClearCase as a primary growth driver for the ballistics division."
+          />
+          <InsightCallout
+            title="Workflow completion"
+            description="Agencies can now complete evidence submission through the web experience instead of depending on a mobile-only workflow that some customers were reluctant to adopt."
+          />
+          <InsightCallout
+            title="Platform modernization"
+            description="The project helped move ClearCase away from a constrained shared codebase and toward independent web and mobile platforms with clearer product ownership."
+          />
+          <InsightCallout
+            title="Production launch"
+            description="The redesign, responsive layout, design system integration, and exhibit creation flow shipped together and are now live in active customer workflows."
+          />
+        </div>
+      </div>
+    </section>
+
     <!-- Reflection -->
     <section class="case-section section">
       <div class="container">
         <SectionHeading title="Reflection" />
         <div class="reflections-grid">
           <div class="reflection-item">
-            <h3>Audit before you redesign</h3>
-            <p>Starting with a UX audit before touching the design meant the redesign was grounded in what was actually broken, not just what looked broken. The exhibit creation gap and the buried analysis report both came from that process, not from intuition alone.</p>
+            <h3>Strategy before screens</h3>
+            <p>Starting with an audit before touching the design made it clear that the product problem was bigger than visual cleanup. The exhibit creation gap and platform constraint needed to shape the strategy before the UI could be effective.</p>
           </div>
           <div class="reflection-item">
-            <h3>System as accelerator</h3>
-            <p>Building on the LeadsOnline design system meant ClearCase felt native to the platform from day one. Shared tokens, components, and patterns cut design time significantly and gave the redesign a coherence it would have taken much longer to achieve from scratch.</p>
+            <h3>Adoption depends on the full job</h3>
+            <p>A product can be technically impressive and still miss adoption if customers cannot complete the job they bought it for. Web-based exhibit submission was not an edge case, it was the point.</p>
           </div>
           <div class="reflection-item">
-            <h3>Know what the product is for</h3>
-            <p>ClearCase has a lot of feature potential. The discipline was staying focused on what investigators actually needed: the analysis report and data-rich views that didn't waste their time. Designing for power users means cutting through what's possible to find what's essential.</p>
+            <h3>Design can clarify architecture</h3>
+            <p>The redesign exposed where shared mobile and web assumptions were holding the product back. Making those constraints visible helped product and engineering align around a direction that could support growth.</p>
           </div>
         </div>
       </div>

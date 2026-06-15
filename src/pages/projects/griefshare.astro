@@ -20,8 +20,8 @@ import cardView from '../../assets/images/projects/griefshare/card-view.png';
 
 <CaseStudyLayout
   title="GriefShare"
-  description="GriefShare's Find a Group page was the front door to everything. I redesigned it from the ground up and, in the process, introduced the first formal UX research practice at Church Initiative."
-  tags={['Online Search', 'UX Research', 'Responsive Web']}
+  description="GriefShare's Find a Group page was the mission-critical entry point to the entire support experience. I redesigned the search journey and introduced the organization's first formal UX research practice, changing how the team learned from users beyond the project itself."
+  tags={['Online Search', 'Research Strategy', 'Responsive Web']}
   heroImage={header}
   slug="griefshare"
   previousProject={{ title: 'ClearCase', slug: 'clearcase' }}
@@ -38,9 +38,9 @@ import cardView from '../../assets/images/projects/griefshare/card-view.png';
           team="1 PM, 3 Engineers"
           timeline="~3 months"
           outcomes={[
+            { label: 'Mission-critical search redesigned', text: 'Improved the front door to GriefShare by prioritizing the criteria people used to choose a support group: schedule, format, distance, and trust.' },
             { label: 'First UX research practice', text: 'Introduced the organization\'s first formal discovery practice with structured interviews, proto-personas, and weekly user conversations.' },
-            { label: 'Research that outlived the project', text: 'The weekly user conversation rhythm continued as long as I was in the role, changing how the org thought about its product.' },
-            { label: 'Ship what\'s possible, keep the vision', text: 'Prioritized high-impact changes for immediate release while validating a full map-view experience as the future direction.' },
+            { label: 'Research that outlived the project', text: 'The weekly user conversation rhythm continued as long as I was in the role, changing how the organization made product decisions.' },
           ]}
         />
       </div>
@@ -50,10 +50,34 @@ import cardView from '../../assets/images/projects/griefshare/card-view.png';
     <section class="case-section section">
       <div class="container">
         <SectionHeading
-          title="The Challenge"
-          subtitle="Find a Group was the most important page on the GriefShare website. Every support group participant started here, and the group experience was the entire product. The page had been built on untested assumptions, and visual hierarchy, accessibility, and the rise of online groups after COVID had all created gaps the original design wasn't built to handle."
+          title="The Mission-Critical Entry Point"
+          subtitle="Find a Group was the most important page on the GriefShare website. Every support group participant started here, and the group experience was the product. If someone could not find a group that felt reachable, trustworthy, and compatible with their life, the organization failed at the moment it most needed to help."
         />
-        <p class="design-question"><strong>Design Question:</strong> How do you redesign a search experience for people in grief, where finding the right group, or failing to, has real human consequences?</p>
+        <p class="design-question"><strong>Product Question:</strong> How do you improve a conversion path where finding the right group, or failing to, has real human consequences?</p>
+      </div>
+    </section>
+
+    <!-- Organizational Context -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="The Organizational Gap"
+          subtitle="The page had been built on untested assumptions. Visual hierarchy, accessibility, and the rise of online groups after COVID had all created gaps the original design was not built to handle. But the deeper issue was that Church Initiative did not yet have a formal way to learn from users before making product decisions."
+        />
+        <div class="insights-grid">
+          <InsightCallout
+            title="Mission risk"
+            description="The page was the bridge between someone seeking help and the support group experience. Search friction was not just a usability problem, it could prevent someone from joining a group."
+          />
+          <InsightCallout
+            title="Assumption risk"
+            description="The team had strong instincts about what mattered, but limited direct evidence about how people in grief evaluated group options before committing."
+          />
+          <InsightCallout
+            title="Capacity risk"
+            description="As a non-profit team, engineering bandwidth was limited. The work needed to identify what should ship now while preserving a larger validated direction."
+          />
+        </div>
       </div>
     </section>
 
@@ -74,7 +98,7 @@ import cardView from '../../assets/images/projects/griefshare/card-view.png';
       <div class="container">
         <SectionHeading
           title="Building the Research Practice"
-          subtitle="Church Initiative had no formal UX research practice when I started this project. I introduced one. Beginning with a design audit and proto-personas, I ran seven structured interviews before transitioning into a weekly cadence of ongoing user conversations, all conducted solo."
+          subtitle="Church Initiative had no formal UX research practice when I started this project. I introduced one. Beginning with a design audit and proto-personas, I ran seven structured interviews before transitioning into a weekly cadence of ongoing user conversations, all conducted solo. The goal was not just to improve one page, but to give the organization a repeatable way to make product decisions from evidence."
         />
 
         <div class="research-grid">
@@ -133,7 +157,7 @@ import cardView from '../../assets/images/projects/griefshare/card-view.png';
       <div class="container">
         <SectionHeading
           title="The Redesign"
-          subtitle="The redesign prioritized changes with the most immediate impact: reordered filters, contextual tags, and accessibility fixes throughout. The map view was designed and validated with users but held back from the initial release given development bandwidth at a non-profit, where it remains the direction to build toward."
+          subtitle="The redesign prioritized changes with the most immediate impact on someone choosing a group: reordered filters, clearer meeting details, contextual tags, and accessibility fixes throughout. The map view was designed and validated with users, but held back from the initial release given development bandwidth at a non-profit. The release improved the baseline experience while preserving the larger direction."
         />
         <div class="prototype-images">
           <FullWidthImage src={mockup1} alt="High-fidelity mockup of the redesigned Find a Group page" />
@@ -144,10 +168,14 @@ import cardView from '../../assets/images/projects/griefshare/card-view.png';
     <!-- Solution Features -->
     <section class="case-section section">
       <div class="container">
+        <SectionHeading
+          title="Shipping the Right Slice"
+          subtitle="The strategic decision was not simply choosing the best concept. It was separating what mattered most now from what should guide the product next. Research showed the map could improve proximity decisions, but the card view could ship sooner with the schedule, format, distance, and accessibility improvements users needed immediately."
+        />
         <div class="solution-features">
           <div class="solution-item">
             <h3>Immersive Map</h3>
-            <p>Designed and validated with users as a way to understand proximity visually rather than reading it. Didn't ship in the initial release but remains the direction to build toward.</p>
+            <p>Designed and validated with users as a way to understand proximity visually rather than reading it. It did not ship in the initial release but remains the direction to build toward.</p>
             <FullWidthImage src={mapView} alt="Immersive map view showing nearby groups" />
           </div>
           <div class="solution-item">
@@ -159,6 +187,34 @@ import cardView from '../../assets/images/projects/griefshare/card-view.png';
       </div>
     </section>
 
+    <!-- Organizational Impact -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="Organizational Impact"
+          subtitle="The lasting outcome was larger than the redesigned page. The project introduced a new operating rhythm for discovery at Church Initiative, giving the team a way to continuously learn from the people it served."
+        />
+        <div class="outcomes-grid">
+          <InsightCallout
+            title="Research became a practice"
+            description="Structured interviews and weekly user conversations continued beyond the redesign, creating a standing channel for product learning."
+          />
+          <InsightCallout
+            title="Evidence shaped prioritization"
+            description="Research clarified which search criteria mattered most, helping the team prioritize immediate improvements while keeping the map experience as a validated future direction."
+          />
+          <InsightCallout
+            title="Ethical recruiting standard"
+            description="The research approach balanced the need for honest feedback with care for participants, focusing on people who had completed a group recently rather than those actively processing fresh loss."
+          />
+          <InsightCallout
+            title="Mission alignment"
+            description="The redesign connected product decisions back to the organization's core mission: helping people find a support group they could trust enough to attend."
+          />
+        </div>
+      </div>
+    </section>
+
     <!-- Reflection -->
     <section class="case-section section" id="reflection">
       <div class="container">
@@ -166,15 +222,15 @@ import cardView from '../../assets/images/projects/griefshare/card-view.png';
         <div class="reflections-grid">
           <div class="reflection-item">
             <h3>Research design is design</h3>
-            <p>The most careful design decision on this project wasn't the UI. It was how to recruit participants. Choosing to speak only with people who had completed their group recently, rather than those still in grief, was an ethical call that made the research more honest and the findings more trustworthy.</p>
+            <p>The most careful design decision on this project was not the UI. It was how to recruit participants. Choosing to speak only with people who had completed their group recently, rather than those still in grief, was an ethical call that made the research more honest and the findings more trustworthy.</p>
           </div>
           <div class="reflection-item">
             <h3>Introduce the practice, not just the project</h3>
-            <p>The most lasting contribution wasn't the redesigned page. Starting a weekly rhythm of user conversations changed how the organization thought about its product. The research practice outlived the project and stayed alive as long as I was in the role.</p>
+            <p>The most lasting contribution was not only the redesigned page. Starting a weekly rhythm of user conversations changed how the organization thought about its product. The research practice outlived the project and stayed alive as long as I was in the role.</p>
           </div>
           <div class="reflection-item">
             <h3>Ship what's possible, keep the vision</h3>
-            <p>Non-profit bandwidth meant a smaller initial release. The discipline was designing the full vision first, then deciding what shipped now and what stayed as the direction to build toward. The map didn't ship. The direction it set did.</p>
+            <p>Non-profit bandwidth meant a smaller initial release. The discipline was designing the full vision first, then deciding what shipped now and what stayed as the direction to build toward. The map did not ship. The direction it set did.</p>
           </div>
         </div>
       </div>

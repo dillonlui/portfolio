@@ -17,8 +17,8 @@ import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashb
 
 <CaseStudyLayout
   title="LeadSuite"
-  description="LeadSuite is the flagship product at LeadsOnline, a B2B SaaS platform used by law enforcement to work cases and surface insights. I led the redesign of the core person profile and case detail experience, turning an information-dense legacy interface into a structured, scalable investigative tool."
-  tags={['B2B SaaS', 'Law Enforcement', 'Information Architecture']}
+  description="LeadSuite is the flagship investigative platform at LeadsOnline. I turned a vague ask to make a legacy interface easier to use into a scalable product foundation, redesigning the core person and case workflows that now support over half of platform traffic."
+  tags={['B2B SaaS', 'Product Strategy', 'Information Architecture']}
   heroImage={thumbnail}
   slug="leadsuite"
   accentColor="#1c3557"
@@ -40,9 +40,9 @@ import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashb
           team="1 PM, 1 Product Analyst, 1 Tech Lead, 5 Engineers, 1 QA"
           timeline="Ongoing since Dec 2024"
           outcomes={[
-            { label: '50%+ of platform traffic', text: 'The redesigned person profile now drives over half of all traffic in the app, validating the new information architecture.' },
-            { label: 'Scalable by design', text: 'Tabbed architecture has already absorbed 2 new data source integrations without any layout changes.' },
-            { label: 'From vague brief to full IA rethink', text: 'Translated a directional PM ask ("make it easier to use") into a complete information architecture redesign.' },
+            { label: '50%+ of platform traffic', text: 'The redesigned person profile now drives over half of all traffic in the app, making the new IA a core product surface rather than a cosmetic improvement.' },
+            { label: 'Scalable product foundation', text: 'The tabbed architecture has already absorbed 2 new data source integrations without layout changes, supporting product velocity beyond the initial redesign.' },
+            { label: 'Ambiguity turned into direction', text: 'Translated a directional PM ask ("make it easier to use") into a buildable information architecture and a clearer model for future investigative workflows.' },
           ]}
         />
       </div>
@@ -52,10 +52,34 @@ import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashb
     <section class="case-section section">
       <div class="container">
         <SectionHeading
-          title="The Challenge"
-          subtitle="LeadSuite was originally a quick reskin of a low-adoption legacy product, carrying over its structure with no rethink of investigative workflows or modern UX patterns. A UX audit before touching anything confirmed the full scope: a person profile with no structure, and a case detail view that made it hard to follow the thread of an investigation."
+          title="The Product Challenge"
+          subtitle="LeadSuite was the flagship platform, but its core workflows were still shaped by a low-adoption legacy product. The interface had been reskinned without rethinking how investigators actually move through people, cases, evidence, and leads. The risk was not just poor usability. The product needed a structure that could support daily use, new data sources, and the next generation of AI-driven workflows."
         />
-        <p class="design-question"><strong>Design Question:</strong> How do you redesign a tool investigators rely on daily so the disruption makes them faster, not just more comfortable?</p>
+        <p class="design-question"><strong>Product Question:</strong> How do you turn a dense legacy interface into a scalable foundation for the flagship investigative platform?</p>
+      </div>
+    </section>
+
+    <!-- From Vague Ask to Product Foundation -->
+    <section class="case-section section">
+      <div class="container">
+        <SectionHeading
+          title="From Vague Ask to Product Foundation"
+          subtitle='The initial brief was simple: "make it easier to use." I used a UX audit and team facilitation to turn that directional ask into a product model the team could build from. The work became less about reorganizing screens and more about defining durable places for the product to grow.'
+        />
+        <div class="insights-grid">
+          <InsightCallout
+            title="Clarified the model"
+            description="The person profile needed to become a structured hub for cases, associates, activity, and background data instead of a single page where every fact competed for attention."
+          />
+          <InsightCallout
+            title="Created room for growth"
+            description="The case detail needed distinct views for summary, spatial-temporal analysis, evidence, and leads so future capabilities could be added without collapsing back into a wall of data."
+          />
+          <InsightCallout
+            title="Aligned the team"
+            description="Audit findings gave product and engineering a concrete way to discuss tradeoffs, turning vague requirements into specific, buildable decisions."
+          />
+        </div>
       </div>
     </section>
 
@@ -74,7 +98,7 @@ import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashb
           />
           <InsightCallout
             title="Vague requirements"
-            description="PM asks were directional, not defined. 'Make it easier to use' was the brief. I used the audit findings as a foundation, then facilitated team discussions to translate directional asks into specific, buildable decisions."
+            description="PM asks were directional, not defined. I used the audit findings as a foundation, then facilitated team discussions to translate broad concerns into specific decisions about navigation, hierarchy, and product structure."
           />
         </div>
       </div>
@@ -85,7 +109,7 @@ import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashb
       <div class="container">
         <SectionHeading
           title="Person Profile"
-          subtitle="The redesign introduces a tabbed structure - Cases, Associates, Activity Log, and a new 'Deep Background' tab that consolidates public records, criminal history, and other investigative data sources into one view. Each tab gives investigators a direct path to what they need instead of forcing them to scan the entire page."
+          subtitle="The person profile became the clearest proof point for the new product structure. I introduced a tabbed model - Cases, Associates, Activity Log, and a new 'Deep Background' tab - that gives investigators a direct path to the information they need while giving the product team durable places to add new data sources."
         />
         <BeforeAfter
           beforeImage={personPageOld}
@@ -104,7 +128,7 @@ import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashb
       <div class="container">
         <SectionHeading
           title="Case Detail"
-          subtitle="The case detail page is where investigators spend most of their time. I restructured it around a vertical navigation with distinct views: an overview with the case summary and map, a timeline and map view for spatial-temporal analysis, and an evidence tab. Each view serves a different mode of investigative thinking without cluttering the others."
+          subtitle="The case detail page is where investigators spend most of their time, so it needed to work as an operating surface, not a report. I restructured it around a vertical navigation with distinct views: an overview with the case summary and map, a timeline and map view for spatial-temporal analysis, and an evidence tab. Each view supports a different mode of investigative thinking without cluttering the others."
         />
         <FullWidthImage
           src={caseDetail}
@@ -149,7 +173,7 @@ import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashb
       <div class="container">
         <SectionHeading
           title="What's Next"
-          subtitle='The redesign launched first to beta users, then expanded to a controlled subset of existing LeadsOnline customers, with a full rollout weeks away. Alongside the core redesign, two new features are in active design: a Dashboard surfacing personalized investigative activity and trend detection, and an AI-powered search. The vision for where these features lead is covered in <a href="/projects/unified-platform">Unifying an Investigative Platform</a>.'
+          subtitle='The redesign launched first to beta users, then expanded to a controlled subset of existing LeadsOnline customers, with a full rollout weeks away. Because the core IA now has clearer places for data, activity, leads, and search, it is becoming the foundation for two larger product bets: a Dashboard surfacing personalized investigative activity and trend detection, and an AI-powered search. The vision for where these features lead is covered in <a href="/projects/unified-platform">Unifying an Investigative Platform</a>.'
         />
         <FullWidthImage
           src={dashboardPropertyPanel}
@@ -166,11 +190,11 @@ import dashboardPropertyPanel from '../../assets/images/projects/leadsuite/dashb
         <div class="reflections-grid">
           <div class="reflection-item">
             <h3>Real usage, real validation</h3>
-            <p>The redesigned person profile now drives over 50% of all traffic in the app. That signal confirmed the tabbed structure was solving a real navigation problem, not just a visual one.</p>
+            <p>The redesigned person profile now drives over 50% of all traffic in the app. That signal confirmed the new structure had become a core product surface, not just a cleaner way to arrange content.</p>
           </div>
           <div class="reflection-item">
             <h3>Scalable structure pays off</h3>
-            <p>The tabbed model has already absorbed two new data source integrations without touching the core layout. Building for growth wasn't over-engineering, it was the right call given the product roadmap.</p>
+            <p>The tabbed model has already absorbed two new data source integrations without touching the core layout. Building for growth was not over-engineering, it was the right call for a flagship product with an expanding roadmap.</p>
           </div>
           <div class="reflection-item">
             <h3>Ambiguity is a design surface</h3>

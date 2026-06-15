@@ -1,10 +1,10 @@
 title: LeadSuite
-description: "Redesigned the core investigative experience of LeadsOnline's flagship platform, from 'make it easier to use' to a full IA rethink now in production."
+description: "Turned a vague ask to improve LeadsOnline's flagship product into a scalable IA foundation that now supports over half of platform traffic."
 thumbnail: /images/projects/leadsuite/thumbnail.png
 slug: leadsuite
 tags:
   - B2B SaaS
-  - Law Enforcement
+  - Product Strategy
   - Information Architecture
 accentColor: "#1c3557"
 order: 4
