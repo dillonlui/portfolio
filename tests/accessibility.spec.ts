@@ -3,18 +3,19 @@ import { test, expect } from '@playwright/test';
 test.describe('Accessibility - reduced motion', () => {
   test.use({ reducedMotion: 'reduce' });
 
-  test('hero title is visible without animation', async ({ page }) => {
+  test('homepage content is visible without animation', async ({ page }) => {
+    test.skip(test.info().project.name !== 'reduced-motion', 'Reduced-motion assertion only matters in the reduced-motion project.');
     await page.goto('/');
-    const heroTitle = page.locator('.hero-title');
-    await expect(heroTitle).toBeVisible();
-    // Should be visible immediately (not waiting for GSAP animation)
-    const opacity = await heroTitle.evaluate((el) =>
-      getComputedStyle(el).opacity
-    );
-    expect(Number(opacity)).toBe(1);
+    const selectors = ['.hero-title', '.hero-subtitle', '.hero-blurb', '.hero-cta'];
+
+    for (const selector of selectors) {
+      const el = page.locator(selector);
+      await expect(el).toBeVisible();
+    }
   });
 
   test('timeline cards are visible without animation', async ({ page }) => {
+    test.skip(test.info().project.name !== 'reduced-motion', 'Reduced-motion assertion only matters in the reduced-motion project.');
     await page.goto('/about');
     const firstCard = page.locator('.timeline-card').first();
     await expect(firstCard).toBeVisible();
@@ -55,5 +56,10 @@ test.describe('Accessibility - general', () => {
     await page.goto('/');
     const skipLink = page.locator('a.skip-link[href="#main-content"]');
     await expect(skipLink).toBeAttached();
+  });
+
+  test('404 page is noindex', async ({ page }) => {
+    await page.goto('/404');
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
   });
 });

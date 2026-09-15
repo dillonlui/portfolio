@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import '../styles/global.css';
 
@@ -38,7 +38,7 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
-    <ViewTransitions />
+    <ClientRouter />
     <title>{title}</title>
   </head>
   <body>
@@ -136,6 +136,14 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
   import { initButtonSheen } from '../scripts/hover-effects';
   import { cleanupGSAP } from '../scripts/scroll-animations';
 
+  const layoutWindow = window as Window & {
+    __portfolioBaseLayoutCleanup?: () => void;
+  };
+
+  if (layoutWindow.__portfolioBaseLayoutCleanup) {
+    layoutWindow.__portfolioBaseLayoutCleanup();
+  }
+
   async function setupCursor() {
     // Only load cursor trail on desktop with fine pointer
     const isDesktop = window.innerWidth >= 768;
@@ -149,29 +157,25 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     initButtonSheen();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      setupCursor();
-      setupInteractions();
-    });
-  } else {
+  function handlePageLoad() {
     setupCursor();
     setupInteractions();
   }
 
-  document.addEventListener('astro:before-swap', () => {
+  function handleBeforeSwap() {
     cleanupGSAP();
-  });
+  }
 
-  document.addEventListener('astro:page-load', () => {
-    setupCursor();
-    setupInteractions();
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', handlePageLoad, { once: true });
+  } else {
+    handlePageLoad();
+  }
 
   // Reinit GSAP when crossing the mobile/desktop breakpoint
   let wasDesktop = window.innerWidth >= 768;
   let resizeTicking = false;
-  window.addEventListener('resize', () => {
+  function handleResize() {
     if (resizeTicking) return;
     resizeTicking = true;
     requestAnimationFrame(() => {
@@ -183,5 +187,15 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
         document.dispatchEvent(new Event('astro:page-load'));
       }
     });
-  }, { passive: true });
+  }
+
+  document.addEventListener('astro:before-swap', handleBeforeSwap);
+  document.addEventListener('astro:page-load', handlePageLoad);
+  window.addEventListener('resize', handleResize, { passive: true });
+
+  layoutWindow.__portfolioBaseLayoutCleanup = () => {
+    document.removeEventListener('astro:before-swap', handleBeforeSwap);
+    document.removeEventListener('astro:page-load', handlePageLoad);
+    window.removeEventListener('resize', handleResize);
+  };
 </script>

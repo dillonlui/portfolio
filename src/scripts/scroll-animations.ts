@@ -3,6 +3,18 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+function shouldReduceMotion(): boolean {
+  return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function revealImmediately(elements: Iterable<Element>) {
+  for (const el of elements) {
+    if (!(el instanceof HTMLElement)) continue;
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  }
+}
+
 /**
  * Kill all GSAP ScrollTriggers and tweens, and clear inline styles
  * GSAP leaves behind so they don't persist across breakpoints or pages.
@@ -31,7 +43,13 @@ export function cleanupGSAP() {
  * Used on pages with general scroll-reveal content.
  */
 export function initFadeIn() {
-  gsap.utils.toArray<Element>('.fade-in').forEach((el) => {
+  const elements = gsap.utils.toArray<Element>('.fade-in');
+  if (shouldReduceMotion()) {
+    revealImmediately(elements);
+    return;
+  }
+
+  elements.forEach((el) => {
     gsap.from(el, {
       scrollTrigger: {
         trigger: el,
@@ -51,7 +69,13 @@ export function initFadeIn() {
  * Accepts a CSS selector string to target specific elements.
  */
 export function initCaseStudyAnimations(selector: string) {
-  gsap.utils.toArray<Element>(selector).forEach((el) => {
+  const elements = gsap.utils.toArray<Element>(selector);
+  if (shouldReduceMotion()) {
+    revealImmediately(elements);
+    return;
+  }
+
+  elements.forEach((el) => {
     gsap.from(el, {
       scrollTrigger: {
         trigger: el,
@@ -71,6 +95,16 @@ export function initCaseStudyAnimations(selector: string) {
  * Animates elements in sequence without scroll trigger.
  */
 export function initHeroAnimation(selectors: string[]) {
+  if (shouldReduceMotion()) {
+    selectors.forEach((selector) => {
+      document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    });
+    return;
+  }
+
   selectors.forEach((selector, i) => {
     gsap.set(selector, { opacity: 0, y: 30 });
     gsap.to(selector, {
@@ -87,7 +121,13 @@ export function initHeroAnimation(selectors: string[]) {
  * Staggered scroll-triggered animation for repeated elements (e.g. project cards).
  */
 export function initStaggerAnimation(selector: string) {
-  gsap.utils.toArray<Element>(selector).forEach((el, i) => {
+  const elements = gsap.utils.toArray<Element>(selector);
+  if (shouldReduceMotion()) {
+    revealImmediately(elements);
+    return;
+  }
+
+  elements.forEach((el, i) => {
     gsap.set(el, { opacity: 0, y: 40 });
     gsap.to(el, {
       scrollTrigger: {
@@ -109,7 +149,12 @@ export function initStaggerAnimation(selector: string) {
  * Moves elements vertically as user scrolls. Disabled on mobile.
  */
 export function initParallax(selector: string, speed: number = -50) {
-  if (window.innerWidth < 768) return;
+  if (window.innerWidth < 768 || shouldReduceMotion()) {
+    document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+      el.style.transform = 'none';
+    });
+    return;
+  }
 
   gsap.utils.toArray<HTMLElement>(selector).forEach((el) => {
     gsap.to(el, {
@@ -167,8 +212,7 @@ export function initTimeline() {
   let nodePositions = measureAndUpdate();
 
   // Respect reduced motion
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) {
+  if (shouldReduceMotion()) {
     fillLine.style.transform = 'scaleY(1)';
     indicator.style.display = 'none';
     nodes.forEach((node) => node.classList.add('is-active'));
@@ -238,4 +282,3 @@ export function initTimeline() {
     );
   });
 }
-

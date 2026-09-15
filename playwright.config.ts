@@ -37,7 +37,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run build && npm run preview',
+    command: 'npm run build && ASTRO_PREVIEW_BACKGROUND=1 npm run preview',
     url: 'http://localhost:4321',
     reuseExistingServer: !process.env.CI,
   },
