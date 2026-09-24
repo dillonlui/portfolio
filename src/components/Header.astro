@@ -333,6 +333,7 @@ const isWorkActive = currentPath.startsWith('/projects');
       padding: calc(var(--header-height) + var(--space-xl)) var(--space-xl);
       gap: var(--space-lg);
       transform: translateX(100%);
+      visibility: hidden;
       transition: transform var(--transition-base);
       box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
       overflow-y: auto;
@@ -340,6 +341,7 @@ const isWorkActive = currentPath.startsWith('/projects');
 
     .nav-links.is-open {
       transform: translateX(0);
+      visibility: visible;
     }
 
     .nav-link {
@@ -423,6 +425,15 @@ const isWorkActive = currentPath.startsWith('/projects');
       return window.matchMedia('(max-width: 767px)').matches;
     }
 
+    function syncMenuAvailability() {
+      if (isMobileViewport() && !navLinks?.classList.contains('is-open')) {
+        navLinks?.setAttribute('inert', '');
+      } else {
+        navLinks?.removeAttribute('inert');
+      }
+      if (!isMobileViewport() && navLinks?.classList.contains('is-open')) closeMenu();
+    }
+
     function getFocusableElements(container: ParentNode | null) {
       return Array.from(container?.querySelectorAll<HTMLElement>(focusableSelector) ?? []);
     }
@@ -454,6 +465,7 @@ const isWorkActive = currentPath.startsWith('/projects');
     function closeMenu({ restoreFocus = false } = {}) {
       menuBtn?.setAttribute('aria-expanded', 'false');
       navLinks?.classList.remove('is-open');
+      syncMenuAvailability();
       mainContent?.removeAttribute('inert');
       closeDropdown();
       document.body.style.removeProperty('overflow');
@@ -468,6 +480,7 @@ const isWorkActive = currentPath.startsWith('/projects');
       lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       menuBtn?.setAttribute('aria-expanded', 'true');
       navLinks?.classList.add('is-open');
+      syncMenuAvailability();
       mainContent?.setAttribute('inert', '');
       document.body.style.overflow = 'hidden';
       requestAnimationFrame(() => {
@@ -575,6 +588,14 @@ const isWorkActive = currentPath.startsWith('/projects');
       });
     }
 
+    function handleDropdownPointerEnter() {
+      if (!isMobileViewport()) openDropdown();
+    }
+
+    function handleDropdownPointerLeave() {
+      if (!isMobileViewport() && !dropdownParent?.contains(document.activeElement)) closeDropdown();
+    }
+
     function handleDocumentClick(e: Event) {
       const target = e.target as HTMLElement;
       if (!target.closest('.nav') && navLinks?.classList.contains('is-open')) {
@@ -626,6 +647,10 @@ const isWorkActive = currentPath.startsWith('/projects');
     dropdownTrigger?.addEventListener('keydown', handleDropdownTriggerKeydown);
     dropdownMenu?.addEventListener('keydown', handleDropdownMenuKeydown);
     dropdownParent?.addEventListener('focusout', handleDropdownFocusout);
+    dropdownParent?.addEventListener('pointerenter', handleDropdownPointerEnter);
+    dropdownParent?.addEventListener('pointerleave', handleDropdownPointerLeave);
+    window.addEventListener('resize', syncMenuAvailability);
+    syncMenuAvailability();
     document.addEventListener('click', handleDocumentClick);
     document.addEventListener('keydown', handleDocumentKeydown);
     navLinks?.addEventListener('keydown', handleNavLinksKeydown);
@@ -641,6 +666,9 @@ const isWorkActive = currentPath.startsWith('/projects');
       dropdownTrigger?.removeEventListener('keydown', handleDropdownTriggerKeydown);
       dropdownMenu?.removeEventListener('keydown', handleDropdownMenuKeydown);
       dropdownParent?.removeEventListener('focusout', handleDropdownFocusout);
+      dropdownParent?.removeEventListener('pointerenter', handleDropdownPointerEnter);
+      dropdownParent?.removeEventListener('pointerleave', handleDropdownPointerLeave);
+      window.removeEventListener('resize', syncMenuAvailability);
       document.removeEventListener('click', handleDocumentClick);
       document.removeEventListener('keydown', handleDocumentKeydown);
       navLinks?.removeEventListener('keydown', handleNavLinksKeydown);

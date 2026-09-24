@@ -11,6 +11,9 @@ import barbellDashboard from '../assets/images/projects/personal/barbell-dashboa
 import barbellSession from '../assets/images/projects/personal/barbell-session.png';
 import barbellTrends from '../assets/images/projects/personal/barbell-trends.png';
 import barbellCalendar from '../assets/images/projects/personal/barbell-calendar.png';
+import tabbyOverview from '../assets/images/projects/personal/tabby-overview.png';
+import tabbyAddExpense from '../assets/images/projects/personal/tabby-add-expense.png';
+import tabbyBalances from '../assets/images/projects/personal/tabby-balances.png';
 import newsBriefingHomepage from '../assets/images/projects/personal/news-briefing-homepage.png';
 import newsBriefingStory from '../assets/images/projects/personal/news-briefing-story.png';
 
@@ -25,6 +28,12 @@ const barbellImages = [
   { src: barbellSession, alt: 'Active workout session showing squat warm-up sets and working sets' },
   { src: barbellTrends, alt: 'Trends view with bench press progression chart over time' },
   { src: barbellCalendar, alt: 'History calendar showing workout days marked in April 2026' },
+];
+
+const tabbyImages = [
+  { src: tabbyOverview, alt: 'Tabby group overview for a weekend trip, showing shared expenses and who is owed money' },
+  { src: tabbyAddExpense, alt: 'Tabby add expense form with participants and an equal split option' },
+  { src: tabbyBalances, alt: 'Tabby balances screen showing a settled group and past payments' },
 ];
 
 const newsImages = [
@@ -82,6 +91,49 @@ const newsImages = [
         <div class="glance-description">
           <p>A lot of churches and non-profits are stuck on aging platforms that nobody on staff knows how to update. I volunteer to rebuild them on a modern stack that non-technical teams can actually maintain. FICCC needed a bilingual site (English and Chinese) with CMS-driven content, form handling, and accessibility built in.</p>
           <p><a href="/sponsorship" class="sponsorship-link">Learn more about my non-profit web sponsorship program</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabby -->
+  <section class="project-section section fade-in">
+    <div class="container">
+      <h2 class="project-title">Tabby - Group Bill Splitting</h2>
+      <p class="project-summary">A lightweight mobile app for keeping shared expenses clear across any group.</p>
+
+      <div class="gallery gallery--phones">
+        {tabbyImages.map((img) => (
+          <Picture
+            src={img.src}
+            alt={img.alt}
+            class="gallery-image gallery-image--phone"
+            formats={['avif', 'webp']}
+            widths={[193, 386]}
+            sizes="(max-width: 767px) 45vw, 200px"
+            loading="lazy"
+            decoding="async"
+          />
+        ))}
+      </div>
+
+      <div class="glance-card">
+        <div class="glance-meta">
+          <div class="glance-item">
+            <span class="glance-label">Platform</span>
+            <span class="glance-value">Mobile</span>
+          </div>
+          <div class="glance-item">
+            <span class="glance-label">Features</span>
+            <span class="glance-value">Group expenses, equal splits, balances, and settle-up history</span>
+          </div>
+          <div class="glance-item">
+            <span class="glance-label">Status</span>
+            <span class="glance-value">Personal project</span>
+          </div>
+        </div>
+        <div class="glance-description">
+          <p>Splitting a dinner or a weekend away should not mean chasing people down in a group chat. Tabby keeps every expense, share, and payment in one calm, easy-to-scan place, so groups can settle up without the mental math.</p>
         </div>
       </div>
     </div>

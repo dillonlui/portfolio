@@ -8,6 +8,7 @@ test.describe('Desktop Navigation', () => {
     await page.goto('/');
     const trigger = page.locator('.dropdown-trigger');
     await trigger.hover();
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
     const links = page.locator('.dropdown-menu .dropdown-link');
     await expect(links).toHaveCount(5);
 

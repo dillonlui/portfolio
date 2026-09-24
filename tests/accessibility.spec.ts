@@ -23,6 +23,39 @@ test.describe('Accessibility - reduced motion', () => {
 });
 
 test.describe('Accessibility - general', () => {
+  test('homepage title remains visible without JavaScript', async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto('/');
+    await expect(page.locator('.hero-title')).toBeVisible();
+    await expect(page.locator('.hero-title')).toHaveCSS('opacity', '1');
+    await context.close();
+  });
+
+  test('mobile projects have one visible link and image per project with reduced motion', async ({ browser }) => {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+    const page = await context.newPage();
+    await page.goto('/');
+    const cards = page.locator('.floating-bubble');
+    await expect(cards).toHaveCount(5);
+    await expect(cards.first()).toBeVisible();
+    await expect(page.locator('.floating-container img')).toHaveCount(5);
+    await context.close();
+  });
+
+  test('closed mobile menu is removed from tab order', async ({ browser }) => {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const page = await context.newPage();
+    await page.goto('/');
+    const menu = page.locator('#primary-nav');
+    await expect(menu).toHaveAttribute('inert', '');
+    await page.locator('.mobile-menu-btn').click();
+    await expect(menu).not.toHaveAttribute('inert');
+    await page.keyboard.press('Escape');
+    await expect(menu).toHaveAttribute('inert', '');
+    await context.close();
+  });
+
   test('all images have alt attributes', async ({ page }) => {
     await page.goto('/projects/griefshare');
     await page.waitForLoadState('networkidle');

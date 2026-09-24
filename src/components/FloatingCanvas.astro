@@ -38,7 +38,7 @@ const bubbleConfig = [
       return (
         <a
           href={`/projects/${project.data.slug}`}
-          class:list={['floating-bubble', { 'floating-bubble--featured': project.data.featured }]}
+          class:list={['floating-bubble', 'mobile-bubble-card', { 'floating-bubble--featured': project.data.featured }]}
           data-slug={project.data.slug}
           data-title={project.data.title}
           data-description={project.data.description}
@@ -61,10 +61,10 @@ const bubbleConfig = [
             <Image
               src={projectImage}
               alt={project.data.title}
-              class="bubble-image"
+              class="bubble-image mobile-bubble-image"
               widths={[400, 600, 800]}
-              sizes="480px"
-              loading={project.data.featured ? 'eager' : 'lazy'}
+              sizes="(max-width: 767px) calc(100vw - 48px), 480px"
+              loading="lazy"
               decoding="async"
               style={`object-position: ${project.data.thumbnailPosition || 'center'};`}
               transition:name={`project-${project.data.slug}`}
@@ -73,54 +73,15 @@ const bubbleConfig = [
             <img
               src={project.data.thumbnail}
               alt={project.data.title}
-              class="bubble-image"
+              class="bubble-image mobile-bubble-image"
               loading="lazy"
               style={`object-position: ${project.data.thumbnailPosition || 'center'};`}
             />
           )}
-        </a>
-      );
-    })}
-
-    <BubbleHoverCard />
-  </div>
-
-  <!-- Mobile fallback: vertical stacked cards -->
-  <div class="floating-mobile-fallback">
-    {allProjects.map((project) => {
-      const projectImage = getProjectImage(project.data.slug);
-      return (
-        <a href={`/projects/${project.data.slug}`} class="mobile-bubble-card">
-          <div class="mobile-bubble-image-wrapper">
-            {project.data.featured && <span class="featured-badge">Featured</span>}
-            {projectImage ? (
-              <Image
-                src={projectImage}
-                alt={project.data.title}
-                class="mobile-bubble-image"
-                widths={[400, 600, 800]}
-                sizes="(max-width: 768px) 100vw, 600px"
-                loading="lazy"
-                decoding="async"
-                style={`object-position: ${project.data.thumbnailPosition || 'center'};`}
-                transition:name={`project-${project.data.slug}`}
-              />
-            ) : (
-              <img
-                src={project.data.thumbnail}
-                alt={project.data.title}
-                class="mobile-bubble-image"
-                loading="lazy"
-                style={`object-position: ${project.data.thumbnailPosition || 'center'};`}
-              />
-            )}
-          </div>
           <div class="mobile-bubble-info">
             {project.data.tags.length > 0 && (
               <div class="mobile-bubble-tags">
-                {project.data.tags.map((tag) => (
-                  <span class="mobile-tag">{tag}</span>
-                ))}
+                {project.data.tags.map((tag) => <span class="mobile-tag">{tag}</span>)}
               </div>
             )}
             <h2 class="mobile-bubble-title">{project.data.title}</h2>
@@ -129,7 +90,10 @@ const bubbleConfig = [
         </a>
       );
     })}
+
+    <BubbleHoverCard />
   </div>
+
 </section>
 
 <style>
@@ -219,31 +183,36 @@ const bubbleConfig = [
     opacity: 1;
   }
 
-  /* Mobile: hide floating, show fallback */
-  .floating-mobile-fallback {
+  .mobile-bubble-info {
     display: none;
   }
 
   @media (max-width: 767px) {
     .floating-container {
-      display: none;
-    }
-
-    .floating-mobile-fallback {
       display: flex;
       flex-direction: column;
       gap: var(--space-2xl);
       padding: 0 var(--space-lg);
       max-width: var(--max-width);
       margin: 0 auto;
+      min-height: 0;
+      height: auto;
+      max-height: none;
+      overflow: visible;
     }
 
     .mobile-bubble-card {
-      display: block;
+      position: relative;
+      width: 100% !important;
+      height: auto !important;
+      transform: none !important;
+      filter: none !important;
+      opacity: 1 !important;
       text-decoration: none;
       color: inherit;
       border-radius: var(--radius-md);
       overflow: hidden;
+      box-shadow: none;
       transition: transform 200ms ease, box-shadow 200ms ease;
     }
 
@@ -252,22 +221,17 @@ const bubbleConfig = [
       box-shadow: var(--shadow-md);
     }
 
-    .mobile-bubble-image-wrapper {
-      position: relative;
+    .mobile-bubble-image {
       width: 100%;
+      height: auto;
       aspect-ratio: 16 / 10;
+      object-fit: cover;
       border-radius: var(--radius-md);
-      overflow: hidden;
       box-shadow: var(--shadow-sm);
     }
 
-    .mobile-bubble-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
     .mobile-bubble-info {
+      display: block;
       padding: var(--space-md) 0;
     }
 
@@ -308,7 +272,7 @@ const bubbleConfig = [
   }
 
   /* Reduced motion: static grid */
-  @media (prefers-reduced-motion: reduce) {
+  @media (prefers-reduced-motion: reduce) and (min-width: 768px) {
     .floating-container {
       display: flex;
       flex-wrap: wrap;

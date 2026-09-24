@@ -149,6 +149,7 @@
 
 <script>
   let lightboxAbort: AbortController | null = null;
+  let restoreBackground: (() => void) | null = null;
 
   function initLightbox() {
     // Clean up previous instance (page transitions)
@@ -156,6 +157,9 @@
       lightboxAbort.abort();
       lightboxAbort = null;
     }
+    restoreBackground?.();
+    restoreBackground = null;
+    document.body.classList.remove('lightbox-open');
 
     const overlay = document.getElementById('case-lightbox');
     if (!overlay) return;
@@ -185,6 +189,23 @@
         overlay!.classList.add('is-open');
         overlay!.setAttribute('aria-hidden', 'false');
         overlay!.removeAttribute('inert');
+        // Keep all content outside the dialog out of keyboard and screen-reader navigation.
+        const priorInert = new Map<HTMLElement, boolean>();
+        let child: HTMLElement = overlay!;
+        while (child.parentElement) {
+          const parent = child.parentElement;
+          for (const sibling of parent.children) {
+            if (sibling !== child && sibling instanceof HTMLElement) {
+              priorInert.set(sibling, sibling.inert);
+              sibling.inert = true;
+            }
+          }
+          if (parent === document.body) break;
+          child = parent;
+        }
+        restoreBackground = () => {
+          for (const [element, wasInert] of priorInert) element.inert = wasInert;
+        };
         document.body.classList.add('lightbox-open');
         // Move focus into lightbox
         closeBtn!.focus();
@@ -195,6 +216,8 @@
         overlay!.setAttribute('aria-hidden', 'true');
         overlay!.setAttribute('inert', '');
         document.body.classList.remove('lightbox-open');
+        restoreBackground?.();
+        restoreBackground = null;
         // Restore focus
         previouslyFocused?.focus();
         previouslyFocused = null;

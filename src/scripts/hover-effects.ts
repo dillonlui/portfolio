@@ -13,70 +13,7 @@ function shouldSkip(): boolean {
 }
 
 /**
- * Feature 1 & 2: Button hover sheen + magnetic snap
- * Targets .btn and .cta-btn elements
- */
-export function initButtonSheen() {
-  if (shouldSkip()) return;
-
-  const buttons = document.querySelectorAll<HTMLElement>('.btn, .cta-btn');
-
-  buttons.forEach((btn) => {
-    // Skip if already initialized (ViewTransitions re-init safety)
-    if (btn.dataset.sheenInit) return;
-    btn.dataset.sheenInit = '1';
-
-    let cachedRect: DOMRect | null = null;
-
-    btn.addEventListener('mouseenter', () => {
-      cachedRect = btn.getBoundingClientRect();
-      btn.classList.add('sheen-active');
-    });
-
-    btn.addEventListener('mousemove', (e) => {
-      const rect = cachedRect || btn.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      // Sheen position
-      btn.style.setProperty('--mouse-x', `${x}px`);
-      btn.style.setProperty('--mouse-y', `${y}px`);
-      btn.classList.add('sheen-active');
-
-      // Magnetic snap: translate toward cursor, capped at 3px
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      const deltaX = (x - centerX) / centerX; // -1 to 1
-      const deltaY = (y - centerY) / centerY;
-      const maxShift = 3;
-
-      gsap.to(btn, {
-        x: deltaX * maxShift,
-        y: deltaY * maxShift,
-        duration: 0.3,
-        ease: 'power2.out',
-        overwrite: 'auto',
-      });
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      cachedRect = null;
-      btn.classList.remove('sheen-active');
-
-      // Spring back to origin
-      gsap.to(btn, {
-        x: 0,
-        y: 0,
-        duration: 0.6,
-        ease: 'elastic.out(1, 0.3)',
-        overwrite: 'auto',
-      });
-    });
-  });
-}
-
-/**
- * Feature 3: Avatar 3D tilt on about page
+ * Avatar 3D tilt on about page
  */
 export function initAvatarTilt() {
   if (shouldSkip()) return;
@@ -130,7 +67,7 @@ export function initAvatarTilt() {
 }
 
 /**
- * Feature 4: Staggered letter reveal for homepage hero title
+ * Staggered letter reveal for homepage hero title
  */
 export function initHeroLetterReveal() {
   if (shouldSkip()) {
@@ -175,7 +112,7 @@ export function initHeroLetterReveal() {
 }
 
 /**
- * Feature 5: Scroll-velocity parallax for case study hero images
+ * Scroll-velocity parallax for case study hero images
  */
 export function initScrollVelocityParallax() {
   if (shouldSkip()) return;

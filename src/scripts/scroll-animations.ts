@@ -38,6 +38,9 @@ export function cleanupGSAP() {
   }
 }
 
+// Let the shared layout clean up transitions without importing GSAP on every route.
+(window as Window & { __portfolioCleanupGSAP?: () => void }).__portfolioCleanupGSAP = cleanupGSAP;
+
 /**
  * Animate elements with the .fade-in class on scroll.
  * Used on pages with general scroll-reveal content.

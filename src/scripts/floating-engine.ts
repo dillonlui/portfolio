@@ -45,6 +45,10 @@ export class FloatingEngine {
   private destroyed: boolean = false;
   private keydownHandler: ((e: KeyboardEvent) => void) | null = null;
   private resizeObserver: ResizeObserver | null = null;
+  private visibilityObserver: IntersectionObserver | null = null;
+  private scrollTrigger: ScrollTrigger | null = null;
+  private entranceTimeline: gsap.core.Timeline | null = null;
+  private isInView: boolean = true;
 
   constructor(
     container: HTMLElement,
@@ -150,7 +154,7 @@ export class FloatingEngine {
     document.addEventListener('keydown', this.keydownHandler);
 
     // Scroll velocity
-    ScrollTrigger.create({
+    this.scrollTrigger = ScrollTrigger.create({
       trigger: this.container,
       start: 'top bottom',
       end: 'bottom top',
@@ -164,6 +168,19 @@ export class FloatingEngine {
       this.containerRect = this.container.getBoundingClientRect();
     });
     this.resizeObserver.observe(this.container);
+
+    this.visibilityObserver = new IntersectionObserver(([entry]) => {
+      this.isInView = entry.isIntersecting;
+      if (this.isInView) {
+        this.startLoop();
+      } else {
+        cancelAnimationFrame(this.rafId);
+        this.rafId = 0;
+        this.mouseInContainer = false;
+        this.scrollVelocity = 0;
+      }
+    });
+    this.visibilityObserver.observe(this.container);
   }
 
   private onBubbleEnter(bubble: Bubble) {
@@ -225,7 +242,12 @@ export class FloatingEngine {
 
     if (tagsEl) {
       const tags = (bubble.el.dataset.tags || '').split(',').filter(Boolean);
-      tagsEl.innerHTML = tags.map((t) => `<span class="tag">${t.trim()}</span>`).join('');
+      tagsEl.replaceChildren(...tags.map((tag) => {
+        const span = document.createElement('span');
+        span.className = 'tag';
+        span.textContent = tag.trim();
+        return span;
+      }));
     }
 
     // Determine card placement: side with more space
@@ -328,10 +350,10 @@ export class FloatingEngine {
     const tl = gsap.timeline({
       onComplete: () => {
         this.entranceDone = true;
-        this.lastTime = performance.now();
-        this.tick(this.lastTime);
+        this.startLoop();
       },
     });
+    this.entranceTimeline = tl;
 
     const featured = this.bubbles.find((b) => b.isFeatured);
     if (featured) {
@@ -375,7 +397,8 @@ export class FloatingEngine {
   }
 
   private tick(timestamp: number) {
-    if (!this.entranceDone || this.destroyed) return;
+    this.rafId = 0;
+    if (!this.entranceDone || this.destroyed || !this.isInView) return;
 
     const dt = Math.min((timestamp - this.lastTime) / 1000, 0.05);
     this.lastTime = timestamp;
@@ -476,6 +499,12 @@ export class FloatingEngine {
     this.rafId = requestAnimationFrame((t) => this.tick(t));
   }
 
+  private startLoop() {
+    if (!this.entranceDone || this.destroyed || !this.isInView || this.rafId) return;
+    this.lastTime = performance.now();
+    this.rafId = requestAnimationFrame((t) => this.tick(t));
+  }
+
   /**
    * Soft collision between bubbles - treats each as an ellipse and pushes apart
    * when they overlap. Uses a spring-like repulsion force.
@@ -542,6 +571,9 @@ export class FloatingEngine {
   destroy() {
     this.destroyed = true;
     cancelAnimationFrame(this.rafId);
+    this.entranceTimeline?.kill();
+    this.scrollTrigger?.kill();
+    this.visibilityObserver?.disconnect();
     if (this.keydownHandler) {
       document.removeEventListener('keydown', this.keydownHandler);
       this.keydownHandler = null;

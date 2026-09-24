@@ -133,27 +133,36 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
 </style>
 
 <script>
-  import { initButtonSheen } from '../scripts/hover-effects';
-  import { cleanupGSAP } from '../scripts/scroll-animations';
-
   const layoutWindow = window as Window & {
     __portfolioBaseLayoutCleanup?: () => void;
+    __portfolioCleanupGSAP?: () => void;
   };
 
   if (layoutWindow.__portfolioBaseLayoutCleanup) {
     layoutWindow.__portfolioBaseLayoutCleanup();
   }
 
+  let cursorModule: typeof import('../scripts/light-trail') | null = null;
+  let cursorGeneration = 0;
+
   async function setupCursor() {
+    const generation = ++cursorGeneration;
     // Only load cursor trail on desktop with fine pointer
     const isDesktop = window.innerWidth >= 768;
     const isCoarse = window.matchMedia('(pointer: coarse)').matches;
-    if (!isDesktop || isCoarse) return;
-    const { initGlobalCursor } = await import('../scripts/light-trail');
-    initGlobalCursor();
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!isDesktop || isCoarse || reducedMotion) {
+      cursorModule?.destroyGlobalCursor();
+      return;
+    }
+    cursorModule ??= await import('../scripts/light-trail');
+    if (generation === cursorGeneration) cursorModule.initGlobalCursor();
   }
 
-  function setupInteractions() {
+  async function setupInteractions() {
+    if (window.innerWidth < 768 || window.matchMedia('(pointer: coarse), (prefers-reduced-motion: reduce)').matches) return;
+    if (!document.querySelector('.btn, .cta-btn')) return;
+    const { initButtonSheen } = await import('../scripts/button-sheen');
     initButtonSheen();
   }
 
@@ -163,7 +172,9 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
   }
 
   function handleBeforeSwap() {
-    cleanupGSAP();
+    cursorGeneration++;
+    cursorModule?.destroyGlobalCursor();
+    layoutWindow.__portfolioCleanupGSAP?.();
   }
 
   if (document.readyState === 'loading') {
@@ -183,7 +194,8 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
       const isDesktop = window.innerWidth >= 768;
       if (isDesktop !== wasDesktop) {
         wasDesktop = isDesktop;
-        cleanupGSAP();
+        layoutWindow.__portfolioCleanupGSAP?.();
+        if (!isDesktop) cursorModule?.destroyGlobalCursor();
         document.dispatchEvent(new Event('astro:page-load'));
       }
     });
@@ -194,6 +206,8 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
   window.addEventListener('resize', handleResize, { passive: true });
 
   layoutWindow.__portfolioBaseLayoutCleanup = () => {
+    cursorGeneration++;
+    cursorModule?.destroyGlobalCursor();
     document.removeEventListener('astro:before-swap', handleBeforeSwap);
     document.removeEventListener('astro:page-load', handlePageLoad);
     window.removeEventListener('resize', handleResize);

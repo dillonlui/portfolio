@@ -23,6 +23,7 @@ class GlobalCursorTrail {
   private mouseX: number = -100;
   private mouseY: number = -100;
   private isActive: boolean = false;
+  private events = new AbortController();
 
   // Custom cursor element
   private cursorEl: HTMLDivElement;
@@ -54,7 +55,6 @@ class GlobalCursorTrail {
     this.resize();
     this.bindEvents();
     this.isActive = true;
-    this.tick(performance.now());
   }
 
   private resize() {
@@ -72,6 +72,7 @@ class GlobalCursorTrail {
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
       this.addPoint(e.clientX, e.clientY);
+      if (!this.rafId) this.rafId = requestAnimationFrame((t) => this.tick(t));
 
       // Update custom cursor position
       this.cursorEl.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
@@ -81,17 +82,17 @@ class GlobalCursorTrail {
         // Add class to body for cursor:none (works cross-browser, no :has() needed)
         document.body.classList.add('custom-cursor-active');
       }
-    });
+    }, { signal: this.events.signal });
 
     document.addEventListener('mouseleave', () => {
       this.cursorEl.classList.remove('is-visible');
       document.body.classList.remove('custom-cursor-active');
-    });
+    }, { signal: this.events.signal });
 
     document.addEventListener('mouseenter', () => {
       this.cursorEl.classList.add('is-visible');
       document.body.classList.add('custom-cursor-active');
-    });
+    }, { signal: this.events.signal });
 
     // Detect hovering over interactive elements for cursor state
     // Includes: links, buttons, inputs, lightbox images, figures with clickable images
@@ -107,9 +108,9 @@ class GlobalCursorTrail {
       } else {
         this.cursorEl.classList.remove('is-hovering');
       }
-    });
+    }, { signal: this.events.signal });
 
-    window.addEventListener('resize', () => this.resize(), { passive: true });
+    window.addEventListener('resize', () => this.resize(), { passive: true, signal: this.events.signal });
   }
 
   private addPoint(x: number, y: number) {
@@ -141,6 +142,7 @@ class GlobalCursorTrail {
   }
 
   private tick(timestamp: number) {
+    this.rafId = 0;
     if (!this.isActive) return;
 
     this.ctx.clearRect(0, 0, this.canvas.width / this.dpr, this.canvas.height / this.dpr);
@@ -175,16 +177,22 @@ class GlobalCursorTrail {
       this.ctx.fill();
     }
 
-    this.rafId = requestAnimationFrame((t) => this.tick(t));
+    if (this.points.length) {
+      this.rafId = requestAnimationFrame((t) => this.tick(t));
+    }
   }
 
   destroy() {
     this.isActive = false;
+    this.events.abort();
     cancelAnimationFrame(this.rafId);
+    document.body.classList.remove('custom-cursor-active');
     this.canvas.remove();
     this.cursorEl.remove();
   }
 }
+
+let activeCursor: GlobalCursorTrail | null = null;
 
 // Initialize once, gate on desktop + no reduced motion
 export function initGlobalCursor() {
@@ -196,7 +204,12 @@ export function initGlobalCursor() {
   if (!isDesktop || prefersReducedMotion || isTouchPrimary) return;
 
   // Prevent double-init
-  if (document.getElementById('global-trail-canvas')) return;
+  if (activeCursor) return;
 
-  new GlobalCursorTrail();
+  activeCursor = new GlobalCursorTrail();
+}
+
+export function destroyGlobalCursor() {
+  activeCursor?.destroy();
+  activeCursor = null;
 }

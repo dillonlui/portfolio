@@ -15,6 +15,8 @@ test.describe('Lightbox', () => {
     const lightbox = page.locator('#case-lightbox');
     await expect(lightbox).toHaveClass(/is-open/);
     await expect(lightbox).toHaveAttribute('aria-hidden', 'false');
+    await expect(page.locator('.header')).toHaveAttribute('inert', '');
+    await expect(page.locator('.case-hero')).toHaveAttribute('inert', '');
 
     const lbImage = page.locator('.lb-image');
     await expect(lbImage).toBeVisible();
